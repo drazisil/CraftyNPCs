@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/CraftyNPCs.iml" filepath="$PROJECT_DIR$/CraftyNPCs.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/CraftyNPCs_main.iml" filepath="$PROJECT_DIR$/.idea/modules/CraftyNPCs_main.iml" group="CraftyNPCs" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/CraftyNPCs_test.iml" filepath="$PROJECT_DIR$/.idea/modules/CraftyNPCs_test.iml" group="CraftyNPCs" />
+    </modules>
+  </component>
+</project>
