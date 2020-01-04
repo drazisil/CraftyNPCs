@@ -1,5 +1,6 @@
 package com.drazisil.craftynpcs;
 
+import com.drazisil.craftynpcs.client.ModEntityRender;
 import com.drazisil.craftynpcs.entity.EntityCraftyNPC;
 import com.drazisil.craftynpcs.item.CraftyNPCEgg;
 import net.minecraft.block.Block;
@@ -9,9 +10,11 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.SpawnEggItem;
+import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
@@ -26,9 +29,9 @@ import org.apache.logging.log4j.Logger;
 @Mod("craftynpcs")
 public class CraftyNPCs {
     // Directly reference a log4j logger.
-    private static final Logger LOGGER = LogManager.getLogger();
+    public static final Logger LOGGER = LogManager.getLogger();
 
-    private static final String MODID = "craftynpcs";
+    public static final String MODID = "craftynpcs";
     public static final DeferredRegister<EntityType<?>> ENTITIES = new DeferredRegister<>(ForgeRegistries.ENTITIES, MODID);
 
     public static EntityType<EntityCraftyNPC> ENTITY_CRAFTY_NPC;
@@ -53,6 +56,12 @@ public class CraftyNPCs {
     private void doClientStuff(final FMLClientSetupEvent event) {
         // do something that can only be done on the client
         LOGGER.info("Got game settings {}", event.getMinecraftSupplier().get().gameSettings);
+
+        LOGGER.info("Registering Model..");
+
+
+        RenderingRegistry.registerEntityRenderingHandler(EntityCraftyNPC.class, ModEntityRender::new);
+        LOGGER.info("Model registered");
     }
 
     // You can use SubscribeEvent and let the Event Bus discover methods to call
@@ -102,5 +111,11 @@ public class CraftyNPCs {
 
 
         }
+
+        @SubscribeEvent
+        public static void registerModels(ModelRegistryEvent event) {
+
+        }
     }
+
 }
