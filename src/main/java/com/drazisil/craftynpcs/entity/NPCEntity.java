@@ -77,8 +77,6 @@ public class NPCEntity extends CreatureEntity  {
 
         ItemStack pickaxeStack = new ItemStack(Items.DIAMOND_PICKAXE);
 
-        System.out.println(pickaxeStack.toString());
-
         this.inventory.setInventorySlotContents(MAIN_HAND_SLOT, pickaxeStack);
         this.npcManager = CraftyNPCs.getInstance().getNpcManager();
         npcManager.register(this);
