@@ -1,7 +1,8 @@
 package com.drazisil.craftynpcs;
 
-import com.drazisil.craftynpcs.client.ModEntityRender;
-import com.drazisil.craftynpcs.entity.EntityCraftyNPC;
+import com.drazisil.craftynpcs.client.NPCEntityRender;
+import com.drazisil.craftynpcs.entity.NPCEntity;
+import com.drazisil.craftynpcs.entity.NPCManager;
 import com.drazisil.craftynpcs.item.CraftyNPCEgg;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
@@ -10,7 +11,6 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.SpawnEggItem;
-import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -29,12 +29,28 @@ import org.apache.logging.log4j.Logger;
 @Mod("craftynpcs")
 public class CraftyNPCs {
     // Directly reference a log4j logger.
-    public static final Logger LOGGER = LogManager.getLogger();
+    static final Logger LOGGER = LogManager.getLogger();
 
     public static final String MODID = "craftynpcs";
     public static final DeferredRegister<EntityType<?>> ENTITIES = new DeferredRegister<>(ForgeRegistries.ENTITIES, MODID);
 
-    public static EntityType<EntityCraftyNPC> ENTITY_CRAFTY_NPC;
+    static EntityType<NPCEntity> NPC_ENTITY_TYPE;
+
+    public NPCManager getNpcManager() {
+        return npcManager;
+    }
+
+    private NPCManager npcManager = new NPCManager();
+
+    public static CraftyNPCs getInstance() {
+        return instance;
+    }
+
+    public static void setInstance(CraftyNPCs instance) {
+        CraftyNPCs.instance = instance;
+    }
+
+    private static CraftyNPCs instance;
 
     public CraftyNPCs() {
         // Register the setup method for modloading
@@ -47,6 +63,9 @@ public class CraftyNPCs {
     }
 
     private void setup(final FMLCommonSetupEvent event) {
+
+        setInstance(this);
+
         // some preinit code
         LOGGER.info("HELLO FROM PREINIT");
         LOGGER.info("DIRT BLOCK >> {}", Blocks.DIRT.getRegistryName());
@@ -60,7 +79,7 @@ public class CraftyNPCs {
         LOGGER.info("Registering Model..");
 
 
-        RenderingRegistry.registerEntityRenderingHandler(EntityCraftyNPC.class, ModEntityRender::new);
+        RenderingRegistry.registerEntityRenderingHandler(NPCEntity.class, NPCEntityRender::new);
         LOGGER.info("Model registered");
     }
 
@@ -78,6 +97,7 @@ public class CraftyNPCs {
     public static class RegistryEvents {
         @SubscribeEvent
         public static void onBlocksRegistry(final RegistryEvent.Register<Block> blockRegistryEvent) {
+
             // register a new block here
             LOGGER.info("HELLO from Register Block");
         }
@@ -85,37 +105,28 @@ public class CraftyNPCs {
         @SubscribeEvent
         public static void registerEntities(RegistryEvent.Register<EntityType<?>> event) {
 
-//            DeferredRegister<EntityType<?>> ENTITIES = new DeferredRegister<>(ForgeRegistries.ENTITIES, MODID);
-
-            assert ENTITY_CRAFTY_NPC == null;
-            event.getRegistry().registerAll(ENTITY_CRAFTY_NPC.setRegistryName("crafty_npc"));
+            if (NPC_ENTITY_TYPE == null) {
+                LOGGER.error("Error in registerEntities: entityType is null");
+                throw new NullPointerException();
+            }
+            event.getRegistry().registerAll(NPC_ENTITY_TYPE.setRegistryName("crafty_npc"));
 
         }
 
         @SubscribeEvent
         public static void registerItems(RegistryEvent.Register<Item> event) {
 
-//            private static final DeferredRegister<EntityType<?>> ENTITIES = new DeferredRegister<>(ForgeRegistries.ENTITIES, MODID);
-//
-//            public static final RegistryObject<EntityType<EntityCraftyNPC>> CRAFTY_NPC = ENTITIES.register("crafty_npc", () -> EntityType.Builder
-//                    .create((EntityType.IFactory<EntityCraftyNPC>) EntityCraftyNPC::new, EntityClassification.MISC)
-//                    .build("crafty_npc"));
-
-            ENTITY_CRAFTY_NPC = EntityType.Builder.create(EntityCraftyNPC::new, EntityClassification.CREATURE)
+            NPC_ENTITY_TYPE = EntityType.Builder.create(NPCEntity::new, EntityClassification.CREATURE)
                     .build("crafty_npc");
 
             Item.Properties spawnEggProps = new Item.Properties().group(ItemGroup.MISC);
-            SpawnEggItem spawnEgg = new CraftyNPCEgg(ENTITY_CRAFTY_NPC, 0x4c3e30, 0xf0f0f, spawnEggProps);
+            SpawnEggItem spawnEgg = new CraftyNPCEgg(NPC_ENTITY_TYPE, 0x4c3e30, 0xf0f0f, spawnEggProps);
 
             event.getRegistry().registerAll(spawnEgg.setRegistryName("crafty_npc_egg"));
 
 
         }
 
-        @SubscribeEvent
-        public static void registerModels(ModelRegistryEvent event) {
-
-        }
     }
 
 }
