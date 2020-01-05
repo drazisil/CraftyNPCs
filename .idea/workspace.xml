@@ -2,132 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="76131b8c-212b-4006-b6b1-7bd47553ebfa" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.gradle/4.9/fileChanges/last-build.bin" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.gradle/4.9/fileContent/annotation-processors.bin" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.gradle/4.9/fileContent/fileContent.lock" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.gradle/4.9/fileHashes/fileHashes.bin" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.gradle/4.9/fileHashes/fileHashes.lock" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.gradle/4.9/fileHashes/resourceHashesCache.bin" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.gradle/4.9/taskHistory/taskHistory.bin" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.gradle/4.9/taskHistory/taskHistory.lock" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/classes/java/main/com/drazisil/craftynpcs/CraftyNPCs$RegistryEvents.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/classes/java/main/com/drazisil/craftynpcs/CraftyNPCs.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/classes/java/main/com/drazisil/craftynpcs/client/NPCEntityRender.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/classes/java/main/com/drazisil/craftynpcs/client/NPCModel.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/classes/java/main/com/drazisil/craftynpcs/entity/NPCEntity.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/classes/java/main/com/drazisil/craftynpcs/entity/NPCEntry.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/classes/java/main/com/drazisil/craftynpcs/entity/NPCManager.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/classes/java/main/com/drazisil/craftynpcs/entity/ai/DefendVillageGoal.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/classes/java/main/com/drazisil/craftynpcs/entity/ai/DiggyDiggyGoal.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/classes/java/main/com/drazisil/craftynpcs/entity/ai/NearestDiggableBlockGoal.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/classes/java/main/com/drazisil/craftynpcs/entity/ai/VillagerTasks.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/classes/java/main/com/drazisil/craftynpcs/item/CraftyNPCEgg.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/natives/META-INF/versions/9/module-info.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/natives/libfliteWrapper.so" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/natives/libglfw.so" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/natives/libglfw_wayland.so" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/natives/libjemalloc.so" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/natives/liblwjgl.so" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/natives/liblwjgl_opengl.so" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/natives/liblwjgl_stb.so" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/natives/libopenal.so" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/resources/main/assets/craftynpcs/textures/entity/crafty_npc.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/resources/main/assets/craftynpcs/textures/entity/crafty_npc_1.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/resources/main/assets/craftynpcs/textures/entity/crafty_npc_2.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/cache.properties" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.gradle/vcsWorkingDirs/gc.properties" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/downloadMCMeta/version.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/natives/META-INF/INDEX.LIST" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/natives/META-INF/MANIFEST.MF" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/natives/libglfw.so.git" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/natives/libglfw.so.sha1" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/natives/libglfw_wayland.so.git" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/natives/libglfw_wayland.so.sha1" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/natives/libjemalloc.so.git" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/natives/libjemalloc.so.sha1" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/natives/liblwjgl.so.git" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/natives/liblwjgl.so.sha1" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/natives/liblwjgl_opengl.so.sha1" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/natives/liblwjgl_stb.so.sha1" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/natives/libopenal.so.git" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/natives/libopenal.so.sha1" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/resources/main/META-INF/mods.toml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/resources/main/assets/craftynpcs/models/item/crafty_npc_egg.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/resources/main/assets/craftynpcs/models/item/generated.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/resources/main/assets/craftynpcs/models/item/template_spawn_egg.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/resources/main/pack.mcmeta" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/run/config/fml.toml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/run/config/forge-client.toml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/run/crash-reports/crash-2020-01-03_13.45.32-server.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/run/crash-reports/crash-2020-01-03_13.56.25-server.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/run/crash-reports/crash-2020-01-03_22.15.02-server.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/run/crash-reports/crash-2020-01-03_22.20.52-server.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/run/crash-reports/crash-2020-01-03_22.36.13-server.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/run/crash-reports/crash-2020-01-04_14.14.07-server.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/run/logs/2020-01-03-1.log.gz" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/run/logs/2020-01-03-2.log.gz" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/run/logs/2020-01-03-3.log.gz" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/run/logs/2020-01-03-4.log.gz" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/run/logs/2020-01-03-5.log.gz" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/run/logs/2020-01-03-6.log.gz" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/run/logs/2020-01-04-1.log.gz" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/run/logs/2020-01-04-2.log.gz" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/run/logs/2020-01-04-3.log.gz" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/run/logs/2020-01-04-4.log.gz" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/run/logs/2020-01-04-5.log.gz" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/run/logs/2020-01-04-6.log.gz" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/run/logs/2020-01-04-7.log.gz" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/run/logs/debug-1.log.gz" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/run/logs/debug-2.log.gz" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/run/logs/debug-3.log.gz" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/run/logs/debug-4.log.gz" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/run/logs/debug-5.log.gz" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/run/logs/debug.log" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/run/logs/latest.log" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/run/options.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/run/saves/New World/advancements/380df991-f603-344c-a090-369bad2a924a.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/run/saves/New World/data/capabilities.dat" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/run/saves/New World/data/raids.dat" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/run/saves/New World/icon.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/run/saves/New World/level.dat" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/run/saves/New World/level.dat_old" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/run/saves/New World/playerdata/380df991-f603-344c-a090-369bad2a924a.dat" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/run/saves/New World/poi/r.-1.-1.mca" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/run/saves/New World/poi/r.-1.0.mca" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/run/saves/New World/poi/r.-1.1.mca" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/run/saves/New World/poi/r.-2.0.mca" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/run/saves/New World/poi/r.-2.1.mca" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/run/saves/New World/poi/r.0.-1.mca" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/run/saves/New World/poi/r.0.0.mca" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/run/saves/New World/region/r.-1.-1.mca" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/run/saves/New World/region/r.-1.0.mca" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/run/saves/New World/region/r.-1.1.mca" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/run/saves/New World/region/r.-2.-1.mca" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/run/saves/New World/region/r.-2.0.mca" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/run/saves/New World/region/r.-2.1.mca" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/run/saves/New World/region/r.0.-1.mca" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/run/saves/New World/region/r.0.0.mca" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/run/saves/New World/region/r.0.1.mca" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/run/saves/New World/serverconfig/forge-server.toml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/run/saves/New World/session.lock" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/run/saves/New World/stats/380df991-f603-344c-a090-369bad2a924a.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/run/screenshots/2020-01-03_21.51.53.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/run/usercache.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/run/usernamecache.json" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/drazisil/craftynpcs/CraftyNPCs.java" afterPath="$PROJECT_DIR$/src/main/java/com/drazisil/craftynpcs/CraftyNPCs.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/drazisil/craftynpcs/client/NPCEntityRender.java" afterPath="$PROJECT_DIR$/src/main/java/com/drazisil/craftynpcs/client/NPCEntityRender.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/drazisil/craftynpcs/client/NPCModel.java" afterPath="$PROJECT_DIR$/src/main/java/com/drazisil/craftynpcs/client/NPCModel.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/drazisil/craftynpcs/entity/NPCEntity.java" afterPath="$PROJECT_DIR$/src/main/java/com/drazisil/craftynpcs/entity/NPCEntity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/drazisil/craftynpcs/entity/NPCEntry.java" afterPath="$PROJECT_DIR$/src/main/java/com/drazisil/craftynpcs/entity/NPCEntry.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/drazisil/craftynpcs/entity/NPCManager.java" afterPath="$PROJECT_DIR$/src/main/java/com/drazisil/craftynpcs/entity/NPCManager.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/drazisil/craftynpcs/entity/ai/DefendVillageGoal.java" afterPath="$PROJECT_DIR$/src/main/java/com/drazisil/craftynpcs/entity/ai/DefendVillageGoal.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/drazisil/craftynpcs/entity/ai/DiggyDiggyGoal.java" afterPath="$PROJECT_DIR$/src/main/java/com/drazisil/craftynpcs/entity/ai/DiggyDiggyGoal.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/drazisil/craftynpcs/entity/ai/NearestDiggableBlockGoal.java" afterPath="$PROJECT_DIR$/src/main/java/com/drazisil/craftynpcs/entity/ai/NearestDiggableBlockGoal.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/drazisil/craftynpcs/entity/ai/VillagerTasks.java" afterPath="$PROJECT_DIR$/src/main/java/com/drazisil/craftynpcs/entity/ai/VillagerTasks.java" />
     </list>
     <ignored path="$PROJECT_DIR$/.gradle/" />
     <ignored path="$PROJECT_DIR$/build/" />
@@ -251,8 +126,8 @@
       <file leaf-file-name=".gitignore" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/.gitignore">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="18">
-              <caret line="1" column="0" lean-forward="false" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
+            <state relative-caret-position="36">
+              <caret line="2" column="5" lean-forward="false" selection-start-line="2" selection-start-column="5" selection-end-line="2" selection-end-column="5" />
               <folding />
             </state>
           </provider>
@@ -1388,7 +1263,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1578057019050</updated>
-      <workItem from="1578057021442" duration="64291000" />
+      <workItem from="1578057021442" duration="64460000" />
     </task>
     <task id="LOCAL-00001" summary="Saving before I break this">
       <created>1578081449165</created>
@@ -1422,7 +1297,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="64291000" />
+    <option name="totallyTimeSpent" value="64460000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="27" width="1600" height="873" extended-state="6" />
@@ -1941,8 +1816,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="18">
-          <caret line="1" column="0" lean-forward="false" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
+        <state relative-caret-position="36">
+          <caret line="2" column="5" lean-forward="false" selection-start-line="2" selection-start-column="5" selection-end-line="2" selection-end-column="5" />
           <folding />
         </state>
       </provider>
