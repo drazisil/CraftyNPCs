@@ -1,9 +1,9 @@
 package com.drazisil.craftynpcs.entity;
 
-public class NPCEntry {
+class NPCEntry {
 
-    public String name;
-    public NPCEntity npc;
+    public final String name;
+    public final NPCEntity npc;
 
     public NPCEntry(String name, NPCEntity npc) {
         this.name = name;

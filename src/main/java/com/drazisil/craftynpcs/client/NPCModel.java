@@ -9,12 +9,12 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
-public class NPCModel<T extends LivingEntity> extends BipedModel<T> {
-    public final RendererModel bipedLeftArmwear;
-    public final RendererModel bipedRightArmwear;
-    public final RendererModel bipedLeftLegwear;
-    public final RendererModel bipedRightLegwear;
-    public final RendererModel bipedBodyWear;
+class NPCModel<T extends LivingEntity> extends BipedModel<T> {
+    private final RendererModel bipedLeftArmwear;
+    private final RendererModel bipedRightArmwear;
+    private final RendererModel bipedLeftLegwear;
+    private final RendererModel bipedRightLegwear;
+    private final RendererModel bipedBodyWear;
     private final RendererModel bipedCape;
     private final RendererModel bipedDeadmau5Head;
     private final boolean smallArms;

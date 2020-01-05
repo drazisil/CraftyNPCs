@@ -14,14 +14,12 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
-import javax.annotation.Nullable;
-
 @OnlyIn(Dist.CLIENT)
 public class NPCEntityRender extends MobRenderer<NPCEntity, NPCModel<NPCEntity>> {
     private static final ResourceLocation field_217779_a = new ResourceLocation(CraftyNPCs.MODID + ":textures/entity/crafty_npc.png");
 
     public NPCEntityRender(EntityRendererManager p_i50954_1_) {
-        super(p_i50954_1_, new NPCModel(1.0F, false), 0.5F);
+        super(p_i50954_1_, new NPCModel<>(1.0F, false), 0.5F);
     }
 
 
@@ -29,16 +27,15 @@ public class NPCEntityRender extends MobRenderer<NPCEntity, NPCModel<NPCEntity>>
         super(p_i50961_1_, p_i50961_2_, p_i50961_3_);
     }
 
-    @Nullable
     @Override
-    protected ResourceLocation getEntityTexture(NPCEntity NPCEntity) {
+    protected ResourceLocation getEntityTexture(NPCEntity npcEntity) {
         return new ResourceLocation(CraftyNPCs.MODID+":textures/entity/crafty_npc.png");
     }
 
 
     public NPCEntityRender(EntityRendererManager p_i50954_1_, IReloadableResourceManager p_i50954_2_) {
-        super(p_i50954_1_, new NPCModel(1.0F, false), 0.5F);
-        this.addLayer(new HeadLayer(this));
+        super(p_i50954_1_, new NPCModel<>(1.0F, false), 0.5F);
+        this.addLayer(new HeadLayer<>(this));
         this.addLayer(new VillagerLevelPendantLayer(this, p_i50954_2_, "crafty_npc"));
         this.addLayer(new VillagerHeldItemLayer(this));
     }

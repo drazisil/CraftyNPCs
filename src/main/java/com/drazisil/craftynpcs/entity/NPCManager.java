@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 public class NPCManager {
 
-    private ArrayList<NPCEntry> npcs = new ArrayList<>();
+    private final ArrayList<NPCEntry> npcs = new ArrayList<>();
 
 
     public void register(NPCEntity NPCEntity) {

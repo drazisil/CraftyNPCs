@@ -8,31 +8,31 @@ import net.minecraft.entity.merchant.villager.VillagerEntity;
 import net.minecraft.entity.merchant.villager.VillagerProfession;
 import net.minecraft.village.PointOfInterestType;
 
-public class VillagerTasks {
+class VillagerTasks {
     public VillagerTasks() {
     }
 
     public static ImmutableList<Pair<Integer, ? extends Task<? super VillagerEntity>>> core(VillagerProfession p_220638_0_, float p_220638_1_) {
         return ImmutableList.of(
-                Pair.of(Integer.valueOf(0), new SwimTask(0.4F, 0.8F)),
-                Pair.of(Integer.valueOf(0), new InteractWithDoorTask()),
-                Pair.of(Integer.valueOf(0), new LookTask(45, 90)),
-                Pair.of(Integer.valueOf(0), new PanicTask()),
-                Pair.of(Integer.valueOf(0), new WakeUpTask()),
-                Pair.of(Integer.valueOf(0), new HideFromRaidOnBellRingTask()),
-                Pair.of(Integer.valueOf(0), new BeginRaidTask()),
-                Pair.of(Integer.valueOf(1), new WalkToTargetTask(200)),
-                Pair.of(Integer.valueOf(2), new TradeTask(p_220638_1_)),
-                Pair.of(Integer.valueOf(5), new PickupFoodTask()),
-                Pair.of(Integer.valueOf(10), new GatherPOITask(p_220638_0_.getPointOfInterest(),
+                Pair.of(0, new SwimTask(0.4F, 0.8F)),
+                Pair.of(0, new InteractWithDoorTask()),
+                Pair.of(0, new LookTask(45, 90)),
+                Pair.of(0, new PanicTask()),
+                Pair.of(0, new WakeUpTask()),
+                Pair.of(0, new HideFromRaidOnBellRingTask()),
+                Pair.of(0, new BeginRaidTask()),
+                Pair.of(1, new WalkToTargetTask(200)),
+                Pair.of(2, new TradeTask(p_220638_1_)),
+                Pair.of(5, new PickupFoodTask()),
+                Pair.of(10, new GatherPOITask(p_220638_0_.getPointOfInterest(),
                         MemoryModuleType.JOB_SITE, true)),
-                Pair.of(Integer.valueOf(10), new GatherPOITask(PointOfInterestType.HOME,
+                Pair.of(10, new GatherPOITask(PointOfInterestType.HOME,
                         MemoryModuleType.HOME, false)),
                 new Pair[]{
-                        Pair.of(Integer.valueOf(10), new GatherPOITask(PointOfInterestType.MEETING,
+                        Pair.of(10, new GatherPOITask(PointOfInterestType.MEETING,
                         MemoryModuleType.MEETING_POINT, true)),
-                        Pair.of(Integer.valueOf(10), new AssignProfessionTask()),
-                        Pair.of(Integer.valueOf(10), new ChangeJobTask())});
+                        Pair.of(10, new AssignProfessionTask()),
+                        Pair.of(10, new ChangeJobTask())});
     }
 
 //    public static ImmutableList<Pair<Integer, ? extends Task<? super VillagerEntity>>> work(VillagerProfession p_220639_0_, float p_220639_1_) {

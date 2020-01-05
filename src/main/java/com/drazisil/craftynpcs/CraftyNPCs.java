@@ -29,24 +29,24 @@ import org.apache.logging.log4j.Logger;
 @Mod("craftynpcs")
 public class CraftyNPCs {
     // Directly reference a log4j logger.
-    static final Logger LOGGER = LogManager.getLogger();
+    private static final Logger LOGGER = LogManager.getLogger();
 
     public static final String MODID = "craftynpcs";
     public static final DeferredRegister<EntityType<?>> ENTITIES = new DeferredRegister<>(ForgeRegistries.ENTITIES, MODID);
 
-    static EntityType<NPCEntity> NPC_ENTITY_TYPE;
+    private static EntityType<NPCEntity> NPC_ENTITY_TYPE;
 
     public NPCManager getNpcManager() {
         return npcManager;
     }
 
-    private NPCManager npcManager = new NPCManager();
+    private final NPCManager npcManager = new NPCManager();
 
     public static CraftyNPCs getInstance() {
         return instance;
     }
 
-    public static void setInstance(CraftyNPCs instance) {
+    private static void setInstance(CraftyNPCs instance) {
         CraftyNPCs.instance = instance;
     }
 
@@ -94,7 +94,7 @@ public class CraftyNPCs {
     // contained class (this is subscribing to the MOD
     // Event bus for receiving Registry Events)
     @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
-    public static class RegistryEvents {
+    private static class RegistryEvents {
         @SubscribeEvent
         public static void onBlocksRegistry(final RegistryEvent.Register<Block> blockRegistryEvent) {
 

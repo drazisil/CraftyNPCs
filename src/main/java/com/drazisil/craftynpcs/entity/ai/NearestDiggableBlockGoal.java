@@ -5,7 +5,7 @@ import net.minecraft.entity.ai.goal.Goal;
 
 import java.util.Objects;
 
-public class NearestDiggableBlockGoal extends Goal {
+class NearestDiggableBlockGoal extends Goal {
 
     private final NPCEntity me;
 

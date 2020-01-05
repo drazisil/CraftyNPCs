@@ -9,7 +9,6 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.math.AxisAlignedBB;
 
 import java.util.EnumSet;
-import java.util.Iterator;
 import java.util.List;
 
 public class DefendVillageGoal extends TargetGoal {
@@ -27,15 +26,11 @@ public class DefendVillageGoal extends TargetGoal {
         AxisAlignedBB axisalignedbb = this.field_75305_a.getBoundingBox().grow(10.0D, 8.0D, 10.0D);
         List<LivingEntity> list = this.field_75305_a.world.getTargettableEntitiesWithinAABB(VillagerEntity.class, this.field_223190_c, this.field_75305_a, axisalignedbb);
         List<PlayerEntity> list1 = this.field_75305_a.world.getTargettablePlayersWithinAABB(this.field_223190_c, this.field_75305_a, axisalignedbb);
-        Iterator var4 = list.iterator();
 
-        while(var4.hasNext()) {
-            LivingEntity livingentity = (LivingEntity)var4.next();
-            VillagerEntity villagerentity = (VillagerEntity)livingentity;
-            Iterator var7 = list1.iterator();
+        for (LivingEntity livingentity : list) {
+            VillagerEntity villagerentity = (VillagerEntity) livingentity;
 
-            while(var7.hasNext()) {
-                PlayerEntity playerentity = (PlayerEntity)var7.next();
+            for (PlayerEntity playerentity : list1) {
                 int i = villagerentity.func_223107_f(playerentity);
                 if (i <= -100) {
                     this.field_75304_b = playerentity;

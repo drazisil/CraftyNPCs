@@ -30,7 +30,6 @@ public class DiggyDiggyGoal extends TargetGoal {
     public boolean shouldExecute() {
 
         BlockPos pos = me.getPosition();
-        pos = pos.down();
         Block block = me.getBlockUnderFeet().getBlock();
 
         return Objects.equals(block.getTranslationKey(), "block.minecraft.stone");
