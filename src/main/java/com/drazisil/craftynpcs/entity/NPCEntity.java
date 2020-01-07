@@ -2,6 +2,7 @@ package com.drazisil.craftynpcs.entity;
 
 import com.drazisil.craftynpcs.CraftyNPCs;
 import com.drazisil.craftynpcs.entity.ai.DiggyDiggyGoal;
+import com.drazisil.craftynpcs.entity.ai.WaterAvoidingRandomWalkingGoal;
 import com.mojang.datafixers.Dynamic;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.EntityType;
@@ -28,6 +29,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.world.IWorld;
+import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
@@ -188,6 +190,7 @@ public class NPCEntity extends MobEntity {
 
     protected void registerGoals() {
         super.registerGoals();
+        this.goalSelector.addGoal(1, new WaterAvoidingRandomWalkingGoal(this, 0.5D));
 //        this.goalSelector.addGoal(1, new MeleeAttackGoal(this, 1.0D, true));
 //        this.goalSelector.addGoal(2, new MoveTowardsTargetGoal(this, 0.9D, 32.0F));
 //        this.goalSelector.addGoal(2, new MoveTowardsVillageGoal(this, 0.6D));
@@ -208,6 +211,13 @@ public class NPCEntity extends MobEntity {
         return true;
     }
 
+    public float getBlockPathWeight(BlockPos pos) {
+        return this.getBlockPathWeight(pos, this.world);
+    }
+
+    public float getBlockPathWeight(BlockPos pos, IWorldReader worldIn) {
+        return 0.0F;
+    }
 
 
 
