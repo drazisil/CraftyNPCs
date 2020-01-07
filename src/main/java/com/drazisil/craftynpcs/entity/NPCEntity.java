@@ -2,12 +2,12 @@ package com.drazisil.craftynpcs.entity;
 
 import com.drazisil.craftynpcs.CraftyNPCs;
 import com.drazisil.craftynpcs.entity.ai.DiggyDiggyGoal;
-import com.drazisil.craftynpcs.entity.ai.WaterAvoidingRandomWalkingGoal;
 import com.mojang.datafixers.Dynamic;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.player.PlayerModelPart;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.inventory.container.INamedContainerProvider;
 import net.minecraft.item.ItemStack;
@@ -31,6 +31,8 @@ import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 import javax.annotation.Nullable;
 import java.util.Iterator;
@@ -76,6 +78,16 @@ public class NPCEntity extends MobEntity {
         npcManager.register(this);
     }
 
+    @OnlyIn(Dist.CLIENT)
+    public boolean isWearing(PlayerModelPart part) {
+//        switch (part) {
+//            case LEFT_SLEEVE:
+//            case RIGHT_SLEEVE:
+//                return false;
+//        }
+        return true;
+    }
+
     public ItemStack getItemStackFromSlot(EquipmentSlotType slotIn) {
         if (slotIn == EquipmentSlotType.MAINHAND) {
             return this.getEquipmentInventory().getStackInSlot(MAIN_HAND_SLOT);
@@ -87,7 +99,6 @@ public class NPCEntity extends MobEntity {
     }
 
     public void writeAdditional(CompoundNBT compound) {
-        System.out.println("Writing...");
         compound.putFloat("Health", this.getHealth());
         compound.putShort("HurtTime", (short)this.hurtTime);
         compound.putShort("DeathTime", (short)this.deathTime);
@@ -140,7 +151,6 @@ public class NPCEntity extends MobEntity {
     }
 
     public void readAdditional(CompoundNBT compound) {
-        System.out.println("Reading...");
 
         this.equipmentInventory.deserializeNBT((CompoundNBT) compound.get("OreInventory"));
 
@@ -190,7 +200,7 @@ public class NPCEntity extends MobEntity {
 
     protected void registerGoals() {
         super.registerGoals();
-        this.goalSelector.addGoal(1, new WaterAvoidingRandomWalkingGoal(this, 0.5D));
+//        this.goalSelector.addGoal(1, new WaterAvoidingRandomWalkingGoal(this, 0.5D));
 //        this.goalSelector.addGoal(1, new MeleeAttackGoal(this, 1.0D, true));
 //        this.goalSelector.addGoal(2, new MoveTowardsTargetGoal(this, 0.9D, 32.0F));
 //        this.goalSelector.addGoal(2, new MoveTowardsVillageGoal(this, 0.6D));

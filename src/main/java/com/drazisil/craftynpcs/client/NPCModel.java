@@ -94,5 +94,21 @@ class NPCModel<T extends LivingEntity> extends BipedModel<T> {
         GlStateManager.popMatrix();
     }
 
+    @Override
+    public void setRotationAngles(T entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scaleFactor) {
+        super.setRotationAngles(entityIn, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scaleFactor);
+        this.bipedLeftLegwear.copyModelAngles(this.bipedLeftLeg);
+        this.bipedRightLegwear.copyModelAngles(this.bipedRightLeg);
+        this.bipedLeftArmwear.copyModelAngles(this.bipedLeftArm);
+        this.bipedRightArmwear.copyModelAngles(this.bipedRightArm);
+        this.bipedBodyWear.copyModelAngles(this.bipedBody);
+        if (entityIn.shouldRenderSneaking()) {
+            this.bipedCape.rotationPointY = 2.0F;
+        } else {
+            this.bipedCape.rotationPointY = 0.0F;
+        }
+
+    }
+
 
 }
