@@ -3,6 +3,7 @@ package com.drazisil.craftynpcs;
 import com.drazisil.craftynpcs.client.NPCEntityRender;
 import com.drazisil.craftynpcs.entity.NPCEntity;
 import com.drazisil.craftynpcs.entity.NPCManager;
+import com.drazisil.craftynpcs.event.EventHandler;
 import com.drazisil.craftynpcs.item.CraftyNPCEgg;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
@@ -60,6 +61,8 @@ public class CraftyNPCs {
 
         // Register ourselves for server and other game events we are interested in
         MinecraftForge.EVENT_BUS.register(this);
+
+        MinecraftForge.EVENT_BUS.register(EventHandler.class);
     }
 
     private void setup(final FMLCommonSetupEvent event) {
@@ -89,6 +92,7 @@ public class CraftyNPCs {
         // do something when the server starts
         LOGGER.info("HELLO from server starting");
     }
+
 
     // You can use EventBusSubscriber to automatically subscribe events on the
     // contained class (this is subscribing to the MOD

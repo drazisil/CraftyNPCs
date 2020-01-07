@@ -39,7 +39,7 @@ public class DiggyDiggyGoal extends TargetGoal {
 
         me.swingArm(Hand.MAIN_HAND);
 //        System.out.println("Diggy diggy hole!");
-        ItemStack mainHandItemStack = me.getInventory().getStackInSlot(me.MAIN_HAND_SLOT);
+        ItemStack mainHandItemStack = me.getEquipmentInventory().getStackInSlot(me.MAIN_HAND_SLOT);
         if (mainHandItemStack == ItemStack.EMPTY) {
             return;
         }
