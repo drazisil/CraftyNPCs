@@ -74,6 +74,16 @@ public class NPCEntity extends MobEntity {
         npcManager.register(this);
     }
 
+    public ItemStack getItemStackFromSlot(EquipmentSlotType slotIn) {
+        if (slotIn == EquipmentSlotType.MAINHAND) {
+            return this.getEquipmentInventory().getStackInSlot(MAIN_HAND_SLOT);
+        } else if (slotIn == EquipmentSlotType.OFFHAND) {
+            return ItemStack.EMPTY;
+        } else {
+            return ItemStack.EMPTY;
+        }
+    }
+
     public void writeAdditional(CompoundNBT compound) {
         System.out.println("Writing...");
         compound.putFloat("Health", this.getHealth());

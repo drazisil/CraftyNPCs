@@ -1,5 +1,6 @@
 package com.drazisil.craftynpcs.client;
 
+import com.mojang.blaze3d.platform.GlStateManager;
 import net.minecraft.client.renderer.entity.model.BipedModel;
 import net.minecraft.client.renderer.entity.model.RendererModel;
 import net.minecraft.entity.LivingEntity;
@@ -65,5 +66,33 @@ class NPCModel<T extends LivingEntity> extends BipedModel<T> {
         this.bipedBodyWear.setRotationPoint(0.0F, 0.0F, 0.0F);
 
     }
+
+    public void render(T entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scale) {
+        super.render(entityIn, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
+        GlStateManager.pushMatrix();
+        if (this.isChild) {
+            float f = 2.0F;
+            GlStateManager.scalef(0.5F, 0.5F, 0.5F);
+            GlStateManager.translatef(0.0F, 24.0F * scale, 0.0F);
+            this.bipedLeftLegwear.render(scale);
+            this.bipedRightLegwear.render(scale);
+            this.bipedLeftArmwear.render(scale);
+            this.bipedRightArmwear.render(scale);
+            this.bipedBodyWear.render(scale);
+        } else {
+            if (entityIn.shouldRenderSneaking()) {
+                GlStateManager.translatef(0.0F, 0.2F, 0.0F);
+            }
+
+            this.bipedLeftLegwear.render(scale);
+            this.bipedRightLegwear.render(scale);
+            this.bipedLeftArmwear.render(scale);
+            this.bipedRightArmwear.render(scale);
+            this.bipedBodyWear.render(scale);
+        }
+
+        GlStateManager.popMatrix();
+    }
+
 
 }
