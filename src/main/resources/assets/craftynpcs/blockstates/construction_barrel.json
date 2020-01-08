@@ -1,0 +1,10 @@
+{
+    "variants": {
+        "": [
+            { "model": "craftynpcs:block/construction_barrel" },
+            { "model": "craftynpcs:block/construction_barrel" },
+            { "model": "craftynpcs:block/construction_barrel", "y": 180 },
+            { "model": "craftynpcs:block/construction_barrel", "y": 180 }
+        ]
+    }
+}

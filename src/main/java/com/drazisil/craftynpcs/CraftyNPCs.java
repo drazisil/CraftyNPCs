@@ -7,11 +7,15 @@ import com.drazisil.craftynpcs.event.EventHandler;
 import com.drazisil.craftynpcs.item.CraftyNPCEgg;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
+import net.minecraft.block.material.Material;
+import net.minecraft.block.material.MaterialColor;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntityType;
+import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.SpawnEggItem;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -36,6 +40,16 @@ public class CraftyNPCs {
     public static final DeferredRegister<EntityType<?>> ENTITIES = new DeferredRegister<>(ForgeRegistries.ENTITIES, MODID);
 
     private static EntityType<NPCEntity> NPC_ENTITY_TYPE;
+
+    public static ConstructionBarrelBlock getBlock() {
+        return block;
+    }
+
+    public static void setBlock(ConstructionBarrelBlock block) {
+        CraftyNPCs.block = block;
+    }
+
+    private static ConstructionBarrelBlock block;
 
     public NPCManager getNpcManager() {
         return npcManager;
@@ -104,6 +118,12 @@ public class CraftyNPCs {
 
             // register a new block here
             LOGGER.info("HELLO from Register Block");
+            ConstructionBarrelBlock constructionBarrelBlock = new ConstructionBarrelBlock(Block.Properties.create(Material.ROCK, MaterialColor.STONE).hardnessAndResistance(1.5F, 6.0F));
+            constructionBarrelBlock.setRegistryName(
+                    new ResourceLocation(CraftyNPCs.MODID + ":construction_barrel"));
+
+            setBlock(constructionBarrelBlock);
+            blockRegistryEvent.getRegistry().registerAll(constructionBarrelBlock);
         }
 
         @SubscribeEvent
@@ -124,9 +144,12 @@ public class CraftyNPCs {
                     .build("crafty_npc");
 
             Item.Properties spawnEggProps = new Item.Properties().group(ItemGroup.MISC);
+            Item.Properties constructionBarrelProps = new Item.Properties().group(ItemGroup.BUILDING_BLOCKS);
             SpawnEggItem spawnEgg = new CraftyNPCEgg(NPC_ENTITY_TYPE, 0x4c3e30, 0xf0f0f, spawnEggProps);
+            BlockItem constrictionBarrelItem = new BlockItem(getBlock(), constructionBarrelProps);
 
             event.getRegistry().registerAll(spawnEgg.setRegistryName("crafty_npc_egg"));
+            event.getRegistry().registerAll(constrictionBarrelItem.setRegistryName(CraftyNPCs.MODID + ":construction_barrel"));
 
 
         }
