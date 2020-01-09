@@ -2,6 +2,7 @@ package com.drazisil.craftynpcs.entity;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.container.INamedContainerProvider;
+import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.ChestTileEntity;
 import net.minecraft.tileentity.TileEntityType;
 
@@ -13,6 +14,10 @@ public class NPCTileEntity extends ChestTileEntity implements INamedContainerPro
     }
 
     public NPCTileEntity() {
+    }
+
+    public ItemStack getItemStackInSlot(int slotId) {
+        return this.getItems().get(slotId);
     }
 
     public void openInventory(PlayerEntity player) {

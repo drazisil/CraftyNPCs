@@ -187,12 +187,8 @@ public class NPCEntity extends MobEntity {
 
     }
 
-
-
     protected void registerGoals() {
         super.registerGoals();
-
-        CraftyNPCs.LOGGER.info("mine: " + getMineableBlocks() + " = " + getMineableBlocks().size());
 
         this.goalSelector.addGoal(1, new LocateMineableBlockGoal(this, getMineableBlocks(), 0.5D));
 //        this.goalSelector.addGoal(2, new WaterAvoidingRandomWalkingGoal(this, 0.5D));
@@ -200,7 +196,7 @@ public class NPCEntity extends MobEntity {
 //        this.goalSelector.addGoal(2, new MoveTowardsTargetGoal(this, 0.9D, 32.0F));
 //        this.goalSelector.addGoal(2, new MoveTowardsVillageGoal(this, 0.6D));
 //        this.goalSelector.addGoal(3, new MoveThroughVillageGoal(this, 0.6D, false, 4, () -> false));
-        this.goalSelector.addGoal(5, new DiggyDiggyGoal(this, getMineableBlocks()));
+        this.goalSelector.addGoal(2, new DiggyDiggyGoal(this, getMineableBlocks()));
 //        this.goalSelector.addGoal(6, new WaterAvoidingRandomWalkingGoal(this, 0.6D));
 //        this.goalSelector.addGoal(7, new LookAtGoal(this, PlayerEntity.class, 6.0F));
 //        this.goalSelector.addGoal(8, new LookRandomlyGoal(this));

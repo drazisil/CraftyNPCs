@@ -15,7 +15,6 @@ import net.minecraftforge.common.ToolType;
 
 import java.util.EnumSet;
 import java.util.HashSet;
-import java.util.Objects;
 
 public class DiggyDiggyGoal extends TargetGoal {
     private final NPCEntity me;
@@ -35,21 +34,23 @@ public class DiggyDiggyGoal extends TargetGoal {
         BlockPos pos = me.getPosition();
         Block block = me.getBlockUnderFeet().getBlock();
 
-        return Objects.equals(block.getTranslationKey(), "block.minecraft.stone");
+        return minableBlocks.contains(block);
     }
 
     public void startExecuting() {
 
         me.swingArm(Hand.MAIN_HAND);
 //        System.out.println("Diggy diggy hole!");
-        ItemStack mainHandItemStack = me.getEquipmentInventory().getStackInSlot(me.MAIN_HAND_SLOT);
+        ItemStack mainHandItemStack = me.getEquipmentInventory().getItemStackInSlot(me.MAIN_HAND_SLOT);
         if (mainHandItemStack == ItemStack.EMPTY) {
+            System.out.println("Empty!");
             return;
         }
 
         Item mainHandItem = mainHandItemStack.getItem();
 
         if (!(mainHandItem instanceof PickaxeItem)) {
+            System.out.println("Not a Pickaxe?");
             return;
         }
 
@@ -57,13 +58,15 @@ public class DiggyDiggyGoal extends TargetGoal {
 
         BlockPos pos = me.getPosition().down(1);
         BlockPos lookPos = new BlockPos(me.getLookVec());
-        BlockState state = me.world.getBlockState(lookPos);
-        System.out.println(state.toString());
+        BlockState state = me.world.getBlockState(pos);
 //        BlockState state = me.getBlockUnderFeet();
         Block block = state.getBlock();
         ToolType toolToBreak = block.getHarvestTool(state);
 
-        if (mainHandTool.canHarvestBlock(state) && minableBlocks.contains(block)) {
+        System.out.println(minableBlocks);
+
+//        if (mainHandTool.canHarvestBlock(state) && minableBlocks.contains(block)) {
+            if (minableBlocks.contains(block)) {
 
 //            net.minecraft.world.storage.loot.LootContext.Builder lootcontext$builder = (new net.minecraft.world.storage.loot.LootContext.Builder(worldIn)).withRandom(worldIn.rand).withParameter(LootParameters.POSITION, pos).withParameter(LootParameters.TOOL, ItemStack.EMPTY).withNullableParameter(LootParameters.BLOCK_ENTITY, null);
 //            List<ItemStack> drops = state.getDrops(lootcontext$builder);
