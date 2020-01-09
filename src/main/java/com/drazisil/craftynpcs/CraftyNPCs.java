@@ -30,40 +30,22 @@ import net.minecraftforge.registries.ForgeRegistries;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.util.HashSet;
+
 // The value here should match an entry in the META-INF/mods.toml file
 @Mod("craftynpcs")
 public class CraftyNPCs {
     // Directly reference a log4j logger.
-    private static final Logger LOGGER = LogManager.getLogger();
+    public static final Logger LOGGER = LogManager.getLogger();
 
     public static final String MODID = "craftynpcs";
     public static final DeferredRegister<EntityType<?>> ENTITIES = new DeferredRegister<>(ForgeRegistries.ENTITIES, MODID);
 
     private static EntityType<NPCEntity> NPC_ENTITY_TYPE;
-
-    public static ConstructionBarrelBlock getBlock() {
-        return block;
-    }
-
-    public static void setBlock(ConstructionBarrelBlock block) {
-        CraftyNPCs.block = block;
-    }
-
-    private static ConstructionBarrelBlock block;
-
-    public NPCManager getNpcManager() {
-        return npcManager;
-    }
+    private static HashSet<Block> mineableBlocks = new HashSet<>();
+    public static ConstructionBarrelBlock block;
 
     private final NPCManager npcManager = new NPCManager();
-
-    public static CraftyNPCs getInstance() {
-        return instance;
-    }
-
-    private static void setInstance(CraftyNPCs instance) {
-        CraftyNPCs.instance = instance;
-    }
 
     private static CraftyNPCs instance;
 
@@ -124,6 +106,13 @@ public class CraftyNPCs {
 
             setBlock(constructionBarrelBlock);
             blockRegistryEvent.getRegistry().registerAll(constructionBarrelBlock);
+
+            CraftyNPCs.getMineableBlocks().add(constructionBarrelBlock);
+
+            if (getMineableBlocks() == null) {
+                System.out.println("Help222222222!");
+                throw new  NullPointerException();
+            }
         }
 
         @SubscribeEvent
@@ -154,6 +143,31 @@ public class CraftyNPCs {
 
         }
 
+    }
+
+    public static ConstructionBarrelBlock getBlock() {
+        return block;
+    }
+
+    public static void setBlock(ConstructionBarrelBlock block) {
+        CraftyNPCs.block = block;
+    }
+
+
+    public NPCManager getNpcManager() {
+        return npcManager;
+    }
+
+    public static CraftyNPCs getInstance() {
+        return instance;
+    }
+
+    private static void setInstance(CraftyNPCs instance) {
+        CraftyNPCs.instance = instance;
+    }
+
+    public static HashSet<Block> getMineableBlocks() {
+        return mineableBlocks;
     }
 
 }

@@ -14,17 +14,20 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.common.ToolType;
 
 import java.util.EnumSet;
+import java.util.HashSet;
 import java.util.Objects;
 
 public class DiggyDiggyGoal extends TargetGoal {
     private final NPCEntity me;
     private LivingEntity field_75304_b;
     private final EntityPredicate field_223190_c = (new EntityPredicate()).setDistance(64.0D);
+    private HashSet<Block> minableBlocks = new HashSet<>();
 
-    public DiggyDiggyGoal(NPCEntity npc) {
+    public DiggyDiggyGoal(NPCEntity npc, HashSet<Block> minableBlocks) {
         super(npc, false, true);
         this.me = npc;
         this.setMutexFlags(EnumSet.of(Flag.TARGET));
+        this.minableBlocks.addAll(minableBlocks);
     }
 
     public boolean shouldExecute() {
@@ -60,7 +63,7 @@ public class DiggyDiggyGoal extends TargetGoal {
         Block block = state.getBlock();
         ToolType toolToBreak = block.getHarvestTool(state);
 
-        if (mainHandTool.canHarvestBlock(state)) {
+        if (mainHandTool.canHarvestBlock(state) && minableBlocks.contains(block)) {
 
 //            net.minecraft.world.storage.loot.LootContext.Builder lootcontext$builder = (new net.minecraft.world.storage.loot.LootContext.Builder(worldIn)).withRandom(worldIn.rand).withParameter(LootParameters.POSITION, pos).withParameter(LootParameters.TOOL, ItemStack.EMPTY).withNullableParameter(LootParameters.BLOCK_ENTITY, null);
 //            List<ItemStack> drops = state.getDrops(lootcontext$builder);
@@ -73,11 +76,11 @@ public class DiggyDiggyGoal extends TargetGoal {
         super.startExecuting();
     }
 
-//    public boolean shouldContinueExecuting() {
-//        BlockPos pos = me.getPosition();
-//        pos = pos.down();
-//        Block block = me.getEntityWorld().getBlockState(pos).getBlock();
-//
-//        return Objects.equals(block.getTranslationKey(), "block.minecraft.stone");
-//    }
+    public boolean shouldContinueExecuting() {
+        BlockPos pos = me.getPosition();
+        pos = pos.down();
+        Block block = me.getEntityWorld().getBlockState(pos).getBlock();
+
+        return minableBlocks.contains(block);
+    }
 }

@@ -2,6 +2,7 @@ package com.drazisil.craftynpcs.entity;
 
 import com.drazisil.craftynpcs.CraftyNPCs;
 import com.drazisil.craftynpcs.entity.ai.DiggyDiggyGoal;
+import com.drazisil.craftynpcs.entity.ai.LocateMineableBlockGoal;
 import com.mojang.datafixers.Dynamic;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.EntityType;
@@ -24,7 +25,6 @@ import net.minecraft.state.properties.ChestType;
 import net.minecraft.tileentity.ChestTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.HandSide;
-import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
@@ -37,6 +37,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import javax.annotation.Nullable;
 import java.util.Iterator;
 
+import static com.drazisil.craftynpcs.CraftyNPCs.getMineableBlocks;
 import static net.minecraft.block.ChestBlock.getDirectionToAttached;
 import static net.minecraft.state.properties.ChestType.SINGLE;
 
@@ -45,12 +46,7 @@ public class NPCEntity extends MobEntity {
 
     private final NPCManager npcManager;
     private final String name;
-    private final NonNullList<ItemStack> inventoryHands;
-    protected final float[] inventoryHandsDropChances;
-    private final NonNullList<ItemStack> inventoryArmor;
-    protected final float[] inventoryArmorDropChances;
     public final Integer MAIN_HAND_SLOT = 0;
-    private int numPlayersUsing;
 
     public static final EnumProperty<ChestType> TYPE;
     private final NPCTileEntity equipmentInventory = new NPCTileEntity();
@@ -65,11 +61,6 @@ public class NPCEntity extends MobEntity {
         super(type, worldIn);
 
         this.name = "miner";
-
-        this.inventoryHands = NonNullList.withSize(2, ItemStack.EMPTY);
-        this.inventoryHandsDropChances = new float[2];
-        this.inventoryArmor = NonNullList.withSize(4, ItemStack.EMPTY);
-        this.inventoryArmorDropChances = new float[4];
 
         ItemStack pickaxeStack = new ItemStack(Items.DIAMOND_PICKAXE);
 
@@ -200,12 +191,16 @@ public class NPCEntity extends MobEntity {
 
     protected void registerGoals() {
         super.registerGoals();
-//        this.goalSelector.addGoal(1, new WaterAvoidingRandomWalkingGoal(this, 0.5D));
+
+        CraftyNPCs.LOGGER.info("mine: " + getMineableBlocks() + " = " + getMineableBlocks().size());
+
+        this.goalSelector.addGoal(1, new LocateMineableBlockGoal(this, getMineableBlocks(), 0.5D));
+//        this.goalSelector.addGoal(2, new WaterAvoidingRandomWalkingGoal(this, 0.5D));
 //        this.goalSelector.addGoal(1, new MeleeAttackGoal(this, 1.0D, true));
 //        this.goalSelector.addGoal(2, new MoveTowardsTargetGoal(this, 0.9D, 32.0F));
 //        this.goalSelector.addGoal(2, new MoveTowardsVillageGoal(this, 0.6D));
 //        this.goalSelector.addGoal(3, new MoveThroughVillageGoal(this, 0.6D, false, 4, () -> false));
-        this.goalSelector.addGoal(5, new DiggyDiggyGoal(this));
+        this.goalSelector.addGoal(5, new DiggyDiggyGoal(this, getMineableBlocks()));
 //        this.goalSelector.addGoal(6, new WaterAvoidingRandomWalkingGoal(this, 0.6D));
 //        this.goalSelector.addGoal(7, new LookAtGoal(this, PlayerEntity.class, 6.0F));
 //        this.goalSelector.addGoal(8, new LookRandomlyGoal(this));

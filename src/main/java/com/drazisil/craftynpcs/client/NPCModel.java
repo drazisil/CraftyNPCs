@@ -16,14 +16,14 @@ class NPCModel<T extends LivingEntity> extends BipedModel<T> {
     public final RendererModel bipedRightLegwear;
     public final RendererModel bipedBodyWear;
     private final RendererModel bipedCape;
-    private final RendererModel bipedDeadmau5Head;
+//    private final RendererModel bipedDeadmau5Head;
     private final boolean smallArms;
 
     public NPCModel(float modelSize, boolean smallArmsIn) {
         super(modelSize, 0.0F, 64, 64);
         this.smallArms = smallArmsIn;
-        this.bipedDeadmau5Head = new RendererModel(this, 24, 0);
-        this.bipedDeadmau5Head.addBox(-3.0F, -6.0F, -1.0F, 6, 6, 1, modelSize);
+//        this.bipedDeadmau5Head = new RendererModel(this, 24, 0);
+//        this.bipedDeadmau5Head.addBox(-3.0F, -6.0F, -1.0F, 6, 6, 1, modelSize);
         this.bipedCape = new RendererModel(this, 0, 0);
         this.bipedCape.setTextureSize(64, 32);
         this.bipedCape.addBox(-5.0F, 0.0F, -1.0F, 10, 16, 1, modelSize);
