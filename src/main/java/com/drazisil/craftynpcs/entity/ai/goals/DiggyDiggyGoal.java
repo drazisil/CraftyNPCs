@@ -1,4 +1,4 @@
-package com.drazisil.craftynpcs.entity.ai;
+package com.drazisil.craftynpcs.entity.ai.goals;
 
 import com.drazisil.craftynpcs.entity.NPCEntity;
 import net.minecraft.block.Block;
@@ -65,7 +65,7 @@ public class DiggyDiggyGoal extends TargetGoal {
 
         System.out.println(minableBlocks);
 
-//        if (mainHandTool.canHarvestBlock(state) && minableBlocks.contains(block)) {
+//        if (mainHandTool.canHarvestBlock(state) && minableBlocks.contains(constructionBarrelBlock)) {
             if (minableBlocks.contains(block)) {
 
 //            net.minecraft.world.storage.loot.LootContext.Builder lootcontext$builder = (new net.minecraft.world.storage.loot.LootContext.Builder(worldIn)).withRandom(worldIn.rand).withParameter(LootParameters.POSITION, pos).withParameter(LootParameters.TOOL, ItemStack.EMPTY).withNullableParameter(LootParameters.BLOCK_ENTITY, null);
@@ -73,7 +73,7 @@ public class DiggyDiggyGoal extends TargetGoal {
 
             me.world.destroyBlock(pos, false);
 
-//            state.getBlock().harvestBlock();
+//            state.getConstructionBarrelBlock().harvestBlock();
         }
 
         super.startExecuting();

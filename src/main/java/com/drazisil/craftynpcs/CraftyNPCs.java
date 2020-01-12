@@ -1,12 +1,15 @@
 package com.drazisil.craftynpcs;
 
+import com.drazisil.craftynpcs.block.BoingBlock;
+import com.drazisil.craftynpcs.block.ConstructionBarrelBlock;
 import com.drazisil.craftynpcs.client.NPCEntityRender;
 import com.drazisil.craftynpcs.entity.NPCEntity;
-import com.drazisil.craftynpcs.entity.NPCManager;
+import com.drazisil.craftynpcs.entity.ai.NPCManager;
 import com.drazisil.craftynpcs.event.EventHandler;
 import com.drazisil.craftynpcs.item.CraftyNPCEgg;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.material.MaterialColor;
 import net.minecraft.entity.EntityClassification;
@@ -43,7 +46,9 @@ public class CraftyNPCs {
 
     private static EntityType<NPCEntity> NPC_ENTITY_TYPE;
     private static HashSet<Block> mineableBlocks = new HashSet<>();
-    public static ConstructionBarrelBlock block;
+    public static ConstructionBarrelBlock constructionBarrelBlock;
+
+    public static BoingBlock boingBlock;
 
     private final NPCManager npcManager = new NPCManager();
 
@@ -98,14 +103,22 @@ public class CraftyNPCs {
         @SubscribeEvent
         public static void onBlocksRegistry(final RegistryEvent.Register<Block> blockRegistryEvent) {
 
-            // register a new block here
+            // register a new constructionBarrelBlock here
             LOGGER.info("HELLO from Register Block");
-            ConstructionBarrelBlock constructionBarrelBlock = new ConstructionBarrelBlock(Block.Properties.create(Material.ROCK, MaterialColor.STONE).hardnessAndResistance(1.5F, 6.0F));
-            constructionBarrelBlock.setRegistryName(
-                    new ResourceLocation(CraftyNPCs.MODID + ":construction_barrel"));
+            ConstructionBarrelBlock constructionBarrelBlock =
+                    (ConstructionBarrelBlock) new ConstructionBarrelBlock(Block.Properties.create(Material.ROCK,
+                            MaterialColor.STONE)
+                            .hardnessAndResistance(1.5F, 6.0F))
+                            .setRegistryName(new ResourceLocation(CraftyNPCs.MODID + ":construction_barrel"));
 
-            setBlock(constructionBarrelBlock);
-            blockRegistryEvent.getRegistry().registerAll(constructionBarrelBlock);
+            BoingBlock boingBlock =
+                    (BoingBlock) new BoingBlock(Block.Properties.create(Material.CLAY, MaterialColor.GRASS).slipperiness(0.8F).sound(SoundType.SLIME))
+                            .setRegistryName(new ResourceLocation(CraftyNPCs.MODID + ":boing"));
+
+
+            setConstructionBarrelBlock(constructionBarrelBlock);
+            setBoingBlock(boingBlock);
+            blockRegistryEvent.getRegistry().registerAll(constructionBarrelBlock, boingBlock);
 
             CraftyNPCs.getMineableBlocks().add(constructionBarrelBlock);
 
@@ -134,23 +147,24 @@ public class CraftyNPCs {
 
             Item.Properties spawnEggProps = new Item.Properties().group(ItemGroup.MISC);
             Item.Properties constructionBarrelProps = new Item.Properties().group(ItemGroup.BUILDING_BLOCKS);
-            SpawnEggItem spawnEgg = new CraftyNPCEgg(NPC_ENTITY_TYPE, 0x4c3e30, 0xf0f0f, spawnEggProps);
-            BlockItem constrictionBarrelItem = new BlockItem(getBlock(), constructionBarrelProps);
+            SpawnEggItem spawnEgg = (SpawnEggItem) new CraftyNPCEgg(NPC_ENTITY_TYPE, 0x4c3e30, 0xf0f0f, spawnEggProps).setRegistryName("crafty_npc_egg");
+            BlockItem constrictionBarrelItem = (BlockItem) new BlockItem(getConstructionBarrelBlock(), constructionBarrelProps).setRegistryName(CraftyNPCs.MODID + ":construction_barrel");
+            BlockItem boingItem = (BlockItem) new BlockItem(getBoingBlock(), constructionBarrelProps).setRegistryName(CraftyNPCs.MODID + ":boing");
 
-            event.getRegistry().registerAll(spawnEgg.setRegistryName("crafty_npc_egg"));
-            event.getRegistry().registerAll(constrictionBarrelItem.setRegistryName(CraftyNPCs.MODID + ":construction_barrel"));
+            event.getRegistry().registerAll(spawnEgg);
+            event.getRegistry().registerAll(constrictionBarrelItem, boingItem);
 
 
         }
 
     }
 
-    public static ConstructionBarrelBlock getBlock() {
-        return block;
+    public static ConstructionBarrelBlock getConstructionBarrelBlock() {
+        return constructionBarrelBlock;
     }
 
-    public static void setBlock(ConstructionBarrelBlock block) {
-        CraftyNPCs.block = block;
+    public static void setConstructionBarrelBlock(ConstructionBarrelBlock constructionBarrelBlock) {
+        CraftyNPCs.constructionBarrelBlock = constructionBarrelBlock;
     }
 
 
@@ -168,6 +182,14 @@ public class CraftyNPCs {
 
     public static HashSet<Block> getMineableBlocks() {
         return mineableBlocks;
+    }
+
+    public static BoingBlock getBoingBlock() {
+        return boingBlock;
+    }
+
+    public static void setBoingBlock(BoingBlock boingBlock) {
+        CraftyNPCs.boingBlock = boingBlock;
     }
 
 }

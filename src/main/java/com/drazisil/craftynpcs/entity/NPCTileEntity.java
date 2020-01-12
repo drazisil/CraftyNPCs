@@ -43,10 +43,10 @@ public class NPCTileEntity extends ChestTileEntity implements INamedContainerPro
     }
 
     protected void onOpenOrClose() {
-//        Block block = this.getBlockState().getBlock();
-//        if (block instanceof ChestBlock) {
-//            this.world.addBlockEvent(this.pos, block, 1, this.numPlayersUsing);
-//            this.world.notifyNeighborsOfStateChange(this.pos, block);
+//        Block constructionBarrelBlock = this.getBlockState().getConstructionBarrelBlock();
+//        if (constructionBarrelBlock instanceof ChestBlock) {
+//            this.world.addBlockEvent(this.pos, constructionBarrelBlock, 1, this.numPlayersUsing);
+//            this.world.notifyNeighborsOfStateChange(this.pos, constructionBarrelBlock);
 //        }
 
     }

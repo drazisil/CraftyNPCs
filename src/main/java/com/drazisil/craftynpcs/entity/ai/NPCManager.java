@@ -1,4 +1,6 @@
-package com.drazisil.craftynpcs.entity;
+package com.drazisil.craftynpcs.entity.ai;
+
+import com.drazisil.craftynpcs.entity.NPCEntity;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;

@@ -1,4 +1,4 @@
-package com.drazisil.craftynpcs.entity.ai;
+package com.drazisil.craftynpcs.entity.ai.goals;
 
 import com.drazisil.craftynpcs.entity.NPCEntity;
 import net.minecraft.entity.ai.goal.Goal;
@@ -15,7 +15,7 @@ class NearestDiggableBlockGoal extends Goal {
 
 
     public boolean shouldExecute() {
-        return !Objects.equals(me.getBlockUnderFeet().getBlock().getTranslationKey(), "block.minecraft.stone");
+        return !Objects.equals(me.getBlockUnderFeet().getBlock().getTranslationKey(), "constructionBarrelBlock.minecraft.stone");
     }
 
     public void startExecuting() {
@@ -44,11 +44,11 @@ class NearestDiggableBlockGoal extends Goal {
 //            return false;
 //        } else {
 //            BlockState blockstate = worldIn.getBlockState(pos);
-//            Block block = blockstate.getBlock();
-//            if (block == Blocks.STONE) {
+//            Block constructionBarrelBlock = blockstate.getConstructionBarrelBlock();
+//            if (constructionBarrelBlock == Blocks.STONE) {
 //                return true;
 //            } else {
-//                return block.isIn(BlockTags.BEDS) && blockstate.get(BedBlock.PART) != BedPart.HEAD;
+//                return constructionBarrelBlock.isIn(BlockTags.BEDS) && blockstate.get(BedBlock.PART) != BedPart.HEAD;
 //            }
 //        }
 //    }

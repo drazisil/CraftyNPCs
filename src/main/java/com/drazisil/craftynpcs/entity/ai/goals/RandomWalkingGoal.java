@@ -1,6 +1,7 @@
-package com.drazisil.craftynpcs.entity.ai;
+package com.drazisil.craftynpcs.entity.ai.goals;
 
 import com.drazisil.craftynpcs.entity.NPCEntity;
+import com.drazisil.craftynpcs.entity.ai.RandomPositionGenerator;
 import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.util.math.Vec3d;
 

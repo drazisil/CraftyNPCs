@@ -2,6 +2,7 @@ package com.drazisil.craftynpcs.event;
 
 import com.drazisil.craftynpcs.entity.NPCEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.server.MinecraftServer;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
@@ -16,7 +17,7 @@ public class EventHandler {
 
                 if (targetEntity.getEquipmentInventory().getNumPlayersUsing() == 0) {
                     player.openContainer(targetEntity.getEquipmentInventory());
-
+                    MinecraftServer moo = player.getServer();
                 }
 
 

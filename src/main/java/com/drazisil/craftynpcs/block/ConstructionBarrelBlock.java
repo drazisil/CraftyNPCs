@@ -1,4 +1,4 @@
-package com.drazisil.craftynpcs;
+package com.drazisil.craftynpcs.block;
 
 import net.minecraft.block.Block;
 
