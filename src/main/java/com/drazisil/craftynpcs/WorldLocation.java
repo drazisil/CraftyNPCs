@@ -2,6 +2,7 @@ package com.drazisil.craftynpcs;
 
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.math.Vec3i;
 
 public class WorldLocation {
 
@@ -9,13 +10,13 @@ public class WorldLocation {
     private int y;
     private int z;
 
-    WorldLocation(Vec3d vec3dIn){
+    public WorldLocation(Vec3d vec3dIn){
         this.x = (int) vec3dIn.x;
         this.y = (int) vec3dIn.y;
         this.z = (int) vec3dIn.z;
     }
 
-    WorldLocation(BlockPos blockPosIn) {
+    public WorldLocation(BlockPos blockPosIn) {
         this.x = blockPosIn.getX();
         this.y = blockPosIn.getY();
         this.z = blockPosIn.getZ();
@@ -58,6 +59,10 @@ public class WorldLocation {
 
     public Vec3d toVec3d() {
         return new Vec3d(this.x, this.y, this.z);
+    }
+
+    public Vec3i toVec3i() {
+        return new Vec3i(this.x, this.y, this.z);
     }
 
     public BlockPos toBlockPos() {
