@@ -2,13 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="76131b8c-212b-4006-b6b1-7bd47553ebfa" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/drazisil/craftynpcs/BlockScanBox.java" afterPath="$PROJECT_DIR$/src/main/java/com/drazisil/craftynpcs/BlockScanBox.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/drazisil/craftynpcs/CraftyNPCs.java" afterPath="$PROJECT_DIR$/src/main/java/com/drazisil/craftynpcs/CraftyNPCs.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/drazisil/craftynpcs/WorldLocation.java" afterPath="$PROJECT_DIR$/src/main/java/com/drazisil/craftynpcs/WorldLocation.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/drazisil/craftynpcs/entity/NPCEntity.java" afterPath="$PROJECT_DIR$/src/main/java/com/drazisil/craftynpcs/entity/NPCEntity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/drazisil/craftynpcs/entity/NPCTileEntity.java" afterPath="$PROJECT_DIR$/src/main/java/com/drazisil/craftynpcs/entity/NPCTileEntity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/drazisil/craftynpcs/entity/ai/goals/DiggyDiggyGoal.java" afterPath="$PROJECT_DIR$/src/main/java/com/drazisil/craftynpcs/entity/ai/goals/DiggyDiggyGoal.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/drazisil/craftynpcs/entity/ai/goals/LookAtTargetBlock.java" afterPath="$PROJECT_DIR$/src/main/java/com/drazisil/craftynpcs/entity/ai/goals/LookAtTargetBlock.java" />
     </list>
     <ignored path="$PROJECT_DIR$/.gradle/" />
     <ignored path="$PROJECT_DIR$/build/" />
@@ -110,15 +104,15 @@
       <file leaf-file-name="NPCEntity.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/drazisil/craftynpcs/entity/NPCEntity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="293">
-              <caret line="197" column="8" lean-forward="false" selection-start-line="197" selection-start-column="8" selection-end-line="197" selection-end-column="8" />
+            <state relative-caret-position="329">
+              <caret line="204" column="64" lean-forward="false" selection-start-line="204" selection-start-column="64" selection-end-line="204" selection-end-column="64" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="method#registerAttributes#0;class#NPCEntity#0" expanded="false" />
                 <element signature="method#setItemStackToSlot#0;class#NPCEntity#0" expanded="false" />
                 <element signature="method#canHarvestBlock#0;class#NPCEntity#0" expanded="false" />
                 <element signature="method#remove#0;class#NPCEntity#0" expanded="false" />
-                <marker date="1578855407101" expanded="false" signature="11811:11825" ph=" }" />
+                <marker date="1578855485915" expanded="false" signature="11949:11963" ph=" }" />
               </folding>
             </state>
           </provider>
@@ -1295,7 +1289,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="169863000" />
+    <option name="totallyTimeSpent" value="170060000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="27" width="1600" height="873" extended-state="6" />
@@ -1836,15 +1830,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/drazisil/craftynpcs/entity/NPCEntity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="293">
-          <caret line="197" column="8" lean-forward="false" selection-start-line="197" selection-start-column="8" selection-end-line="197" selection-end-column="8" />
+        <state relative-caret-position="329">
+          <caret line="204" column="64" lean-forward="false" selection-start-line="204" selection-start-column="64" selection-end-line="204" selection-end-column="64" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="method#registerAttributes#0;class#NPCEntity#0" expanded="false" />
             <element signature="method#setItemStackToSlot#0;class#NPCEntity#0" expanded="false" />
             <element signature="method#canHarvestBlock#0;class#NPCEntity#0" expanded="false" />
             <element signature="method#remove#0;class#NPCEntity#0" expanded="false" />
-            <marker date="1578855407101" expanded="false" signature="11811:11825" ph=" }" />
+            <marker date="1578855485915" expanded="false" signature="11949:11963" ph=" }" />
           </folding>
         </state>
       </provider>

@@ -2,8 +2,10 @@ package com.drazisil.craftynpcs.entity;
 
 import com.drazisil.craftynpcs.CraftyNPCs;
 import com.drazisil.craftynpcs.entity.ai.NPCManager;
+import com.drazisil.craftynpcs.entity.ai.goals.DiggyDiggyGoal;
 import com.drazisil.craftynpcs.entity.ai.goals.LookAtTargetBlock;
 import com.drazisil.craftynpcs.entity.ai.goals.MoveTowardsTargetGoal;
+import com.drazisil.craftynpcs.entity.ai.goals.WaterAvoidingRandomWalkingGoal;
 import com.mojang.datafixers.Dynamic;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.EntityType;
@@ -198,8 +200,8 @@ public class NPCEntity extends MobEntity {
         float maxScanDistance = 50.0f;
         this.goalSelector.addGoal(1, new LookAtTargetBlock(this, getMineableBlocks(), maxScanDistance));
         this.goalSelector.addGoal(2, new MoveTowardsTargetGoal(this, 0.5D, maxScanDistance));
-//        this.goalSelector.addGoal(3, new DiggyDiggyGoal(this, getMineableBlocks()));
-//        this.goalSelector.addGoal(4, new WaterAvoidingRandomWalkingGoal(this, 0.5D));
+        this.goalSelector.addGoal(3, new DiggyDiggyGoal(this, getMineableBlocks()));
+        this.goalSelector.addGoal(4, new WaterAvoidingRandomWalkingGoal(this, 0.5D));
 //        this.goalSelector.addGoal(1, new MeleeAttackGoal(this, 1.0D, true));
 //        this.goalSelector.addGoal(2, new MoveTowardsVillageGoal(this, 0.6D));
 //        this.goalSelector.addGoal(3, new MoveThroughVillageGoal(this, 0.6D, false, 4, () -> false));
