@@ -60,10 +60,6 @@ public class BlockScanBox {
 
         WorldLocation startLocation = rawStartLocation.copy();
 
-//        System.out.println(rawStartLocation.toVec3d() + " / " + startLocation.toVec3d());
-
-//        System.out.println("Start: " + startLocation.toVec3d());
-
         setHeight(height);
         setWidth(width);
         setDepth(depth);
@@ -95,7 +91,6 @@ public class BlockScanBox {
 
         WorldLocation cursorLocation = startLocation.copy();
 
-//        System.out.println("Scan Start");
         for (int y = startY; y > (startY - depth); y -= 1) {
             cursorLocation.setY(y);
 
@@ -107,19 +102,16 @@ public class BlockScanBox {
 
                     // Capture the block
                     BlockPos blockPos = cursorLocation.copy().toBlockPos();
-//                    CraftyNPCs.LOGGER.info(blockPos);
-                    BlockState state = world.getBlockState(cursorLocation.toBlockPos());
+                    BlockState state = world.getBlockState(blockPos);
 
                     Block block = state.getBlock();
 
                     BlockSave blockSave = new BlockSave(world, cursorLocation.copy(), block, state);
-//                    CraftyNPCs.LOGGER.info(blockSave.toString());
                     addBlock(blockSave);
                 }
             }
 
         }
-//        System.out.println("Scan End");
     }
 
     public double getLeftSideX() {
@@ -201,22 +193,6 @@ public class BlockScanBox {
         return startLocation.getZ();
     }
 
-//    public void restoreAll(BlockSaveRecord blocksToChange) {
-//
-//        ArrayList<BlockSave> currentBlocks = blocksToChange.getBlocks();
-//        ArrayList<BlockSave> restoreBlocks = getBlocks();
-//
-//
-//        for (int i = 0; i < blocksToChange.getBlocks().size(); i++) {
-//            BlockSave currentBlock = currentBlocks.get(i);
-//            BlockSave restoreBlock = restoreBlocks.get(i);
-//
-//            currentBlock.getBlock().setType(restoreBlock.getType());
-//            restoreBlock.getState().update();
-//        }
-//
-//    }
-
     private boolean compareFloorDouble(double d1, double d2) {
         return Math.floor(d1) == Math.floor(d2);
     }
@@ -242,19 +218,7 @@ public class BlockScanBox {
 
     public WorldLocation LocateBlock(Block block){
 
-//        System.out.println(this.leftSideX + " / " + this.rightSideX);
-//        System.out.println(this.frontSideZ + " / " + this.backSideZ);
-
         for (BlockSave blockSave: this.blocks) {
-//            System.out.println("Pos: " + blockSave.getLocation().getX() + " " + blockSave.getLocation().getY() + " " + blockSave.getLocation().getZ());
-            if (blockSave.getLocation().getX() == -186 && blockSave.getLocation().getZ() == -88) {
-//                System.out.println("Block!: " + blockSave.getBlock() + " = " + blockSave.getLocation().toVec3d());
-            }
-            if (blockSave.getBlock() == block) {
-//                System.out.println("Found!: " + blockSave.getLocation());
-            }
-//            System.out.println(blockSave.getBlock() + " = " + blockSave.getLocation().toVec3d());
-
             if (blockSave.getBlock() == block) {
                 return blockSave.getLocation();
             }

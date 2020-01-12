@@ -39,6 +39,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import javax.annotation.Nullable;
 import java.util.Iterator;
 
+import static com.drazisil.craftynpcs.CraftyNPCs.getMineableBlocks;
 import static net.minecraft.block.ChestBlock.getDirectionToAttached;
 import static net.minecraft.state.properties.ChestType.SINGLE;
 
@@ -194,14 +195,14 @@ public class NPCEntity extends MobEntity {
         super.registerGoals();
 
 //        this.goalSelector.addGoal(1, new LocateMineableBlockGoal(this, getMineableBlocks(), 0.5D));
-        this.goalSelector.addGoal(1, new LookAtTargetBlock(this, CraftyNPCs.getMineableBlocks(), 32.0F));
-
-        //        this.goalSelector.addGoal(2, new WaterAvoidingRandomWalkingGoal(this, 0.5D));
+        float maxScanDistance = 50.0f;
+        this.goalSelector.addGoal(1, new LookAtTargetBlock(this, getMineableBlocks(), maxScanDistance));
+        this.goalSelector.addGoal(2, new MoveTowardsTargetGoal(this, 0.5D, maxScanDistance));
+//        this.goalSelector.addGoal(3, new DiggyDiggyGoal(this, getMineableBlocks()));
+//        this.goalSelector.addGoal(4, new WaterAvoidingRandomWalkingGoal(this, 0.5D));
 //        this.goalSelector.addGoal(1, new MeleeAttackGoal(this, 1.0D, true));
-        this.goalSelector.addGoal(2, new MoveTowardsTargetGoal(this, 0.5D, 32.0F));
 //        this.goalSelector.addGoal(2, new MoveTowardsVillageGoal(this, 0.6D));
 //        this.goalSelector.addGoal(3, new MoveThroughVillageGoal(this, 0.6D, false, 4, () -> false));
-//        this.goalSelector.addGoal(2, new DiggyDiggyGoal(this, getMineableBlocks()));
 //        this.goalSelector.addGoal(6, new WaterAvoidingRandomWalkingGoal(this, 0.6D));
 //        this.goalSelector.addGoal(8, new LookRandomlyGoal(this));
 //        this.targetSelector.addGoal(1, new DefendVillageGoal(this));

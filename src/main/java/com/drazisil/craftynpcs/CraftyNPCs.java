@@ -123,7 +123,6 @@ public class CraftyNPCs {
             CraftyNPCs.getMineableBlocks().add(constructionBarrelBlock);
 
             if (getMineableBlocks() == null) {
-                System.out.println("Help222222222!");
                 throw new  NullPointerException();
             }
         }

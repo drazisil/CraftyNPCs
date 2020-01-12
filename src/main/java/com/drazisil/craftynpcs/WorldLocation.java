@@ -20,7 +20,6 @@ public class WorldLocation {
         this.x = blockPosIn.getX();
         this.y = blockPosIn.getY();
         this.z = blockPosIn.getZ();
-//        System.out.println(blockPosIn.toString() + " = " + this.x + ", " + this.y + ", " + this.z);
     }
 
     private WorldLocation(WorldLocation worldLocationIn){

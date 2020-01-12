@@ -33,7 +33,6 @@ public class NPCTileEntity extends ChestTileEntity implements INamedContainerPro
     }
 
     public void closeInventory(PlayerEntity player) {
-        System.out.println(this.getItems().toString());
         if (!player.isSpectator()) {
             --this.numPlayersUsing;
             this.markDirty();
