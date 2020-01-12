@@ -75,7 +75,7 @@ public class LookAtTargetBlock extends Goal {
 
     public void tick() {
         this.npcEntity.getLookController().func_220679_a(closestBlock.x, closestBlock.y, closestBlock.z);
-//        CraftyNPCs.LOGGER.info("Looking at: " + npcEntity.getLookPos());
+//        CraftyNPCs.LOGGER.info("Looking at: " + getLookPos(npcEntity) + " = " + getBlockAtPos(world, npcEntity.getPosition().down()));
         --this.lookTime;
     }
 

@@ -1,15 +1,14 @@
 package com.drazisil.craftynpcs.entity;
 
 import com.drazisil.craftynpcs.CraftyNPCs;
-import com.drazisil.craftynpcs.WorldLocation;
 import com.drazisil.craftynpcs.entity.ai.NPCManager;
 import com.drazisil.craftynpcs.entity.ai.goals.LookAtTargetBlock;
+import com.drazisil.craftynpcs.entity.ai.goals.MoveTowardsTargetGoal;
 import com.mojang.datafixers.Dynamic;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.SharedMonsterAttributes;
-import com.drazisil.craftynpcs.entity.ai.goals.MoveTowardsTargetGoal;
 import net.minecraft.entity.player.PlayerModelPart;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.inventory.container.INamedContainerProvider;
@@ -29,7 +28,6 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.HandSide;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
-import net.minecraft.util.math.Vec3i;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.world.IWorld;
@@ -213,13 +211,6 @@ public class NPCEntity extends MobEntity {
 //        }));
 //
     }
-
-    public BlockPos getLookPos() {
-        Vec3i lookVec3i = new WorldLocation(this.getLookVec()).toVec3i();
-        return this.getPosition().add(lookVec3i);
-
-    }
-
 
     public boolean isNoDespawnRequired() {
         return true;
