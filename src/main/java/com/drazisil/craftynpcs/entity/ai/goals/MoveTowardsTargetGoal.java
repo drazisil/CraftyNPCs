@@ -47,6 +47,7 @@ public class MoveTowardsTargetGoal extends Goal {
     }
 
     public void resetTask() {
+
         this.targetPos = null;
     }
 
