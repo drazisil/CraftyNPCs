@@ -2,12 +2,12 @@ package com.drazisil.craftynpcs.entity;
 
 import com.drazisil.craftynpcs.CraftyNPCs;
 import com.drazisil.craftynpcs.entity.ai.NPCManager;
+import com.drazisil.craftynpcs.entity.ai.brain.Brain;
 import com.drazisil.craftynpcs.entity.ai.goals.LookAtTargetBlock;
 import com.drazisil.craftynpcs.entity.ai.goals.MakeStructure;
 import com.drazisil.craftynpcs.entity.ai.goals.MoveTowardsTargetGoal;
 import com.drazisil.craftynpcs.entity.ai.goals.WaterAvoidingRandomWalkingGoal;
 import com.drazisil.craftynpcs.entity.ai.structure.AIStructure;
-import com.mojang.datafixers.Dynamic;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MobEntity;
@@ -18,9 +18,7 @@ import net.minecraft.inventory.container.INamedContainerProvider;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.nbt.INBT;
 import net.minecraft.nbt.ListNBT;
-import net.minecraft.nbt.NBTDynamicOps;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.scoreboard.ScorePlayerTeam;
 import net.minecraft.state.EnumProperty;
@@ -54,6 +52,8 @@ public class NPCEntity extends MobEntity {
 
     private BlockPos targetPos;
     public boolean isDigging = false;
+
+    private Brain brain = new Brain(CraftyNPCs.LOGGER);
 
     public static final EnumProperty<ChestType> TYPE;
     private final NPCTileEntity equipmentInventory = new NPCTileEntity();
@@ -145,7 +145,7 @@ public class NPCEntity extends MobEntity {
 
         compound.putBoolean("FallFlying", this.isElytraFlying());
 
-        compound.put("Brain", (INBT)this.brain.serialize(NBTDynamicOps.INSTANCE));
+//        compound.put("Brain", (INBT)this.brain.serialize(NBTDynamicOps.INSTANCE));
     }
 
     public void readAdditional(CompoundNBT compound) {
@@ -189,9 +189,15 @@ public class NPCEntity extends MobEntity {
         }
 
         if (compound.contains("Brain", 10)) {
-            this.brain = this.createBrain(new Dynamic(NBTDynamicOps.INSTANCE, compound.get("Brain")));
+//            this.brain = this.createBrain(new Dynamic(NBTDynamicOps.INSTANCE, compound.get("Brain")));
         }
 
+    }
+
+    @Override
+    public void livingTick() {
+        super.livingTick();
+        this.brain.tick();
     }
 
     protected void registerGoals() {
