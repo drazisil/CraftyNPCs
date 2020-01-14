@@ -2,13 +2,13 @@ package com.drazisil.craftynpcs.entity.ai.goals;
 
 import com.drazisil.craftynpcs.entity.NPCEntity;
 import net.minecraft.entity.ai.goal.Goal;
-import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.math.BlockPos;
 
 import java.util.EnumSet;
 
 public class MoveTowardsTargetGoal extends Goal {
     private final NPCEntity npcEntity;
-    private Vec3d targetPos;
+    private BlockPos targetPos;
     private double movePosX;
     private double movePosY;
     private double movePosZ;
@@ -24,26 +24,26 @@ public class MoveTowardsTargetGoal extends Goal {
 
     public boolean shouldExecute() {
         this.targetPos = npcEntity.getTargetPos();
-        if (this.targetPos == null) {
+        if (this.targetPos == null || npcEntity.isDigging) {
             return false;
-        } else if (npcEntity.getDistanceSq(targetPos) > (double)(this.maxTargetDistance * this.maxTargetDistance)) {
-            return false;
-        } else {
-//            Vec3d vec3d = RandomPositionGenerator.findRandomTargetBlockTowards(this.npcEntity, 16, 7, new Vec3d(this.targetPos.x, this.targetPos.y, this.targetPos.z));
-            Vec3d vec3d = this.targetPos;
-            if (vec3d == null) {
-                return false;
-            } else {
-                this.movePosX = vec3d.x;
-                this.movePosY = vec3d.y;
-                this.movePosZ = vec3d.z;
-                return true;
-            }
         }
+
+        this.targetPos.up();
+        if (npcEntity.getDistanceSq(targetPos.getX(), targetPos.getY(), targetPos.getZ()) > (double)(this.maxTargetDistance * this.maxTargetDistance)) {
+            return false;
+        }
+
+        BlockPos vec3d = this.targetPos;
+        this.movePosX = vec3d.getX();
+        this.movePosY = vec3d.getY();
+        this.movePosZ = vec3d.getZ();
+        return true;
+
     }
 
     public boolean shouldContinueExecuting() {
-        return !this.npcEntity.getNavigator().noPath() && npcEntity.getDistanceSq(targetPos) < (double)(this.maxTargetDistance * this.maxTargetDistance);
+        return !this.npcEntity.getNavigator().noPath()
+                && npcEntity.getDistanceSq(targetPos.getX(), targetPos.getY(), targetPos.getZ()) < (double)(this.maxTargetDistance * this.maxTargetDistance);
     }
 
     public void resetTask() {

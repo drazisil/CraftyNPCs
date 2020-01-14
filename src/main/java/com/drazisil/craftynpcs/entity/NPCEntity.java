@@ -2,10 +2,11 @@ package com.drazisil.craftynpcs.entity;
 
 import com.drazisil.craftynpcs.CraftyNPCs;
 import com.drazisil.craftynpcs.entity.ai.NPCManager;
-import com.drazisil.craftynpcs.entity.ai.goals.DiggyDiggyGoal;
 import com.drazisil.craftynpcs.entity.ai.goals.LookAtTargetBlock;
+import com.drazisil.craftynpcs.entity.ai.goals.MakeStructure;
 import com.drazisil.craftynpcs.entity.ai.goals.MoveTowardsTargetGoal;
 import com.drazisil.craftynpcs.entity.ai.goals.WaterAvoidingRandomWalkingGoal;
+import com.drazisil.craftynpcs.entity.ai.structure.AIStructure;
 import com.mojang.datafixers.Dynamic;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.EntityType;
@@ -29,7 +30,6 @@ import net.minecraft.tileentity.ChestTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.HandSide;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.world.IWorld;
@@ -52,7 +52,8 @@ public class NPCEntity extends MobEntity {
     private final String name;
     public final Integer MAIN_HAND_SLOT = 0;
 
-    private Vec3d targetPos;
+    private BlockPos targetPos;
+    public boolean isDigging = false;
 
     public static final EnumProperty<ChestType> TYPE;
     private final NPCTileEntity equipmentInventory = new NPCTileEntity();
@@ -200,7 +201,8 @@ public class NPCEntity extends MobEntity {
         float maxScanDistance = 50.0f;
         this.goalSelector.addGoal(1, new LookAtTargetBlock(this, getMineableBlocks(), maxScanDistance));
         this.goalSelector.addGoal(2, new MoveTowardsTargetGoal(this, 0.5D, maxScanDistance));
-        this.goalSelector.addGoal(3, new DiggyDiggyGoal(this, getMineableBlocks()));
+//        this.goalSelector.addGoal(3, new DiggyDiggyGoal(this, getMineableBlocks()));
+        this.goalSelector.addGoal(3, new MakeStructure(this, new AIStructure()));
         this.goalSelector.addGoal(4, new WaterAvoidingRandomWalkingGoal(this, 0.5D));
 //        this.goalSelector.addGoal(1, new MeleeAttackGoal(this, 1.0D, true));
 //        this.goalSelector.addGoal(2, new MoveTowardsVillageGoal(this, 0.6D));
@@ -291,11 +293,11 @@ public class NPCEntity extends MobEntity {
         }
     }
 
-    public Vec3d getTargetPos() {
+    public BlockPos getTargetPos() {
         return targetPos;
     }
 
-    public void setTargetPos(Vec3d targetPos) {
+    public void setTargetPos(BlockPos targetPos) {
         this.targetPos = targetPos;
     }
 

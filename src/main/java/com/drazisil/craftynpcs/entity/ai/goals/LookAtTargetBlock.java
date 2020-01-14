@@ -5,7 +5,7 @@ import com.drazisil.craftynpcs.WorldLocation;
 import com.drazisil.craftynpcs.entity.NPCEntity;
 import net.minecraft.block.Block;
 import net.minecraft.entity.ai.goal.Goal;
-import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
@@ -14,7 +14,7 @@ import java.util.HashSet;
 
 public class LookAtTargetBlock extends Goal {
     private final NPCEntity npcEntity;
-    private Vec3d closestBlock;
+    private BlockPos closestBlock;
     private final World world;
     private HashSet<Block> mineableBlocks = new HashSet<>();
     private final float maxDistance;
@@ -30,16 +30,20 @@ public class LookAtTargetBlock extends Goal {
 
     public boolean shouldExecute() {
         closestBlock = this.getClosestBlock();
-        if (closestBlock == null) {
+        if (closestBlock == null || npcEntity.isDigging) {
             return false;
         }
-            npcEntity.setTargetPos(closestBlock);
-            return true;
+
+        npcEntity.setTargetPos(closestBlock);
+        return npcEntity.getPosition() != closestBlock;
 
     }
 
     public boolean shouldContinueExecuting() {
-        return closestBlock != null && !(this.npcEntity.getDistanceSq(closestBlock) > (double) (this.maxDistance * this.maxDistance)) && this.lookTime > 0;
+
+        return closestBlock != null
+                && npcEntity.getPosition() != closestBlock
+                && !(this.npcEntity.getDistanceSq(closestBlock.getX(), closestBlock.getY(), closestBlock.getZ()) > (double) (this.maxDistance * this.maxDistance)) && this.lookTime > 0;
     }
 
     public void startExecuting() {
@@ -52,12 +56,12 @@ public class LookAtTargetBlock extends Goal {
     }
 
     public void tick() {
-        this.npcEntity.getLookController().func_220679_a(closestBlock.x, closestBlock.y, closestBlock.z);
+        this.npcEntity.getLookController().func_220679_a(closestBlock.getX(), closestBlock.getY(), closestBlock.getZ());
         --this.lookTime;
     }
 
     @Nullable
-    private Vec3d getClosestBlock() {
+    private BlockPos getClosestBlock() {
         BlockScanBox scanBox = new BlockScanBox();
         scanBox.generateBlockScanBox(world, npcEntity.getPosition(), (int) maxDistance, (int) maxDistance, (int) maxDistance, BlockScanBox.CenterType.CENTER, 0);
 
@@ -66,8 +70,8 @@ public class LookAtTargetBlock extends Goal {
         WorldLocation targetBlockLocation = scanBox.LocateBlock(blockToLookFor);
 
         if (!(targetBlockLocation == null)) {
-            npcEntity.setTargetPos(targetBlockLocation.toVec3d());
-            return npcEntity.getTargetPos();
+            npcEntity.setTargetPos(targetBlockLocation.toBlockPos());
+            return npcEntity.getTargetPos().up();
         }
 
         return null;

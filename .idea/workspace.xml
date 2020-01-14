@@ -2,7 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="76131b8c-212b-4006-b6b1-7bd47553ebfa" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/drazisil/craftynpcs/entity/ai/goals/MakeStructure.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/drazisil/craftynpcs/entity/ai/structure/AIStructure.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/drazisil/craftynpcs/entity/NPCEntity.java" afterPath="$PROJECT_DIR$/src/main/java/com/drazisil/craftynpcs/entity/NPCEntity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/drazisil/craftynpcs/entity/ai/goals/LookAtTargetBlock.java" afterPath="$PROJECT_DIR$/src/main/java/com/drazisil/craftynpcs/entity/ai/goals/LookAtTargetBlock.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/drazisil/craftynpcs/entity/ai/goals/MoveTowardsTargetGoal.java" afterPath="$PROJECT_DIR$/src/main/java/com/drazisil/craftynpcs/entity/ai/goals/MoveTowardsTargetGoal.java" />
     </list>
     <ignored path="$PROJECT_DIR$/.gradle/" />
     <ignored path="$PROJECT_DIR$/build/" />
@@ -49,11 +54,27 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
+      <file leaf-file-name="AIStructure.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/drazisil/craftynpcs/entity/ai/structure/AIStructure.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="95">
+              <caret line="33" column="29" lean-forward="true" selection-start-line="33" selection-start-column="29" selection-end-line="33" selection-end-column="29" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#610#611#0" expanded="true" />
+                <element signature="e#642#643#0" expanded="true" />
+                <element signature="e#678#679#0" expanded="true" />
+                <element signature="e#715#716#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="LookAtTargetBlock.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/drazisil/craftynpcs/entity/ai/goals/LookAtTargetBlock.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="227">
-              <caret line="17" column="0" lean-forward="false" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
+            <state relative-caret-position="162">
+              <caret line="54" column="28" lean-forward="false" selection-start-line="54" selection-start-column="28" selection-end-line="54" selection-end-column="28" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -61,113 +82,90 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="BlockUtil.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/drazisil/craftynpcs/util/BlockUtil.java">
+      <file leaf-file-name="MoveTowardsTargetGoal.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/drazisil/craftynpcs/entity/ai/goals/MoveTowardsTargetGoal.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="311">
-              <caret line="18" column="8" lean-forward="false" selection-start-line="18" selection-start-column="8" selection-end-line="18" selection-end-column="8" />
+            <state relative-caret-position="269">
+              <caret line="26" column="8" lean-forward="false" selection-start-line="26" selection-start-column="8" selection-end-line="26" selection-end-column="8" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#557#558#0" expanded="true" />
-                <element signature="e#615#616#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="BlockPos.class" pinned="false" current-in-tab="false">
-        <entry file="jar://$USER_HOME$/.gradle/caches/forge_gradle/minecraft_user_repo/net/minecraftforge/forge/1.14.4-28.1.0_mapped_snapshot_20190719-1.14.3/forge-1.14.4-28.1.0_mapped_snapshot_20190719-1.14.3-recomp.jar!/net/minecraft/util/math/BlockPos.class">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="262">
-              <caret line="134" column="20" lean-forward="false" selection-start-line="134" selection-start-column="20" selection-end-line="134" selection-end-column="20" />
-              <folding>
-                <element signature="e#4693#4694#0" expanded="true" />
-                <element signature="e#4760#4761#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="MobEntity.class" pinned="false" current-in-tab="false">
-        <entry file="jar://$USER_HOME$/.gradle/caches/forge_gradle/minecraft_user_repo/net/minecraftforge/forge/1.14.4-28.1.0_mapped_snapshot_20190719-1.14.3/forge-1.14.4-28.1.0_mapped_snapshot_20190719-1.14.3-recomp.jar!/net/minecraft/entity/MobEntity.class">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-2384">
-              <caret line="157" column="26" lean-forward="false" selection-start-line="157" selection-start-column="26" selection-end-line="157" selection-end-column="26" />
-              <folding>
-                <element signature="e#6585#6586#0" expanded="true" />
-                <element signature="e#6627#6628#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="NPCEntity.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="NPCEntity.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/drazisil/craftynpcs/entity/NPCEntity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="329">
-              <caret line="204" column="64" lean-forward="false" selection-start-line="204" selection-start-column="64" selection-end-line="204" selection-end-column="64" />
+            <state relative-caret-position="235">
+              <caret line="55" column="37" lean-forward="false" selection-start-line="55" selection-start-column="37" selection-end-line="55" selection-end-column="37" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="method#registerAttributes#0;class#NPCEntity#0" expanded="false" />
                 <element signature="method#setItemStackToSlot#0;class#NPCEntity#0" expanded="false" />
-                <element signature="method#canHarvestBlock#0;class#NPCEntity#0" expanded="false" />
                 <element signature="method#remove#0;class#NPCEntity#0" expanded="false" />
-                <marker date="1578855485915" expanded="false" signature="11949:11963" ph=" }" />
+                <marker date="1578963815196" expanded="false" signature="12105:12119" ph=" }" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="WorldLocation.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/drazisil/craftynpcs/WorldLocation.java">
+      <file leaf-file-name="World.class" pinned="false" current-in-tab="false">
+        <entry file="jar://$USER_HOME$/.gradle/caches/forge_gradle/minecraft_user_repo/net/minecraftforge/forge/1.14.4-28.1.0_mapped_snapshot_20190719-1.14.3/forge-1.14.4-28.1.0_mapped_snapshot_20190719-1.14.3-recomp.jar!/net/minecraft/world/World.class">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-173">
-              <caret line="22" column="0" lean-forward="false" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CraftyNPCs.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/drazisil/craftynpcs/CraftyNPCs.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="137">
-              <caret line="124" column="46" lean-forward="false" selection-start-line="124" selection-start-column="46" selection-end-line="124" selection-end-column="46" />
+            <state relative-caret-position="125">
+              <caret line="1402" column="39" lean-forward="false" selection-start-line="1402" selection-start-column="34" selection-end-line="1402" selection-end-column="39" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="NPCTileEntity.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/drazisil/craftynpcs/entity/NPCTileEntity.java">
+      <file leaf-file-name="ServerWorld.class" pinned="false" current-in-tab="false">
+        <entry file="jar://$USER_HOME$/.gradle/caches/forge_gradle/minecraft_user_repo/net/minecraftforge/forge/1.14.4-28.1.0_mapped_snapshot_20190719-1.14.3/forge-1.14.4-28.1.0_mapped_snapshot_20190719-1.14.3-recomp.jar!/net/minecraft/world/server/ServerWorld.class">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="155">
-              <caret line="35" column="0" lean-forward="false" selection-start-line="35" selection-start-column="0" selection-end-line="35" selection-end-column="0" />
+            <state relative-caret-position="244">
+              <caret line="1447" column="0" lean-forward="false" selection-start-line="1447" selection-start-column="0" selection-end-line="1447" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DiggyDiggyGoal.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/drazisil/craftynpcs/entity/ai/goals/DiggyDiggyGoal.java">
+      <file leaf-file-name="IForgeItemStack.class" pinned="false" current-in-tab="false">
+        <entry file="jar://$USER_HOME$/.gradle/caches/forge_gradle/minecraft_user_repo/net/minecraftforge/forge/1.14.4-28.1.0_mapped_snapshot_20190719-1.14.3/forge-1.14.4-28.1.0_mapped_snapshot_20190719-1.14.3-recomp.jar!/net/minecraftforge/common/extensions/IForgeItemStack.class">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-148">
-              <caret line="28" column="0" lean-forward="false" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
+            <state relative-caret-position="125">
+              <caret line="78" column="37" lean-forward="false" selection-start-line="78" selection-start-column="32" selection-end-line="78" selection-end-column="37" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="BlockScanBox.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/drazisil/craftynpcs/BlockScanBox.java">
+      <file leaf-file-name="ToolItem.class" pinned="false" current-in-tab="false">
+        <entry file="jar://$USER_HOME$/.gradle/caches/forge_gradle/minecraft_user_repo/net/minecraftforge/forge/1.14.4-28.1.0_mapped_snapshot_20190719-1.14.3/forge-1.14.4-28.1.0_mapped_snapshot_20190719-1.14.3-recomp.jar!/net/minecraft/item/ToolItem.class">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="331">
-              <caret line="227" column="1" lean-forward="false" selection-start-line="227" selection-start-column="1" selection-end-line="227" selection-end-column="1" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state relative-caret-position="-39">
+              <caret line="22" column="13" lean-forward="false" selection-start-line="22" selection-start-column="13" selection-end-line="22" selection-end-column="13" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Block.class" pinned="false" current-in-tab="false">
+        <entry file="jar://$USER_HOME$/.gradle/caches/forge_gradle/minecraft_user_repo/net/minecraftforge/forge/1.14.4-28.1.0_mapped_snapshot_20190719-1.14.3/forge-1.14.4-28.1.0_mapped_snapshot_20190719-1.14.3-recomp.jar!/net/minecraft/block/Block.class">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="9648">
+              <caret line="661" column="34" lean-forward="false" selection-start-line="661" selection-start-column="16" selection-end-line="661" selection-end-column="34" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="BlockState.class" pinned="false" current-in-tab="false">
+        <entry file="jar://$USER_HOME$/.gradle/caches/forge_gradle/minecraft_user_repo/net/minecraftforge/forge/1.14.4-28.1.0_mapped_snapshot_20190719-1.14.3/forge-1.14.4-28.1.0_mapped_snapshot_20190719-1.14.3-recomp.jar!/net/minecraft/block/BlockState.class">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="125">
+              <caret line="139" column="33" lean-forward="false" selection-start-line="139" selection-start-column="28" selection-end-line="139" selection-end-column="33" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -183,7 +181,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>tick</find>
       <find>gravity</find>
       <find>hasNoGravity</find>
       <find>Gravity</find>
@@ -213,6 +210,7 @@
       <find>chunkprovider</find>
       <find>system.out</find>
       <find>System.out</find>
+      <find>break</find>
     </findStrings>
     <dirStrings>
       <dir>$USER_HOME$/.gradle/caches/forge_gradle/minecraft_user_repo/net/minecraftforge/forge/1.14.4-28.1.0_mapped_snapshot_20190719-1.14.3/forge-1.14.4-28.1.0_mapped_snapshot_20190719-1.14.3-recomp.jar!/net/minecraft/client</dir>
@@ -753,8 +751,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/com/drazisil/craftynpcs/entity/EntityCraftNPC.java" />
-        <option value="$PROJECT_DIR$/src/main/resources/META-INF/mods.toml" />
         <option value="$PROJECT_DIR$/src/main/java/com/drazisil/craftynpcs/item/CraftyNPCEgg.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/drazisil/craftynpcs/ModEntityRender.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/drazisil/craftynpcs/ModelCraftyNPC.java" />
@@ -794,16 +790,18 @@
         <option value="$PROJECT_DIR$/src/main/java/com/drazisil/craftynpcs/block/ConstructionBarrelBlock.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/drazisil/craftynpcs/block/BoingBlock.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/drazisil/craftynpcs/BlockSave.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/drazisil/craftynpcs/entity/ai/goals/MoveTowardsTargetGoal.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/drazisil/craftynpcs/util/BlockUtil.java" />
         <option value="$PROJECT_DIR$/.gitignore" />
-        <option value="$PROJECT_DIR$/src/main/java/com/drazisil/craftynpcs/CraftyNPCs.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/drazisil/craftynpcs/entity/NPCTileEntity.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/drazisil/craftynpcs/BlockScanBox.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/drazisil/craftynpcs/WorldLocation.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/drazisil/craftynpcs/entity/ai/goals/LookAtTargetBlock.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/drazisil/craftynpcs/entity/ai/goals/DiggyDiggyGoal.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/drazisil/craftynpcs/CraftyNPCs.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/drazisil/craftynpcs/entity/ai/goals/MakeStructure.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/drazisil/craftynpcs/entity/NPCEntity.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/drazisil/craftynpcs/entity/ai/goals/MoveTowardsTargetGoal.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/drazisil/craftynpcs/entity/ai/goals/LookAtTargetBlock.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/drazisil/craftynpcs/entity/ai/structure/AIStructure.java" />
       </list>
     </option>
   </component>
@@ -1064,14 +1062,29 @@
               <item name="forge-1.14.4-28.1.0_mapped_snapshot_20190719-1.14.3-recomp.jar" type="462c0819:PsiDirectoryNode" />
               <item name="net" type="462c0819:PsiDirectoryNode" />
               <item name="minecraft" type="462c0819:PsiDirectoryNode" />
-              <item name="world" type="462c0819:PsiDirectoryNode" />
+              <item name="block" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
       <pane id="Scope" />
-      <pane id="PackagesPane" />
+      <pane id="PackagesPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="CraftyNPCs" type="58d84e3e:PackageViewProjectNode" />
+              <item name="CraftyNPCs" type="eaaa3913:PackageViewModuleGroupNode" />
+            </path>
+            <path>
+              <item name="CraftyNPCs" type="58d84e3e:PackageViewProjectNode" />
+              <item name="CraftyNPCs" type="eaaa3913:PackageViewModuleGroupNode" />
+              <item name="CraftyNPCs_main" type="616d4139:PackageViewModuleNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
       <pane id="Scratches" />
       <pane id="AndroidView" />
     </panes>
@@ -1289,10 +1302,11 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="170060000" />
+    <option name="totallyTimeSpent" value="179818000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="27" width="1600" height="873" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
@@ -1302,12 +1316,12 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33106267" sideWeight="0.502574" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.33106267" sideWeight="0.497426" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.33106267" sideWeight="0.497426" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32970026" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24967825" sideWeight="0.5" order="4" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24967825" sideWeight="0.5" order="4" side_tool="false" content_ui="combo" />
       <window_info id="Inspection Results" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32833788" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32833788" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -1400,112 +1414,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar://$USER_HOME$/.gradle/caches/forge_gradle/minecraft_user_repo/net/minecraftforge/forge/1.14.4-28.1.0_mapped_snapshot_20190719-1.14.3/forge-1.14.4-28.1.0_mapped_snapshot_20190719-1.14.3-recomp.jar!/net/minecraftforge/event/entity/player/PlayerFlyableFallEvent.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="13" column="33" lean-forward="false" selection-start-line="13" selection-start-column="11" selection-end-line="13" selection-end-column="33" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/.gradle/caches/forge_gradle/minecraft_user_repo/net/minecraftforge/forge/1.14.4-28.1.0_mapped_snapshot_20190719-1.14.3/forge-1.14.4-28.1.0_mapped_snapshot_20190719-1.14.3-recomp.jar!/net/minecraft/client/entity/player/ClientPlayerEntity.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="126">
-          <caret line="102" column="49" lean-forward="false" selection-start-line="102" selection-start-column="49" selection-end-line="102" selection-end-column="49" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/.gradle/caches/forge_gradle/minecraft_user_repo/net/minecraftforge/forge/1.14.4-28.1.0_mapped_snapshot_20190719-1.14.3/forge-1.14.4-28.1.0_mapped_snapshot_20190719-1.14.3-recomp.jar!/net/minecraft/client/entity/player/AbstractClientPlayerEntity.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="126">
-          <caret line="40" column="42" lean-forward="false" selection-start-line="40" selection-start-column="42" selection-end-line="40" selection-end-column="42" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/drazisil/craftynpcs/block/BoingBlock.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="257">
-          <caret line="19" column="47" lean-forward="true" selection-start-line="19" selection-start-column="47" selection-end-line="19" selection-end-column="47" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/.gradle/caches/forge_gradle/minecraft_user_repo/net/minecraftforge/forge/1.14.4-28.1.0_mapped_snapshot_20190719-1.14.3/forge-1.14.4-28.1.0_mapped_snapshot_20190719-1.14.3-recomp.jar!/net/minecraft/client/audio/UnderwaterAmbientSounds.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="166">
-          <caret line="31" column="31" lean-forward="true" selection-start-line="31" selection-start-column="31" selection-end-line="31" selection-end-column="31" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/.gradle/caches/forge_gradle/minecraft_user_repo/net/minecraftforge/forge/1.14.4-28.1.0_mapped_snapshot_20190719-1.14.3/forge-1.14.4-28.1.0_mapped_snapshot_20190719-1.14.3-recomp.jar!/net/minecraft/client/audio/UnderwaterAmbientSoundHandler.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-144">
-          <caret line="14" column="13" lean-forward="false" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/.gradle/caches/forge_gradle/minecraft_user_repo/net/minecraftforge/forge/1.14.4-28.1.0_mapped_snapshot_20190719-1.14.3/forge-1.14.4-28.1.0_mapped_snapshot_20190719-1.14.3-recomp.jar!/net/minecraft/client/audio/TickableSound.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="126">
-          <caret line="13" column="22" lean-forward="false" selection-start-line="13" selection-start-column="22" selection-end-line="13" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/.gradle/caches/forge_gradle/minecraft_user_repo/net/minecraftforge/forge/1.14.4-28.1.0_mapped_snapshot_20190719-1.14.3/forge-1.14.4-28.1.0_mapped_snapshot_20190719-1.14.3-recomp.jar!/net/minecraft/client/audio/SoundSystem.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-522">
-          <caret line="27" column="13" lean-forward="false" selection-start-line="27" selection-start-column="13" selection-end-line="27" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/.gradle/caches/forge_gradle/minecraft_user_repo/net/minecraftforge/forge/1.14.4-28.1.0_mapped_snapshot_20190719-1.14.3/forge-1.14.4-28.1.0_mapped_snapshot_20190719-1.14.3-recomp.jar!/net/minecraft/client/audio/EntityTickableSound.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="18">
-          <caret line="14" column="13" lean-forward="false" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/.gradle/caches/forge_gradle/minecraft_user_repo/net/minecraftforge/forge/1.14.4-28.1.0_mapped_snapshot_20190719-1.14.3/forge-1.14.4-28.1.0_mapped_snapshot_20190719-1.14.3-recomp.jar!/net/minecraft/client/audio/Listener.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="72">
-          <caret line="13" column="13" lean-forward="false" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/.gradle/caches/forge_gradle/minecraft_user_repo/net/minecraftforge/forge/1.14.4-28.1.0_mapped_snapshot_20190719-1.14.3/forge-1.14.4-28.1.0_mapped_snapshot_20190719-1.14.3-recomp.jar!/net/minecraft/client/audio/SoundList.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="83">
-          <caret line="13" column="13" lean-forward="false" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/.gradle/caches/forge_gradle/minecraft_user_repo/net/minecraftforge/forge/1.14.4-28.1.0_mapped_snapshot_20190719-1.14.3/forge-1.14.4-28.1.0_mapped_snapshot_20190719-1.14.3-recomp.jar!/net/minecraft/client/audio/BubbleColumnAmbientSoundHandler.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="83">
-          <caret line="35" column="46" lean-forward="false" selection-start-line="35" selection-start-column="46" selection-end-line="35" selection-end-column="46" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/.gradle/caches/forge_gradle/minecraft_user_repo/net/minecraftforge/forge/1.14.4-28.1.0_mapped_snapshot_20190719-1.14.3/forge-1.14.4-28.1.0_mapped_snapshot_20190719-1.14.3-recomp.jar!/net/minecraft/util/SoundEvent.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="108">
-          <caret line="11" column="13" lean-forward="false" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$USER_HOME$/.gradle/caches/forge_gradle/minecraft_user_repo/net/minecraftforge/forge/1.14.4-28.1.0_mapped_snapshot_20190719-1.14.3/forge-1.14.4-28.1.0_mapped_snapshot_20190719-1.14.3-recomp.jar!/net/minecraft/client/audio/SoundHandler.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="271">
@@ -1636,25 +1544,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar://$USER_HOME$/.gradle/caches/forge_gradle/minecraft_user_repo/net/minecraftforge/forge/1.14.4-28.1.0_mapped_snapshot_20190719-1.14.3/forge-1.14.4-28.1.0_mapped_snapshot_20190719-1.14.3-recomp.jar!/net/minecraft/block/BlockState.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="143">
-          <caret line="83" column="18" lean-forward="true" selection-start-line="83" selection-start-column="18" selection-end-line="83" selection-end-column="18" />
-          <folding>
-            <element signature="e#3087#3088#0" expanded="true" />
-            <element signature="e#3128#3129#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/.gradle/caches/forge_gradle/minecraft_user_repo/net/minecraftforge/forge/1.14.4-28.1.0_mapped_snapshot_20190719-1.14.3/forge-1.14.4-28.1.0_mapped_snapshot_20190719-1.14.3-recomp.jar!/net/minecraft/block/Block.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1117">
-          <caret line="687" column="34" lean-forward="false" selection-start-line="687" selection-start-column="26" selection-end-line="687" selection-end-column="34" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$USER_HOME$/.gradle/caches/forge_gradle/minecraft_user_repo/net/minecraftforge/forge/1.14.4-28.1.0_mapped_snapshot_20190719-1.14.3/forge-1.14.4-28.1.0_mapped_snapshot_20190719-1.14.3-recomp.jar!/net/minecraft/world/chunk/ChunkPrimer.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1566">
@@ -1695,31 +1584,13 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar://$USER_HOME$/.gradle/caches/forge_gradle/minecraft_user_repo/net/minecraftforge/forge/1.14.4-28.1.0_mapped_snapshot_20190719-1.14.3/forge-1.14.4-28.1.0_mapped_snapshot_20190719-1.14.3-recomp.jar!/net/minecraft/world/World.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="125">
-          <caret line="407" column="22" lean-forward="false" selection-start-line="407" selection-start-column="22" selection-end-line="407" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/drazisil/craftynpcs/BlockSave.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="347">
           <caret line="40" column="0" lean-forward="false" selection-start-line="40" selection-start-column="0" selection-end-line="40" selection-end-column="0" />
           <folding>
-            <element signature="e#546#547#0" expanded="true" />
-            <element signature="e#574#575#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/drazisil/craftynpcs/entity/ai/goals/MoveTowardsTargetGoal.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="25" column="50" lean-forward="false" selection-start-line="25" selection-start-column="50" selection-end-line="25" selection-end-column="50" />
-          <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="e#546#547#0" expanded="false" />
+            <element signature="e#574#575#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1729,17 +1600,6 @@
         <state relative-caret-position="306">
           <caret line="34" column="16" lean-forward="false" selection-start-line="34" selection-start-column="16" selection-end-line="34" selection-end-column="16" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/.gradle/caches/forge_gradle/minecraft_user_repo/net/minecraftforge/forge/1.14.4-28.1.0_mapped_snapshot_20190719-1.14.3/forge-1.14.4-28.1.0_mapped_snapshot_20190719-1.14.3-recomp.jar!/net/minecraft/util/math/BlockPos.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="262">
-          <caret line="134" column="20" lean-forward="false" selection-start-line="134" selection-start-column="20" selection-end-line="134" selection-end-column="20" />
-          <folding>
-            <element signature="e#4693#4694#0" expanded="true" />
-            <element signature="e#4760#4761#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1759,9 +1619,9 @@
         <state relative-caret-position="311">
           <caret line="18" column="8" lean-forward="false" selection-start-line="18" selection-start-column="8" selection-end-line="18" selection-end-column="8" />
           <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#557#558#0" expanded="true" />
-            <element signature="e#615#616#0" expanded="true" />
+            <element signature="imports" expanded="false" />
+            <element signature="e#557#558#0" expanded="false" />
+            <element signature="e#615#616#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1770,14 +1630,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="54">
           <caret line="3" column="9" lean-forward="true" selection-start-line="3" selection-start-column="9" selection-end-line="3" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/drazisil/craftynpcs/CraftyNPCs.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="137">
-          <caret line="124" column="46" lean-forward="false" selection-start-line="124" selection-start-column="46" selection-end-line="124" selection-end-column="46" />
           <folding />
         </state>
       </provider>
@@ -1810,16 +1662,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/drazisil/craftynpcs/entity/ai/goals/LookAtTargetBlock.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="227">
-          <caret line="17" column="0" lean-forward="false" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/drazisil/craftynpcs/entity/ai/goals/DiggyDiggyGoal.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-148">
@@ -1828,17 +1670,200 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/drazisil/craftynpcs/CraftyNPCs.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="243">
+          <caret line="122" column="72" lean-forward="false" selection-start-line="122" selection-start-column="72" selection-end-line="122" selection-end-column="72" />
+          <folding>
+            <element signature="e#7534#7535#0" expanded="true" />
+            <element signature="e#7571#7572#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/drazisil/craftynpcs/entity/ai/goals/RandomWalkingGoal.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-139">
+          <caret line="10" column="13" lean-forward="false" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/drazisil/craftynpcs/entity/ai/goals/WaterAvoidingRandomWalkingGoal.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-45">
+          <caret line="8" column="13" lean-forward="false" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/drazisil/craftynpcs/entity/ai/goals/NearestDiggableBlockGoal.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="324">
+          <caret line="26" column="20" lean-forward="false" selection-start-line="26" selection-start-column="20" selection-end-line="26" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/forge_gradle/minecraft_user_repo/net/minecraftforge/forge/1.14.4-28.1.0_mapped_snapshot_20190719-1.14.3/forge-1.14.4-28.1.0_mapped_snapshot_20190719-1.14.3-recomp.jar!/net/minecraft/entity/ai/goal/Goal.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="396">
+          <caret line="29" column="5" lean-forward="false" selection-start-line="29" selection-start-column="5" selection-end-line="29" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/forge_gradle/minecraft_user_repo/net/minecraftforge/forge/1.14.4-28.1.0_mapped_snapshot_20190719-1.14.3/forge-1.14.4-28.1.0_mapped_snapshot_20190719-1.14.3-recomp.jar!/net/minecraft/util/math/BlockPos.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="154">
+          <caret line="142" column="20" lean-forward="false" selection-start-line="142" selection-start-column="20" selection-end-line="142" selection-end-column="20" />
+          <folding>
+            <element signature="e#4901#4902#0" expanded="true" />
+            <element signature="e#4934#4935#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/drazisil/craftynpcs/entity/ai/goals/MakeStructure.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="26" column="0" lean-forward="false" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#741#742#0" expanded="true" />
+            <element signature="e#793#794#0" expanded="true" />
+            <element signature="e#829#830#0" expanded="true" />
+            <element signature="e#876#877#0" expanded="true" />
+            <element signature="e#902#903#0" expanded="true" />
+            <element signature="e#967#968#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/forge_gradle/minecraft_user_repo/net/minecraftforge/forge/1.14.4-28.1.0_mapped_snapshot_20190719-1.14.3/forge-1.14.4-28.1.0_mapped_snapshot_20190719-1.14.3-recomp.jar!/net/minecraft/pathfinding/PathNavigator.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="208">
+          <caret line="139" column="19" lean-forward="false" selection-start-line="139" selection-start-column="19" selection-end-line="139" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/forge_gradle/minecraft_user_repo/net/minecraftforge/forge/1.14.4-28.1.0_mapped_snapshot_20190719-1.14.3/forge-1.14.4-28.1.0_mapped_snapshot_20190719-1.14.3-recomp.jar!/net/minecraftforge/common/extensions/IForgeItemStack.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="125">
+          <caret line="78" column="37" lean-forward="false" selection-start-line="78" selection-start-column="32" selection-end-line="78" selection-end-column="37" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/forge_gradle/minecraft_user_repo/net/minecraftforge/forge/1.14.4-28.1.0_mapped_snapshot_20190719-1.14.3/forge-1.14.4-28.1.0_mapped_snapshot_20190719-1.14.3-recomp.jar!/net/minecraft/block/BreakableBlock.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="72">
+          <caret line="10" column="48" lean-forward="true" selection-start-line="10" selection-start-column="48" selection-end-line="10" selection-end-column="48" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/forge_gradle/minecraft_user_repo/net/minecraftforge/forge/1.14.4-28.1.0_mapped_snapshot_20190719-1.14.3/forge-1.14.4-28.1.0_mapped_snapshot_20190719-1.14.3-recomp.jar!/net/minecraft/item/ToolItem.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-39">
+          <caret line="22" column="13" lean-forward="false" selection-start-line="22" selection-start-column="13" selection-end-line="22" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/forge_gradle/minecraft_user_repo/net/minecraftforge/forge/1.14.4-28.1.0_mapped_snapshot_20190719-1.14.3/forge-1.14.4-28.1.0_mapped_snapshot_20190719-1.14.3-recomp.jar!/net/minecraft/block/CarrotBlock.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="108">
+          <caret line="15" column="13" lean-forward="false" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/forge_gradle/minecraft_user_repo/net/minecraftforge/forge/1.14.4-28.1.0_mapped_snapshot_20190719-1.14.3/forge-1.14.4-28.1.0_mapped_snapshot_20190719-1.14.3-recomp.jar!/net/minecraft/block/SandBlock.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="108">
+          <caret line="11" column="13" lean-forward="false" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/forge_gradle/minecraft_user_repo/net/minecraftforge/forge/1.14.4-28.1.0_mapped_snapshot_20190719-1.14.3/forge-1.14.4-28.1.0_mapped_snapshot_20190719-1.14.3-recomp.jar!/net/minecraft/block/Block.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="9648">
+          <caret line="661" column="34" lean-forward="false" selection-start-line="661" selection-start-column="16" selection-end-line="661" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/forge_gradle/minecraft_user_repo/net/minecraftforge/forge/1.14.4-28.1.0_mapped_snapshot_20190719-1.14.3/forge-1.14.4-28.1.0_mapped_snapshot_20190719-1.14.3-recomp.jar!/net/minecraft/block/BlockState.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="125">
+          <caret line="139" column="33" lean-forward="false" selection-start-line="139" selection-start-column="28" selection-end-line="139" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/forge_gradle/minecraft_user_repo/net/minecraftforge/forge/1.14.4-28.1.0_mapped_snapshot_20190719-1.14.3/forge-1.14.4-28.1.0_mapped_snapshot_20190719-1.14.3-recomp.jar!/net/minecraft/world/World.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="125">
+          <caret line="1402" column="39" lean-forward="false" selection-start-line="1402" selection-start-column="34" selection-end-line="1402" selection-end-column="39" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/forge_gradle/minecraft_user_repo/net/minecraftforge/forge/1.14.4-28.1.0_mapped_snapshot_20190719-1.14.3/forge-1.14.4-28.1.0_mapped_snapshot_20190719-1.14.3-recomp.jar!/net/minecraft/world/server/ServerWorld.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="244">
+          <caret line="1447" column="0" lean-forward="false" selection-start-line="1447" selection-start-column="0" selection-end-line="1447" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/drazisil/craftynpcs/entity/NPCEntity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="329">
-          <caret line="204" column="64" lean-forward="false" selection-start-line="204" selection-start-column="64" selection-end-line="204" selection-end-column="64" />
+        <state relative-caret-position="235">
+          <caret line="55" column="37" lean-forward="false" selection-start-line="55" selection-start-column="37" selection-end-line="55" selection-end-column="37" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="method#registerAttributes#0;class#NPCEntity#0" expanded="false" />
             <element signature="method#setItemStackToSlot#0;class#NPCEntity#0" expanded="false" />
-            <element signature="method#canHarvestBlock#0;class#NPCEntity#0" expanded="false" />
             <element signature="method#remove#0;class#NPCEntity#0" expanded="false" />
-            <marker date="1578855485915" expanded="false" signature="11949:11963" ph=" }" />
+            <marker date="1578963815196" expanded="false" signature="12105:12119" ph=" }" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/drazisil/craftynpcs/entity/ai/goals/MoveTowardsTargetGoal.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="269">
+          <caret line="26" column="8" lean-forward="false" selection-start-line="26" selection-start-column="8" selection-end-line="26" selection-end-column="8" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/drazisil/craftynpcs/entity/ai/goals/LookAtTargetBlock.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="162">
+          <caret line="54" column="28" lean-forward="false" selection-start-line="54" selection-start-column="28" selection-end-line="54" selection-end-column="28" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/drazisil/craftynpcs/entity/ai/structure/AIStructure.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="95">
+          <caret line="33" column="29" lean-forward="true" selection-start-line="33" selection-start-column="29" selection-end-line="33" selection-end-column="29" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#610#611#0" expanded="true" />
+            <element signature="e#642#643#0" expanded="true" />
+            <element signature="e#678#679#0" expanded="true" />
+            <element signature="e#715#716#0" expanded="true" />
           </folding>
         </state>
       </provider>
