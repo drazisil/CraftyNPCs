@@ -2,7 +2,6 @@ package com.drazisil.craftynpcs.entity.ai.brain;
 
 import com.drazisil.craftynpcs.WorldLocation;
 import com.drazisil.craftynpcs.entity.NPCEntity;
-import com.drazisil.craftynpcs.util.BlockUtil;
 
 public class VisionSensor extends Sensor {
 
@@ -22,5 +21,9 @@ public class VisionSensor extends Sensor {
     @Override
     public String getValue() {
         return this.location.toString();
+    }
+
+    public WorldLocation getLocation() {
+        return this.location;
     }
 }

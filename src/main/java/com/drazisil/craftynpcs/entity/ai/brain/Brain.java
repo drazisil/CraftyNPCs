@@ -1,6 +1,8 @@
 package com.drazisil.craftynpcs.entity.ai.brain;
 
 import com.drazisil.craftynpcs.entity.NPCEntity;
+import com.drazisil.craftynpcs.util.BlockUtil;
+import net.minecraft.block.Block;
 import org.apache.logging.log4j.Logger;
 
 import java.util.ArrayList;
@@ -35,6 +37,21 @@ public class Brain {
         for (Sensor sensor: this.sensors) {
             LOGGER.debug(sensor.getName() + ": " + sensor.getValue());
         }
+        LOGGER.info("Looking at: " + getLookingAtBlock());
         brainSpeedCounter = 0;
+    }
+
+    private Sensor getSensorByName(String name) {
+        for (Sensor sensor: this.sensors) {
+            if(sensor.getName().equals(name)) return sensor;
+        }
+        return null;
+    }
+
+    public Block getLookingAtBlock() {
+        if (!(this.getSensorByName("vision_sensor") == null)) {
+            return BlockUtil.getBlockAtPos(npcEntity.getEntityWorld(), ((VisionSensor)this.getSensorByName("vision_sensor")).getLocation().toBlockPos());
+        }
+        return null;
     }
 }
