@@ -1,13 +1,9 @@
 package com.drazisil.craftynpcs.entity;
 
 import com.drazisil.craftynpcs.CraftyNPCs;
+import com.drazisil.craftynpcs.WorldLocation;
 import com.drazisil.craftynpcs.entity.ai.NPCManager;
 import com.drazisil.craftynpcs.entity.ai.brain.Brain;
-import com.drazisil.craftynpcs.entity.ai.goals.LookAtTargetBlock;
-import com.drazisil.craftynpcs.entity.ai.goals.MakeStructure;
-import com.drazisil.craftynpcs.entity.ai.goals.MoveTowardsTargetGoal;
-import com.drazisil.craftynpcs.entity.ai.goals.WaterAvoidingRandomWalkingGoal;
-import com.drazisil.craftynpcs.entity.ai.structure.AIStructure;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MobEntity;
@@ -27,7 +23,7 @@ import net.minecraft.state.properties.ChestType;
 import net.minecraft.tileentity.ChestTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.HandSide;
-import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.*;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.world.IWorld;
@@ -39,7 +35,6 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import javax.annotation.Nullable;
 import java.util.Iterator;
 
-import static com.drazisil.craftynpcs.CraftyNPCs.getMineableBlocks;
 import static net.minecraft.block.ChestBlock.getDirectionToAttached;
 import static net.minecraft.state.properties.ChestType.SINGLE;
 
@@ -53,7 +48,10 @@ public class NPCEntity extends MobEntity {
     private BlockPos targetPos;
     public boolean isDigging = false;
 
-    private Brain brain = new Brain(CraftyNPCs.LOGGER);
+    // This is the block the entity is looking at
+    private WorldLocation rayTraceBlock = new WorldLocation(0, 0, 0);
+
+    private Brain brain = new Brain(CraftyNPCs.LOGGER, this);
 
     public static final EnumProperty<ChestType> TYPE;
     private final NPCTileEntity equipmentInventory = new NPCTileEntity();
@@ -85,6 +83,11 @@ public class NPCEntity extends MobEntity {
 //        }
         return true;
     }
+
+    public WorldLocation getLookPos() {
+        return rayTraceBlock;
+    }
+
 
     public ItemStack getItemStackFromSlot(EquipmentSlotType slotIn) {
         if (slotIn == EquipmentSlotType.MAINHAND) {
@@ -197,30 +200,44 @@ public class NPCEntity extends MobEntity {
     @Override
     public void livingTick() {
         super.livingTick();
+        BlockPos lookingBlockPos = ((BlockRayTraceResult) this.func_213324_a(20.0D, 0.0F, false)).getPos();
+        this.rayTraceBlock.update(lookingBlockPos);
         this.brain.tick();
+    }
+
+    /*
+        Default call is         this.rayTraceBlock = entity.func_213324_a(20.0D, 0.0F, false);
+     */
+    @OnlyIn(Dist.CLIENT)
+    @Override
+    public RayTraceResult func_213324_a(double p_213324_1_, float p_213324_3_, boolean isFluid) {
+        Vec3d vec3d = this.getEyePosition(p_213324_3_);
+        Vec3d vec3d1 = this.getLook(p_213324_3_);
+        Vec3d vec3d2 = vec3d.add(vec3d1.x * p_213324_1_, vec3d1.y * p_213324_1_, vec3d1.z * p_213324_1_);
+        return this.world.rayTraceBlocks(new RayTraceContext(vec3d, vec3d2, RayTraceContext.BlockMode.OUTLINE, isFluid ? RayTraceContext.FluidMode.ANY : RayTraceContext.FluidMode.NONE, this));
     }
 
     protected void registerGoals() {
         super.registerGoals();
 
-//        this.goalSelector.addGoal(1, new LocateMineableBlockGoal(this, getMineableBlocks(), 0.5D));
-        float maxScanDistance = 50.0f;
-        this.goalSelector.addGoal(1, new LookAtTargetBlock(this, getMineableBlocks(), maxScanDistance));
-        this.goalSelector.addGoal(2, new MoveTowardsTargetGoal(this, 0.5D, maxScanDistance));
+////        this.goalSelector.addGoal(1, new LocateMineableBlockGoal(this, getMineableBlocks(), 0.5D));
+//        float maxScanDistance = 50.0f;
+//        this.goalSelector.addGoal(1, new LookAtTargetBlock(this, getMineableBlocks(), maxScanDistance));
+//        this.goalSelector.addGoal(2, new MoveTowardsTargetGoal(this, 0.5D, maxScanDistance));
 //        this.goalSelector.addGoal(3, new DiggyDiggyGoal(this, getMineableBlocks()));
-        this.goalSelector.addGoal(3, new MakeStructure(this, new AIStructure()));
-        this.goalSelector.addGoal(4, new WaterAvoidingRandomWalkingGoal(this, 0.5D));
-//        this.goalSelector.addGoal(1, new MeleeAttackGoal(this, 1.0D, true));
-//        this.goalSelector.addGoal(2, new MoveTowardsVillageGoal(this, 0.6D));
-//        this.goalSelector.addGoal(3, new MoveThroughVillageGoal(this, 0.6D, false, 4, () -> false));
-//        this.goalSelector.addGoal(6, new WaterAvoidingRandomWalkingGoal(this, 0.6D));
-//        this.goalSelector.addGoal(8, new LookRandomlyGoal(this));
-//        this.targetSelector.addGoal(1, new DefendVillageGoal(this));
-//        this.targetSelector.addGoal(2, new HurtByTargetGoal(this, new Class[0]));
-//        this.targetSelector.addGoal(3, new NearestDiggableBlockGoal(this, MobEntity.class, 5, false, false, (p_213619_0_) -> {
-//            return p_213619_0_ instanceof IMob && !(p_213619_0_ instanceof CreeperEntity);
-//        }));
-//
+//        this.goalSelector.addGoal(3, new MakeStructure(this, new AIStructure()));
+//        this.goalSelector.addGoal(4, new WaterAvoidingRandomWalkingGoal(this, 0.5D));
+////        this.goalSelector.addGoal(1, new MeleeAttackGoal(this, 1.0D, true));
+////        this.goalSelector.addGoal(2, new MoveTowardsVillageGoal(this, 0.6D));
+////        this.goalSelector.addGoal(3, new MoveThroughVillageGoal(this, 0.6D, false, 4, () -> false));
+////        this.goalSelector.addGoal(6, new WaterAvoidingRandomWalkingGoal(this, 0.6D));
+////        this.goalSelector.addGoal(8, new LookRandomlyGoal(this));
+////        this.targetSelector.addGoal(1, new DefendVillageGoal(this));
+////        this.targetSelector.addGoal(2, new HurtByTargetGoal(this, new Class[0]));
+////        this.targetSelector.addGoal(3, new NearestDiggableBlockGoal(this, MobEntity.class, 5, false, false, (p_213619_0_) -> {
+////            return p_213619_0_ instanceof IMob && !(p_213619_0_ instanceof CreeperEntity);
+////        }));
+////
     }
 
     public boolean isNoDespawnRequired() {
@@ -310,8 +327,6 @@ public class NPCEntity extends MobEntity {
     public NPCTileEntity getEquipmentInventory() {
         return equipmentInventory;
     }
-
-
 
     interface InventoryFactory<T> {
         T forSingle(INamedContainerProvider var1);
