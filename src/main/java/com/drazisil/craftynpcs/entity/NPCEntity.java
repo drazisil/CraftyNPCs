@@ -4,13 +4,19 @@ import com.drazisil.craftynpcs.CraftyNPCs;
 import com.drazisil.craftynpcs.WorldLocation;
 import com.drazisil.craftynpcs.entity.ai.NPCManager;
 import com.drazisil.craftynpcs.entity.ai.brain.Brain;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.material.Material;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.item.ItemEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerModelPart;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.inventory.container.INamedContainerProvider;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.CompoundNBT;
@@ -34,6 +40,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 import javax.annotation.Nullable;
 import java.util.Iterator;
+import java.util.List;
 
 import static net.minecraft.block.ChestBlock.getDirectionToAttached;
 import static net.minecraft.state.properties.ChestType.SINGLE;
@@ -55,6 +62,11 @@ public class NPCEntity extends MobEntity {
 
     public static final EnumProperty<ChestType> TYPE;
     private final NPCTileEntity equipmentInventory = new NPCTileEntity();
+    private BlockPos destroyPos;
+    private int durabilityRemainingOnBlock;
+    private int digTicks;
+    private int initialBlockDamage;
+    private int initialDamage;
 
     public static InventoryFactory<INamedContainerProvider> getInventory() {
         return inventory;
@@ -203,6 +215,52 @@ public class NPCEntity extends MobEntity {
         BlockPos lookingBlockPos = ((BlockRayTraceResult) this.func_213324_a(20.0D, 0.0F, false)).getPos();
         this.rayTraceBlock.update(lookingBlockPos);
         this.brain.tick();
+        if (this.destroyPos == null && this.getPosition().getY() > 15) {
+            this.destroyPos = this.getPosition().down();
+            this.diggingTick();
+            this.destroyPos = null;
+        }
+        collideEntities();
+    }
+
+
+    private void collideEntities() {
+
+
+        AxisAlignedBB axisalignedbb;
+        axisalignedbb = this.getBoundingBox().grow(1.0D, 0.5D, 1.0D);
+
+        List<Entity> list = this.world.getEntitiesWithinAABBExcludingEntity(this, axisalignedbb);
+
+        for (int i = 0; i < list.size(); ++i) {
+            Entity entity = (Entity) list.get(i);
+            if (entity.isAlive() && entity instanceof ItemEntity) {
+                this.itemCollideWithNPC(this, (ItemEntity) entity);
+            }
+        }
+    }
+
+    public void itemCollideWithNPC(NPCEntity npcEntity, ItemEntity itemIn) {
+        if (!itemIn.world.isRemote) {
+
+            ItemStack itemstack = itemIn.getItem();
+            Item item = itemstack.getItem();
+            int i = itemstack.getCount();
+
+            ItemStack copy = itemstack.copy();
+            if ((itemIn.lifespan - itemIn.getAge() <= 200
+                    || (i <= 0
+                    || npcEntity.equipmentInventory.addInventorySlotContents((npcEntity.equipmentInventory.getSizeInventory() - 1), itemstack)))) {
+                copy.setCount(copy.getCount() - itemIn.getItem().getCount());
+                if (itemstack.isEmpty()) {
+                    npcEntity.onItemPickup(this, i);
+                    this.remove();
+                    itemstack.setCount(i);
+                }
+
+            }
+        }
+
     }
 
     /*
@@ -314,6 +372,108 @@ public class NPCEntity extends MobEntity {
                 return p_220106_4_.forSingle(chesttileentity);
             }
         }
+    }
+
+    public void doDigBlock(BlockPos blockPosToDig) {
+        double d0 = this.posX - ((double)blockPosToDig.getX() + 0.5D);
+        double d1 = this.posY - ((double)blockPosToDig.getY() + 0.5D) + 1.5D;
+        double d2 = this.posZ - ((double)blockPosToDig.getZ() + 0.5D);
+        double d3 = d0 * d0 + d1 * d1 + d2 * d2;
+        double dist = this.getAttribute(PlayerEntity.REACH_DISTANCE).getValue() + 1.0D;
+            dist *= dist;
+                BlockState blockstate;
+                    this.initialDamage = this.digTicks;
+                    float f = 1.0F;
+                    blockstate = this.world.getBlockState(blockPosToDig);
+                    if (!blockstate.isAir(this.world, blockPosToDig)) {
+
+                        f = blockstate.getBlockHardness(world, blockPosToDig);
+                    }
+
+                    checkIfBlockDestroyed(this, world, blockPosToDig);
+
+                    this.isDigging = true;
+                    this.destroyPos = blockPosToDig;
+                    int i = (int)(f * 10.0F);
+                    this.durabilityRemainingOnBlock = i;
+
+    }
+
+    private void checkIfBlockDestroyed(NPCEntity digger, World world, BlockPos loc) {
+        int j = this.digTicks - this.initialDamage;
+        BlockState blockstate = this.world.getBlockState(loc);
+        if (!(blockstate.getMaterial() == Material.AIR)) {
+            float f1 = blockstate.getBlockHardness(world, loc)  * (float)(j + 1);
+
+            this.isDigging = false;
+            this.initialBlockDamage = this.initialDamage;
+        }
+    }
+
+    public boolean tryHarvestBlock(BlockPos pos) {
+        BlockState blockstate = this.world.getBlockState(pos);
+            Block block = blockstate.getBlock();
+                ItemStack itemstack = this.getHeldItemMainhand();
+                ItemStack copy = itemstack.copy();
+                boolean flag1 = canHarvestBlock(blockstate);
+                if (itemstack.isEmpty() && !copy.isEmpty()) {
+                }
+
+                boolean flag = this.removeBlock(pos, flag1);
+                if (flag && flag1) {
+                    ItemStack itemstack1 = itemstack.isEmpty() ? ItemStack.EMPTY : itemstack.copy();
+                    block.spawnDrops(blockstate, this.world, pos, null, this, itemstack1);
+                }
+
+                return true;
+
+    }
+
+    private boolean removeBlock(BlockPos pos, boolean canHarvest) {
+        BlockState state = this.world.getBlockState(pos);
+        boolean removed = world.removeBlock(pos, false);
+        if (removed) {
+            state.getBlock().onPlayerDestroy(this.world, pos, state);
+        }
+
+        return removed;
+    }
+
+    public void diggingTick() {
+        ++this.digTicks;
+        BlockState blockstate1;
+        if (!this.isDigging) {
+            blockstate1 = this.world.getBlockState(this.destroyPos);
+            if (blockstate1.isAir(this.world, this.destroyPos)) {
+                this.isDigging = false;
+            } else {
+                float f = this.func_225417_a(blockstate1, this.destroyPos);
+                if (f >= 1.0F) {
+                    this.isDigging = false;
+                    this.tryHarvestBlock(this.destroyPos);
+                }
+            }
+        } else if (this.isDigging) {
+            blockstate1 = this.world.getBlockState(this.destroyPos);
+            if (blockstate1.isAir(this.world, this.destroyPos)) {
+                this.durabilityRemainingOnBlock = -1;
+                this.isDigging = false;
+            } else {
+                this.func_225417_a(blockstate1, this.destroyPos);
+            }
+        }
+
+    }
+
+    private float func_225417_a(BlockState p_225417_1_, BlockPos loc) {
+        int i = this.digTicks - this.initialBlockDamage;
+        float f = p_225417_1_.getBlockHardness(world, loc)  * (float)(i + 1);
+        int j = (int)(f * 10.0F);
+        if (j != this.durabilityRemainingOnBlock) {
+            this.durabilityRemainingOnBlock = j;
+        }
+
+        return f;
     }
 
     public BlockPos getTargetPos() {

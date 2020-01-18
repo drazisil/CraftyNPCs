@@ -5,15 +5,18 @@ import net.minecraft.inventory.container.INamedContainerProvider;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.ChestTileEntity;
 import net.minecraft.tileentity.TileEntityType;
+import net.minecraft.util.NonNullList;
 
 public class NPCTileEntity extends ChestTileEntity implements INamedContainerProvider {
 
+    private NonNullList<ItemStack> chestContents;
 
     public NPCTileEntity(TileEntityType<?> typeIn) {
         super(typeIn);
     }
 
     public NPCTileEntity() {
+        this.chestContents = NonNullList.withSize(27, ItemStack.EMPTY);
     }
 
     public ItemStack getItemStackInSlot(int slotId) {
@@ -57,6 +60,20 @@ public class NPCTileEntity extends ChestTileEntity implements INamedContainerPro
     public boolean isUsableByPlayer(PlayerEntity var1) {
         return true;
 
+    }
+
+    protected NonNullList<ItemStack> getItems() {
+        return this.chestContents;
+    }
+
+    public boolean addInventorySlotContents(int index, ItemStack stack) {
+        this.getItems().set(index, stack);
+        if (stack.getCount() > this.getInventoryStackLimit()) {
+            stack.setCount(this.getInventoryStackLimit());
+        }
+
+        this.markDirty();
+        return true;
     }
 
 }

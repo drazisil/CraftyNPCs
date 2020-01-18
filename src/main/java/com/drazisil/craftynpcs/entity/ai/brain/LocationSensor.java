@@ -20,6 +20,6 @@ public class LocationSensor extends Sensor {
 
     @Override
     public String getValue() {
-        return this.location.toString();
+        return this.location.toBlockPos().toString();
     }
 }

@@ -13,6 +13,7 @@ public class Brain {
     private final NPCEntity npcEntity;
     private Logger LOGGER;
     private ArrayList<Sensor> sensors = new ArrayList<>();
+    private ArrayList<Memory> memories = new ArrayList<>();
     private ArrayList<Task> tasks = new ArrayList<>();
 
     private int brainSpeed = 20;
@@ -23,6 +24,8 @@ public class Brain {
         this.npcEntity = npcEntity;
         this.sensors.add(new LocationSensor(this.npcEntity));
         this.sensors.add(new VisionSensor(this.npcEntity));
+
+        this.memories.add(new Memory(this.npcEntity,"should_dig", "true"));
     }
 
     public void tick(){
@@ -44,6 +47,13 @@ public class Brain {
     private Sensor getSensorByName(String name) {
         for (Sensor sensor: this.sensors) {
             if(sensor.getName().equals(name)) return sensor;
+        }
+        return null;
+    }
+
+    private String getMemoryValue(String name) {
+        for (Memory memory: this.memories) {
+            if(memory.getName().equals(name)) return memory.getValue();
         }
         return null;
     }
