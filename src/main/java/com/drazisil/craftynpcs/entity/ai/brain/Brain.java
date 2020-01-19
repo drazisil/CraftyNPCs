@@ -1,6 +1,8 @@
 package com.drazisil.craftynpcs.entity.ai.brain;
 
 import com.drazisil.craftynpcs.entity.NPCEntity;
+import com.drazisil.craftynpcs.entity.ai.brain.task.DigTask;
+import com.drazisil.craftynpcs.entity.ai.brain.task.Task;
 import com.drazisil.craftynpcs.util.BlockUtil;
 import net.minecraft.block.Block;
 import org.apache.logging.log4j.Logger;
@@ -10,7 +12,7 @@ import java.util.ArrayList;
 public class Brain {
 
 
-    private final NPCEntity npcEntity;
+    public final NPCEntity npcEntity;
     private Logger LOGGER;
     private ArrayList<Sensor> sensors = new ArrayList<>();
     private ArrayList<Memory> memories = new ArrayList<>();
@@ -26,6 +28,9 @@ public class Brain {
         this.sensors.add(new VisionSensor(this.npcEntity));
 
         this.memories.add(new Memory(this.npcEntity,"should_dig", "true"));
+        this.memories.add(new Memory(this.npcEntity,"dig_pos", ""));
+
+        this.tasks.add(new DigTask("dig_task", this));
     }
 
     public void tick(){
@@ -40,6 +45,10 @@ public class Brain {
         for (Sensor sensor: this.sensors) {
             LOGGER.debug(sensor.getName() + ": " + sensor.getValue());
         }
+        for (Task task: this.tasks) {
+            task.tick();
+        }
+
         LOGGER.info("Looking at: " + getLookingAtBlock());
         brainSpeedCounter = 0;
     }
@@ -51,11 +60,17 @@ public class Brain {
         return null;
     }
 
-    private String getMemoryValue(String name) {
+    public String getMemoryValue(String name) {
         for (Memory memory: this.memories) {
             if(memory.getName().equals(name)) return memory.getValue();
         }
         return null;
+    }
+
+    public void setMemoryValue(String name, String value) {
+        for (Memory memory: this.memories) {
+            if(memory.getName().equals(name)) memory.setValue(value);
+        }
     }
 
     public Block getLookingAtBlock() {

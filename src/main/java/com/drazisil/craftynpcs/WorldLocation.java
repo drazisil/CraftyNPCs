@@ -10,6 +10,14 @@ public class WorldLocation {
     private int y;
     private int z;
 
+    public WorldLocation(String stringIn){
+        String[] parts = stringIn.split(":");
+        this.x = new Integer(parts[0]);
+        this.y = new Integer(parts[1]);
+        this.z = new Integer(parts[2]);
+    }
+
+
     public WorldLocation(Vec3d vec3dIn){
         this.x = (int) vec3dIn.x;
         this.y = (int) vec3dIn.y;
@@ -94,6 +102,6 @@ public class WorldLocation {
 
     @Override
     public String toString() {
-        return "x: " + this.x + ", y: " + this.y + ", z: " + this.z;
+        return this.x + ":" + this.y + ":" + this.z;
     }
 }
