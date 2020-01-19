@@ -32,7 +32,6 @@ import net.minecraft.util.math.*;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.world.IWorld;
-import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -93,6 +92,7 @@ public class NPCEntity extends MobEntity {
     }
 
 
+    @Override
     public ItemStack getItemStackFromSlot(EquipmentSlotType slotIn) {
         if (slotIn == EquipmentSlotType.MAINHAND) {
             return this.getEquipmentInventory().getStackInSlot(MAIN_HAND_SLOT);
@@ -289,12 +289,9 @@ public class NPCEntity extends MobEntity {
     }
 
     public float getBlockPathWeight(BlockPos pos) {
-        return this.getBlockPathWeight(pos, this.world);
-    }
-
-    private float getBlockPathWeight(BlockPos pos, IWorldReader worldIn) {
         return 0.0F;
     }
+
 
 
 
