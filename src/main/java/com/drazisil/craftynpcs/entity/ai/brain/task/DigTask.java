@@ -40,8 +40,12 @@ public class DigTask extends Task {
         ArrayList<String> mineableBlockNames = new ArrayList<>(Arrays.asList(mineableBlockNamesArray.split(",")));
         for (Block block: CraftyNPCs.getBlockRegistry().getValues()) {
 //            System.out.println(block.getRegistryName().toString());
-            if (mineableBlockNames.contains(block.getRegistryName().toString())) {
-                minableBlocks.add(block);
+            try {
+                if (mineableBlockNames.contains(block.getRegistryName().toString())) {
+                    minableBlocks.add(block);
+                }
+            } catch (NullPointerException e) {
+                CraftyNPCs.LOGGER.error("Error fetching name for block: " + e);
             }
         }
 
@@ -67,28 +71,28 @@ public class DigTask extends Task {
 
     }
 
-    public void diggingTick() {
+    private void diggingTick() {
         ++this.digTicks;
-        BlockState blockstate1;
+        BlockState blockState;
         BlockPos digPos = new WorldLocation(brain.getMemoryValue("dig_pos")).toBlockPos();
         if (!digger.isDigging) {
-            blockstate1 = world.getBlockState(digPos);
-            if (blockstate1.isAir(this.world, digPos)) {
+            blockState = world.getBlockState(digPos);
+            if (blockState.isAir(this.world, digPos)) {
                 digger.isDigging = false;
             } else {
-                float f = this.func_225417_a(blockstate1, digPos);
+                float f = this.func_225417_a(blockState, digPos);
                 if (f >= 1.0F) {
                     digger.isDigging = false;
                     digger.tryHarvestBlock(digPos);
                 }
             }
-        } else if (digger.isDigging) {
-            blockstate1 = this.world.getBlockState(digPos);
-            if (blockstate1.isAir(this.world, digPos)) {
+        } else {
+            blockState = this.world.getBlockState(digPos);
+            if (blockState.isAir(this.world, digPos)) {
                 this.durabilityRemainingOnBlock = -1;
                 digger.isDigging = false;
             } else {
-                this.func_225417_a(blockstate1, digPos);
+                this.func_225417_a(blockState, digPos);
             }
         }
 
@@ -117,4 +121,7 @@ public class DigTask extends Task {
         }
     }
 
+    public String getName() {
+        return name;
+    }
 }

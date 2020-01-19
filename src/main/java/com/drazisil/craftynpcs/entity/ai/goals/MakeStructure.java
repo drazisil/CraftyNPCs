@@ -16,13 +16,13 @@ public class MakeStructure extends Goal {
     public boolean shouldExecute() {
         if (this.npcEntity.getPosition().equals(this.npcEntity.getTargetPos())) {
 
-            if (!this.structure.isCompleted()) return true;
+            if (this.structure.isNotCompleted()) return true;
         }
         return false;
     }
 
     public boolean shouldContinueExecuting() {
-        return !this.structure.isCompleted();
+        return this.structure.isNotCompleted();
     }
 
     public void startExecuting() {

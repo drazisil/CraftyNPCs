@@ -18,7 +18,6 @@ public class BlockScanBox {
         CENTER_OFFSET_Y,
     }
 
-    private World world;
     private int height;
     private int width;
     private int depth;
@@ -56,7 +55,7 @@ public class BlockScanBox {
                                        CenterType typeOfBox,
                                        int offsetY) {
 
-        this.world = world;
+//        World world1 = world;
 
         WorldLocation startLocation = rawStartLocation.copy();
 

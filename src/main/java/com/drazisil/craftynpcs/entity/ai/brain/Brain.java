@@ -21,7 +21,6 @@ public class Brain {
     private ArrayList<Memory> memories = new ArrayList<>();
     private ArrayList<Task> tasks = new ArrayList<>();
 
-    private int brainSpeed = 1; // 20 is good for debugging
     private int brainSpeedCounter = 0;
 
     public Brain(Logger logger, NPCEntity npcEntity) {
@@ -50,6 +49,7 @@ public class Brain {
 
         if (!shouldBrain()) return;
 
+        int brainSpeed = 1;
         if (brainSpeedCounter < brainSpeed) {
             brainSpeedCounter++;
             return;

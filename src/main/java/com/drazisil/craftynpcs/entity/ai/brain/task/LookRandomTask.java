@@ -2,14 +2,12 @@ package com.drazisil.craftynpcs.entity.ai.brain.task;
 
 import com.drazisil.craftynpcs.entity.NPCEntity;
 import com.drazisil.craftynpcs.entity.ai.brain.Brain;
-import net.minecraft.world.World;
 
 public class LookRandomTask extends Task {
 
     private final String name;
     private final Brain brain;
     private final NPCEntity npcEntity;
-    private final World world;
     private int idleTime;
     private double lookX;
     private double lookZ;
@@ -19,7 +17,7 @@ public class LookRandomTask extends Task {
         this.name = name;
         this.brain = brain;
         this.npcEntity = this.brain.npcEntity;
-        this.world = this.npcEntity.getEntityWorld();
+//        World world = this.npcEntity.getEntityWorld();
     }
 
     @Override
@@ -54,5 +52,9 @@ public class LookRandomTask extends Task {
 
 
         return (npcEntity.getRNG().nextFloat() < 0.02F) || this.idleTime >= 0;
+    }
+
+    public String getName() {
+        return name;
     }
 }

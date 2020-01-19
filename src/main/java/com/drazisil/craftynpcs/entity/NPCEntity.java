@@ -416,7 +416,7 @@ public class NPCEntity extends MobEntity {
                 boolean wasBlockRemoved = this.removeBlock(pos, canHarvestBlock);
                 if (wasBlockRemoved && canHarvestBlock) {
                     ItemStack itemstack1 = itemstack.isEmpty() ? ItemStack.EMPTY : itemstack.copy();
-                    block.spawnDrops(blockstate, this.world, pos, null, this, itemstack1);
+                    Block.spawnDrops(blockstate, this.world, pos, null, this, itemstack1);
                 }
 
                 return true;

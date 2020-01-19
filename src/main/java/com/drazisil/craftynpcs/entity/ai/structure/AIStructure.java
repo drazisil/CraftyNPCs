@@ -8,12 +8,9 @@ import net.minecraft.world.World;
 
 public class AIStructure {
 
-    private BlockPos centerPos;
     private boolean completed = false;
     private NPCEntity npcEntity;
     private BlockPos currentPos;
-    private int maxY = 10;
-    private int tickSpread = 40;
     private int currentTick;
     private World world;
 
@@ -21,12 +18,13 @@ public class AIStructure {
 
     }
 
-    public boolean isCompleted() {
-        return this.completed;
+    public boolean isNotCompleted() {
+        return !this.completed;
     }
 
     public void tick(BlockPos position) {
 //        CraftyNPCs.LOGGER.info("Tick...");
+        int tickSpread = 40;
         if (currentTick < tickSpread) {
             currentTick++;
         } else {
@@ -34,6 +32,7 @@ public class AIStructure {
         }
 
         updateStep(this.currentPos);
+        int maxY = 10;
         if (this.currentPos.getY() <= maxY) {
             this.npcEntity.isDigging = false;
             this.completed = true;
@@ -43,9 +42,9 @@ public class AIStructure {
     public void start(NPCEntity npcEntity) {
         this.npcEntity = npcEntity;
         this.world = npcEntity.getEntityWorld();
-        this.centerPos = this.npcEntity.getTargetPos();
-        CraftyNPCs.LOGGER.info("Start building structure at " + this.centerPos);
-        BlockPos startPos = this.centerPos.east().down();
+        BlockPos centerPos = this.npcEntity.getTargetPos();
+        CraftyNPCs.LOGGER.info("Start building structure at " + centerPos);
+        BlockPos startPos = centerPos.east().down();
         this.currentPos = startPos;
         this.npcEntity.isDigging = true;
         this.npcEntity.getNavigator().tryMoveToXYZ(startPos.getX(), startPos.getY(), startPos.getZ(), 0.5f);

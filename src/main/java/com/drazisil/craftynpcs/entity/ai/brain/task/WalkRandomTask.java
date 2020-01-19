@@ -1,10 +1,9 @@
 package com.drazisil.craftynpcs.entity.ai.brain.task;
 
 import com.drazisil.craftynpcs.entity.NPCEntity;
-import com.drazisil.craftynpcs.entity.ai.brain.Brain;
 import com.drazisil.craftynpcs.entity.ai.RandomPositionGenerator;
+import com.drazisil.craftynpcs.entity.ai.brain.Brain;
 import net.minecraft.util.math.Vec3d;
-import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
 
@@ -13,11 +12,9 @@ public class WalkRandomTask extends Task {
     private final String name;
     private final Brain brain;
     private final NPCEntity npcEntity;
-    private final World world;
     private double x;
     private double y;
     private double z;
-    private double speed = 0.5d;
     private boolean mustUpdate;
     private int executionChance = 10;
 
@@ -25,7 +22,7 @@ public class WalkRandomTask extends Task {
         this.name = name;
         this.brain = brain;
         this.npcEntity = this.brain.npcEntity;
-        this.world = this.npcEntity.getEntityWorld();
+//        World world = this.npcEntity.getEntityWorld();
     }
 
     private boolean shouldTick() {
@@ -60,7 +57,8 @@ public class WalkRandomTask extends Task {
 
         if (!shouldTick()) return;
 
-        npcEntity.getNavigator().tryMoveToXYZ(this.x, this.y, this.z, this.speed);
+        double speed = 0.5d;
+        npcEntity.getNavigator().tryMoveToXYZ(this.x, this.y, this.z, speed);
 
     }
 
@@ -71,5 +69,9 @@ public class WalkRandomTask extends Task {
 
     public void setExecutionChance(int newchance) {
         this.executionChance = newchance;
+    }
+
+    public String getName() {
+        return name;
     }
 }

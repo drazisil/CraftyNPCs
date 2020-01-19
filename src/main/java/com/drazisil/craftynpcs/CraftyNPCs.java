@@ -47,9 +47,9 @@ public class CraftyNPCs {
 
     private static EntityType<NPCEntity> NPC_ENTITY_TYPE;
     private static HashSet<Block> mineableBlocks = new HashSet<>();
-    public static ConstructionBarrelBlock constructionBarrelBlock;
+    private static ConstructionBarrelBlock constructionBarrelBlock;
 
-    public static BoingBlock boingBlock;
+    private static BoingBlock boingBlock;
 
     private final NPCManager npcManager = new NPCManager();
 
@@ -164,11 +164,11 @@ public class CraftyNPCs {
 
     }
 
-    public static ConstructionBarrelBlock getConstructionBarrelBlock() {
+    private static ConstructionBarrelBlock getConstructionBarrelBlock() {
         return constructionBarrelBlock;
     }
 
-    public static void setConstructionBarrelBlock(ConstructionBarrelBlock constructionBarrelBlock) {
+    private static void setConstructionBarrelBlock(ConstructionBarrelBlock constructionBarrelBlock) {
         CraftyNPCs.constructionBarrelBlock = constructionBarrelBlock;
     }
 
@@ -176,7 +176,7 @@ public class CraftyNPCs {
         return blockRegistry;
     }
 
-    public static void setBlockRegistry(IForgeRegistry<Block> blockRegistry) {
+    private static void setBlockRegistry(IForgeRegistry<Block> blockRegistry) {
         CraftyNPCs.blockRegistry = blockRegistry;
     }
 
@@ -192,15 +192,15 @@ public class CraftyNPCs {
         CraftyNPCs.instance = instance;
     }
 
-    public static HashSet<Block> getMineableBlocks() {
+    private static HashSet<Block> getMineableBlocks() {
         return mineableBlocks;
     }
 
-    public static BoingBlock getBoingBlock() {
+    private static BoingBlock getBoingBlock() {
         return boingBlock;
     }
 
-    public static void setBoingBlock(BoingBlock boingBlock) {
+    private static void setBoingBlock(BoingBlock boingBlock) {
         CraftyNPCs.boingBlock = boingBlock;
     }
 

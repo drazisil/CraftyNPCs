@@ -21,9 +21,10 @@ import net.minecraftforge.fml.client.registry.IRenderFactory;
 
 import javax.annotation.Nullable;
 
+@SuppressWarnings("ALL")
 @OnlyIn(Dist.CLIENT)
 public class NPCEntityRender extends BipedRenderer<NPCEntity, NPCModel<NPCEntity>> {
-    public NPCEntityRender(EntityRendererManager renderManagerIn, NPCModel modelBipedIn, float shadowSize) {
+    public NPCEntityRender(EntityRendererManager renderManagerIn, NPCModel<NPCEntity> modelBipedIn, float shadowSize) {
         super(renderManagerIn, modelBipedIn, shadowSize);
     }
 
@@ -33,14 +34,15 @@ public class NPCEntityRender extends BipedRenderer<NPCEntity, NPCModel<NPCEntity
     float shadowSize;
 
     public NPCEntityRender(EntityRendererManager p_i50954_1_) {
-        super(p_i50954_1_, new NPCModel(1.0F, false), 0.5F);
+        super(p_i50954_1_, new NPCModel<>(1.0F, false), 0.5F);
         this.renderManager = p_i50954_1_;
         this.shadowSize = 0.5F;
-        this.addLayer(new BipedArmorLayer(this, new BipedModel(0.5F), new BipedModel(1.0F)));
-        this.addLayer(new HeldItemLayer(this));
-        this.addLayer(new ArrowLayer(this));
+        this.addLayer(new BipedArmorLayer<NPCEntity, NPCModel<NPCEntity>, BipedModel<NPCEntity>>(this, new BipedModel<>(0.5F), new BipedModel<>(1.0F)));
+        this.addLayer(new HeldItemLayer<>(this));
+        this.addLayer(new ArrowLayer<>(this));
+        //noinspection unchecked
         this.addLayer(new HeadLayer(this));
-        this.addLayer(new ElytraLayer(this));
+        this.addLayer(new ElytraLayer<>(this));
         this.addLayer(new SpinAttackEffectLayer(this));
     }
 

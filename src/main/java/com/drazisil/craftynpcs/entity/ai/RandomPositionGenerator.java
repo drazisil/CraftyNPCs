@@ -1,7 +1,6 @@
 package com.drazisil.craftynpcs.entity.ai;
 
 import com.drazisil.craftynpcs.entity.NPCEntity;
-import net.minecraft.entity.CreatureEntity;
 import net.minecraft.pathfinding.PathNavigator;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.math.BlockPos;
@@ -155,7 +154,6 @@ public class RandomPositionGenerator {
         } else {
             BlockPos blockpos;
             for(blockpos = p_191378_0_.up(); blockpos.getY() < p_191378_1_.world.getHeight() && p_191378_1_.world.getBlockState(blockpos).getMaterial().isSolid(); blockpos = blockpos.up()) {
-                ;
             }
 
             return blockpos;
