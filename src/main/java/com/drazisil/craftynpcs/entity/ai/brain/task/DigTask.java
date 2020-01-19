@@ -25,13 +25,24 @@ public class DigTask extends Task {
         this.world = this.digger.getEntityWorld();
     }
 
+    private boolean shouldDig() {
+
+        return brain.getMemoryValue("should_dig").equals("true") && !brain.getMemoryValue("dig_pos").equals("") && digger.getPosition().getY() > 15;
+
+    }
+
     @Override
     public void tick() {
-        if (brain.getMemoryValue("dig_pos").equals("") && digger.getPosition().getY() > 15) {
-            brain.setMemoryValue("dig_pos", new WorldLocation(digger.getPosition().down()).toString());
-            this.diggingTick();
-            brain.setMemoryValue("dig_pos", "");
-        }
+
+        if (!shouldDig()) return;
+
+//        brain.setMemoryValue("dig_pos", new WorldLocation(digger.getPosition().down()).toString());
+        this.diggingTick();
+        brain.setMemoryValue("dig_pos", "");
+        brain.setMemoryValue("should_dig_pos", "false");
+        brain.setMemoryValue("should_look", "true");
+        brain.setMemoryValue("should_random_walk", "true");
+
     }
 
     public void diggingTick() {

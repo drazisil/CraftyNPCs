@@ -2,6 +2,7 @@ package com.drazisil.craftynpcs.util;
 
 import com.drazisil.craftynpcs.WorldLocation;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
 import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.ai.controller.LookController;
 import net.minecraft.util.math.BlockPos;
@@ -30,5 +31,9 @@ public class BlockUtil {
 
     public static Block getBlockAtPos(World world, BlockPos pos) {
         return world.getBlockState(pos).getBlock();
+    }
+
+    public static BlockState getBlockStateAtPos(World world, BlockPos pos) {
+        return world.getBlockState(pos);
     }
 }

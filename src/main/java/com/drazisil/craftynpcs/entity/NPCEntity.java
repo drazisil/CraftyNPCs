@@ -6,6 +6,7 @@ import com.drazisil.craftynpcs.entity.ai.NPCManager;
 import com.drazisil.craftynpcs.entity.ai.brain.Brain;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MobEntity;
@@ -269,7 +270,7 @@ public class NPCEntity extends MobEntity {
     }
 
     protected void registerGoals() {
-        super.registerGoals();
+//        super.registerGoals();
 
 ////        this.goalSelector.addGoal(1, new LocateMineableBlockGoal(this, getMineableBlocks(), 0.5D));
 //        float maxScanDistance = 50.0f;
@@ -408,12 +409,12 @@ public class NPCEntity extends MobEntity {
             Block block = blockstate.getBlock();
                 ItemStack itemstack = this.getHeldItemMainhand();
                 ItemStack copy = itemstack.copy();
-                boolean flag1 = canHarvestBlock(blockstate);
+                boolean canHarvestBlock = canHarvestBlock(blockstate);
                 if (itemstack.isEmpty() && !copy.isEmpty()) {
                 }
 
-                boolean flag = this.removeBlock(pos, flag1);
-                if (flag && flag1) {
+                boolean wasBlockRemoved = this.removeBlock(pos, canHarvestBlock);
+                if (wasBlockRemoved && canHarvestBlock) {
                     ItemStack itemstack1 = itemstack.isEmpty() ? ItemStack.EMPTY : itemstack.copy();
                     block.spawnDrops(blockstate, this.world, pos, null, this, itemstack1);
                 }
@@ -432,6 +433,11 @@ public class NPCEntity extends MobEntity {
         return removed;
     }
 
+    @OnlyIn(Dist.CLIENT)
+    public void sendMessage(String msg) {
+        StringTextComponent component = new StringTextComponent(msg);
+        Minecraft.getInstance().ingameGUI.getChatGUI().printChatMessage(component);
+    }
 
     public BlockPos getTargetPos() {
         return targetPos;
