@@ -1,26 +1,25 @@
 package com.drazisil.craftynpcs.entity;
 
 import com.drazisil.craftynpcs.CraftyNPCs;
+import com.drazisil.craftynpcs.WorldLocation;
 import com.drazisil.craftynpcs.entity.ai.NPCManager;
-import com.drazisil.craftynpcs.entity.ai.goals.LookAtTargetBlock;
-import com.drazisil.craftynpcs.entity.ai.goals.MakeStructure;
-import com.drazisil.craftynpcs.entity.ai.goals.MoveTowardsTargetGoal;
-import com.drazisil.craftynpcs.entity.ai.goals.WaterAvoidingRandomWalkingGoal;
-import com.drazisil.craftynpcs.entity.ai.structure.AIStructure;
-import com.mojang.datafixers.Dynamic;
+import com.drazisil.craftynpcs.entity.ai.brain.Brain;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.client.Minecraft;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerModelPart;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.inventory.container.INamedContainerProvider;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.nbt.INBT;
 import net.minecraft.nbt.ListNBT;
-import net.minecraft.nbt.NBTDynamicOps;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.scoreboard.ScorePlayerTeam;
 import net.minecraft.state.EnumProperty;
@@ -29,7 +28,7 @@ import net.minecraft.state.properties.ChestType;
 import net.minecraft.tileentity.ChestTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.HandSide;
-import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.*;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.world.IWorld;
@@ -40,8 +39,8 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 import javax.annotation.Nullable;
 import java.util.Iterator;
+import java.util.List;
 
-import static com.drazisil.craftynpcs.CraftyNPCs.getMineableBlocks;
 import static net.minecraft.block.ChestBlock.getDirectionToAttached;
 import static net.minecraft.state.properties.ChestType.SINGLE;
 
@@ -55,8 +54,17 @@ public class NPCEntity extends MobEntity {
     private BlockPos targetPos;
     public boolean isDigging = false;
 
+    // This is the block the entity is looking at
+    private WorldLocation rayTraceBlock = new WorldLocation(0, 0, 0);
+
+    private Brain brain = new Brain(CraftyNPCs.LOGGER, this);
+
     public static final EnumProperty<ChestType> TYPE;
     private final NPCTileEntity equipmentInventory = new NPCTileEntity();
+    private int durabilityRemainingOnBlock;
+    private int digTicks;
+    private int initialBlockDamage;
+    private int initialDamage;
 
     public static InventoryFactory<INamedContainerProvider> getInventory() {
         return inventory;
@@ -85,6 +93,11 @@ public class NPCEntity extends MobEntity {
 //        }
         return true;
     }
+
+    public WorldLocation getLookPos() {
+        return rayTraceBlock;
+    }
+
 
     public ItemStack getItemStackFromSlot(EquipmentSlotType slotIn) {
         if (slotIn == EquipmentSlotType.MAINHAND) {
@@ -145,7 +158,7 @@ public class NPCEntity extends MobEntity {
 
         compound.putBoolean("FallFlying", this.isElytraFlying());
 
-        compound.put("Brain", (INBT)this.brain.serialize(NBTDynamicOps.INSTANCE));
+//        compound.put("Brain", (INBT)this.brain.serialize(NBTDynamicOps.INSTANCE));
     }
 
     public void readAdditional(CompoundNBT compound) {
@@ -189,32 +202,94 @@ public class NPCEntity extends MobEntity {
         }
 
         if (compound.contains("Brain", 10)) {
-            this.brain = this.createBrain(new Dynamic(NBTDynamicOps.INSTANCE, compound.get("Brain")));
+//            this.brain = this.createBrain(new Dynamic(NBTDynamicOps.INSTANCE, compound.get("Brain")));
         }
 
     }
 
-    protected void registerGoals() {
-        super.registerGoals();
+    @Override
+    public void livingTick() {
+        super.livingTick();
+        BlockPos lookingBlockPos = ((BlockRayTraceResult) this.func_213324_a(20.0D, 0.0F, false)).getPos();
+        this.rayTraceBlock.update(lookingBlockPos);
+        this.brain.tick();
 
-//        this.goalSelector.addGoal(1, new LocateMineableBlockGoal(this, getMineableBlocks(), 0.5D));
-        float maxScanDistance = 50.0f;
-        this.goalSelector.addGoal(1, new LookAtTargetBlock(this, getMineableBlocks(), maxScanDistance));
-        this.goalSelector.addGoal(2, new MoveTowardsTargetGoal(this, 0.5D, maxScanDistance));
+        collideEntities();
+    }
+
+
+    private void collideEntities() {
+
+
+        AxisAlignedBB axisalignedbb;
+        axisalignedbb = this.getBoundingBox().grow(1.0D, 0.5D, 1.0D);
+
+        List<Entity> list = this.world.getEntitiesWithinAABBExcludingEntity(this, axisalignedbb);
+
+        for (int i = 0; i < list.size(); ++i) {
+            Entity entity = (Entity) list.get(i);
+            if (entity.isAlive() && entity instanceof ItemEntity) {
+                this.itemCollideWithNPC(this, (ItemEntity) entity);
+            }
+        }
+    }
+
+    public void itemCollideWithNPC(NPCEntity npcEntity, ItemEntity itemIn) {
+        if (!itemIn.world.isRemote) {
+
+            ItemStack itemstack = itemIn.getItem();
+            Item item = itemstack.getItem();
+            int i = itemstack.getCount();
+
+            ItemStack copy = itemstack.copy();
+            if ((itemIn.lifespan - itemIn.getAge() <= 200
+                    || (i <= 0
+                    || npcEntity.equipmentInventory.addInventorySlotContents((npcEntity.equipmentInventory.getSizeInventory() - 1), itemstack)))) {
+                copy.setCount(copy.getCount() - itemIn.getItem().getCount());
+                if (itemstack.isEmpty()) {
+                    npcEntity.onItemPickup(this, i);
+                    this.remove();
+                    itemstack.setCount(i);
+                }
+
+            }
+        }
+
+    }
+
+    /*
+        Default call is         this.rayTraceBlock = entity.func_213324_a(20.0D, 0.0F, false);
+     */
+    @OnlyIn(Dist.CLIENT)
+    @Override
+    public RayTraceResult func_213324_a(double p_213324_1_, float p_213324_3_, boolean isFluid) {
+        Vec3d vec3d = this.getEyePosition(p_213324_3_);
+        Vec3d vec3d1 = this.getLook(p_213324_3_);
+        Vec3d vec3d2 = vec3d.add(vec3d1.x * p_213324_1_, vec3d1.y * p_213324_1_, vec3d1.z * p_213324_1_);
+        return this.world.rayTraceBlocks(new RayTraceContext(vec3d, vec3d2, RayTraceContext.BlockMode.OUTLINE, isFluid ? RayTraceContext.FluidMode.ANY : RayTraceContext.FluidMode.NONE, this));
+    }
+
+    protected void registerGoals() {
+//        super.registerGoals();
+
+////        this.goalSelector.addGoal(1, new LocateMineableBlockGoal(this, getMineableBlocks(), 0.5D));
+//        float maxScanDistance = 50.0f;
+//        this.goalSelector.addGoal(1, new LookAtTargetBlock(this, getMineableBlocks(), maxScanDistance));
+//        this.goalSelector.addGoal(2, new MoveTowardsTargetGoal(this, 0.5D, maxScanDistance));
 //        this.goalSelector.addGoal(3, new DiggyDiggyGoal(this, getMineableBlocks()));
-        this.goalSelector.addGoal(3, new MakeStructure(this, new AIStructure()));
-        this.goalSelector.addGoal(4, new WaterAvoidingRandomWalkingGoal(this, 0.5D));
-//        this.goalSelector.addGoal(1, new MeleeAttackGoal(this, 1.0D, true));
-//        this.goalSelector.addGoal(2, new MoveTowardsVillageGoal(this, 0.6D));
-//        this.goalSelector.addGoal(3, new MoveThroughVillageGoal(this, 0.6D, false, 4, () -> false));
-//        this.goalSelector.addGoal(6, new WaterAvoidingRandomWalkingGoal(this, 0.6D));
-//        this.goalSelector.addGoal(8, new LookRandomlyGoal(this));
-//        this.targetSelector.addGoal(1, new DefendVillageGoal(this));
-//        this.targetSelector.addGoal(2, new HurtByTargetGoal(this, new Class[0]));
-//        this.targetSelector.addGoal(3, new NearestDiggableBlockGoal(this, MobEntity.class, 5, false, false, (p_213619_0_) -> {
-//            return p_213619_0_ instanceof IMob && !(p_213619_0_ instanceof CreeperEntity);
-//        }));
-//
+//        this.goalSelector.addGoal(3, new MakeStructure(this, new AIStructure()));
+//        this.goalSelector.addGoal(4, new WaterAvoidingRandomWalkingGoal(this, 0.5D));
+////        this.goalSelector.addGoal(1, new MeleeAttackGoal(this, 1.0D, true));
+////        this.goalSelector.addGoal(2, new MoveTowardsVillageGoal(this, 0.6D));
+////        this.goalSelector.addGoal(3, new MoveThroughVillageGoal(this, 0.6D, false, 4, () -> false));
+////        this.goalSelector.addGoal(6, new WaterAvoidingRandomWalkingGoal(this, 0.6D));
+////        this.goalSelector.addGoal(8, new LookRandomlyGoal(this));
+////        this.targetSelector.addGoal(1, new DefendVillageGoal(this));
+////        this.targetSelector.addGoal(2, new HurtByTargetGoal(this, new Class[0]));
+////        this.targetSelector.addGoal(3, new NearestDiggableBlockGoal(this, MobEntity.class, 5, false, false, (p_213619_0_) -> {
+////            return p_213619_0_ instanceof IMob && !(p_213619_0_ instanceof CreeperEntity);
+////        }));
+////
     }
 
     public boolean isNoDespawnRequired() {
@@ -293,6 +368,77 @@ public class NPCEntity extends MobEntity {
         }
     }
 
+//    public void doDigBlock(BlockPos blockPosToDig) {
+//        double d0 = this.posX - ((double)blockPosToDig.getX() + 0.5D);
+//        double d1 = this.posY - ((double)blockPosToDig.getY() + 0.5D) + 1.5D;
+//        double d2 = this.posZ - ((double)blockPosToDig.getZ() + 0.5D);
+//        double d3 = d0 * d0 + d1 * d1 + d2 * d2;
+//        double dist = this.getAttribute(PlayerEntity.REACH_DISTANCE).getValue() + 1.0D;
+//            dist *= dist;
+//                BlockState blockstate;
+//                    this.initialDamage = this.digTicks;
+//                    float f = 1.0F;
+//                    blockstate = this.world.getBlockState(blockPosToDig);
+//                    if (!blockstate.isAir(this.world, blockPosToDig)) {
+//
+//                        f = blockstate.getBlockHardness(world, blockPosToDig);
+//                    }
+//
+//                    checkIfBlockDestroyed(this, world, blockPosToDig);
+//
+//                    this.isDigging = true;
+//                    this.destroyPos = blockPosToDig;
+//                    int i = (int)(f * 10.0F);
+//                    this.durabilityRemainingOnBlock = i;
+//
+//    }
+//
+//    private void checkIfBlockDestroyed(NPCEntity digger, World world, BlockPos loc) {
+//        int j = this.digTicks - this.initialDamage;
+//        BlockState blockstate = this.world.getBlockState(loc);
+//        if (!(blockstate.getMaterial() == Material.AIR)) {
+//            float f1 = blockstate.getBlockHardness(world, loc)  * (float)(j + 1);
+//
+//            this.isDigging = false;
+//            this.initialBlockDamage = this.initialDamage;
+//        }
+//    }
+
+    public boolean tryHarvestBlock(BlockPos pos) {
+        BlockState blockstate = this.world.getBlockState(pos);
+            Block block = blockstate.getBlock();
+                ItemStack itemstack = this.getHeldItemMainhand();
+                ItemStack copy = itemstack.copy();
+                boolean canHarvestBlock = canHarvestBlock(blockstate);
+                if (itemstack.isEmpty() && !copy.isEmpty()) {
+                }
+
+                boolean wasBlockRemoved = this.removeBlock(pos, canHarvestBlock);
+                if (wasBlockRemoved && canHarvestBlock) {
+                    ItemStack itemstack1 = itemstack.isEmpty() ? ItemStack.EMPTY : itemstack.copy();
+                    block.spawnDrops(blockstate, this.world, pos, null, this, itemstack1);
+                }
+
+                return true;
+
+    }
+
+    private boolean removeBlock(BlockPos pos, boolean canHarvest) {
+        BlockState state = this.world.getBlockState(pos);
+        boolean removed = world.removeBlock(pos, false);
+        if (removed) {
+            state.getBlock().onPlayerDestroy(this.world, pos, state);
+        }
+
+        return removed;
+    }
+
+    @OnlyIn(Dist.CLIENT)
+    public void sendMessage(String msg) {
+        StringTextComponent component = new StringTextComponent(msg);
+        Minecraft.getInstance().ingameGUI.getChatGUI().printChatMessage(component);
+    }
+
     public BlockPos getTargetPos() {
         return targetPos;
     }
@@ -304,8 +450,6 @@ public class NPCEntity extends MobEntity {
     public NPCTileEntity getEquipmentInventory() {
         return equipmentInventory;
     }
-
-
 
     interface InventoryFactory<T> {
         T forSingle(INamedContainerProvider var1);

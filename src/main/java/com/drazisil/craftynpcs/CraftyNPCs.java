@@ -30,6 +30,7 @@ import net.minecraftforge.fml.event.server.FMLServerStartingEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.IForgeRegistry;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -53,6 +54,7 @@ public class CraftyNPCs {
     private final NPCManager npcManager = new NPCManager();
 
     private static CraftyNPCs instance;
+    private static IForgeRegistry<Block> blockRegistry;
 
     public CraftyNPCs() {
         // Register the setup method for modloading
@@ -103,6 +105,8 @@ public class CraftyNPCs {
         @SubscribeEvent
         public static void onBlocksRegistry(final RegistryEvent.Register<Block> blockRegistryEvent) {
 
+             setBlockRegistry(blockRegistryEvent.getRegistry());
+
             // register a new constructionBarrelBlock here
             LOGGER.info("HELLO from Register Block");
             ConstructionBarrelBlock constructionBarrelBlock =
@@ -141,6 +145,8 @@ public class CraftyNPCs {
         @SubscribeEvent
         public static void registerItems(RegistryEvent.Register<Item> event) {
 
+
+
             NPC_ENTITY_TYPE = EntityType.Builder.create(NPCEntity::new, EntityClassification.CREATURE)
                     .build("crafty_npc");
 
@@ -166,6 +172,13 @@ public class CraftyNPCs {
         CraftyNPCs.constructionBarrelBlock = constructionBarrelBlock;
     }
 
+    public static IForgeRegistry<Block> getBlockRegistry() {
+        return blockRegistry;
+    }
+
+    public static void setBlockRegistry(IForgeRegistry<Block> blockRegistry) {
+        CraftyNPCs.blockRegistry = blockRegistry;
+    }
 
     public NPCManager getNpcManager() {
         return npcManager;

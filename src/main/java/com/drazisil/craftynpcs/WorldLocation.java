@@ -10,6 +10,14 @@ public class WorldLocation {
     private int y;
     private int z;
 
+    public WorldLocation(String stringIn){
+        String[] parts = stringIn.split(":");
+        this.x = new Integer(parts[0]);
+        this.y = new Integer(parts[1]);
+        this.z = new Integer(parts[2]);
+    }
+
+
     public WorldLocation(Vec3d vec3dIn){
         this.x = (int) vec3dIn.x;
         this.y = (int) vec3dIn.y;
@@ -26,6 +34,30 @@ public class WorldLocation {
         this.x = worldLocationIn.getX();
         this.y = worldLocationIn.getY();
         this.z = worldLocationIn.getZ();
+    }
+
+    public WorldLocation(double posX, double posY, double posZ) {
+        this.x = (int) posX;
+        this.y = (int) posY;
+        this.z = (int) posZ;
+    }
+
+    public void update(Vec3d vec3dIn){
+        this.x = (int) vec3dIn.x;
+        this.y = (int) vec3dIn.y;
+        this.z = (int) vec3dIn.z;
+    }
+
+    public void update(BlockPos blockPosIn) {
+        this.x = blockPosIn.getX();
+        this.y = blockPosIn.getY();
+        this.z = blockPosIn.getZ();
+    }
+
+    public void update(WorldLocation locationIn) {
+        this.x = locationIn.getX();
+        this.y = locationIn.getY();
+        this.z = locationIn.getZ();
     }
 
     public int getX() {
@@ -66,5 +98,10 @@ public class WorldLocation {
 
     public BlockPos toBlockPos() {
         return new BlockPos(this.x, this.y, this.z);
+    }
+
+    @Override
+    public String toString() {
+        return this.x + ":" + this.y + ":" + this.z;
     }
 }
