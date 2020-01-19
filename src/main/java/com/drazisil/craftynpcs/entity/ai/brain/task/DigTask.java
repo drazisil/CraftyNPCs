@@ -1,11 +1,16 @@
 package com.drazisil.craftynpcs.entity.ai.brain.task;
 
+import com.drazisil.craftynpcs.CraftyNPCs;
 import com.drazisil.craftynpcs.WorldLocation;
 import com.drazisil.craftynpcs.entity.NPCEntity;
 import com.drazisil.craftynpcs.entity.ai.brain.Brain;
+import com.drazisil.craftynpcs.entity.ai.brain.VisionSensor;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+
+import java.util.ArrayList;
 
 public class DigTask extends Task {
 
@@ -17,16 +22,29 @@ public class DigTask extends Task {
     private int digTicks;
     private int initialBlockDamage;
     private int initialDamage;
+    private ArrayList<Block> minableBlocks = new ArrayList<>();
 
     public DigTask(String name, Brain brain) {
         this.name = name;
         this.brain = brain;
         this.digger = this.brain.npcEntity;
         this.world = this.digger.getEntityWorld();
+        ArrayList<String> minableBlockNames = new ArrayList<>();
+        minableBlockNames.add("minecraft:grass_block");
+        minableBlockNames.add("minecraft:dirt");
+        for (Block block: CraftyNPCs.getBlockRegistry().getValues()) {
+//            System.out.println(block.getRegistryName().toString());
+            if (minableBlockNames.contains(block.getRegistryName().toString())) {
+                minableBlocks.add(block);
+            }
+        }
+
+        System.out.println(minableBlocks.toString());
+
     }
 
     private boolean shouldDig() {
-
+        checkBlockMinable();
         return brain.getMemoryValue("should_dig").equals("true") && !brain.getMemoryValue("dig_pos").equals("") && digger.getPosition().getY() > 15;
 
     }
@@ -81,6 +99,18 @@ public class DigTask extends Task {
         }
 
         return f;
+    }
+
+    private void checkBlockMinable() {
+        if (brain.getLookingAtBlock().equals(minableBlocks.get(0))) {
+            brain.setMemoryValue("should_random_walk", "false");
+            brain.setMemoryValue("should_look", "false");
+            if (world.isRemote()) {
+                digger.sendMessage("Found something...");
+            }
+            brain.setMemoryValue("dig_pos", ((VisionSensor)brain.getSensorByName("vision_sensor")).getLocation().toString());
+            brain.setMemoryValue("should_dig", "true");
+        }
     }
 
 }

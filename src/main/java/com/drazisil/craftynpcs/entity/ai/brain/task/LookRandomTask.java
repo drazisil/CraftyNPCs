@@ -2,8 +2,6 @@ package com.drazisil.craftynpcs.entity.ai.brain.task;
 
 import com.drazisil.craftynpcs.entity.NPCEntity;
 import com.drazisil.craftynpcs.entity.ai.brain.Brain;
-import com.drazisil.craftynpcs.entity.ai.brain.VisionSensor;
-import net.minecraft.block.Blocks;
 import net.minecraft.world.World;
 
 public class LookRandomTask extends Task {
@@ -50,17 +48,6 @@ public class LookRandomTask extends Task {
                 this.idleTime = 20 + npcEntity.getRNG().nextInt(20);
             }
             System.out.println("y: "+this.lookY);
-
-            if (brain.getLookingAtBlock() == Blocks.DIRT) {
-                brain.setMemoryValue("should_random_walk", "false");
-                brain.setMemoryValue("should_look", "false");
-                if (world.isRemote()) {
-                    npcEntity.sendMessage("Found something...");
-                }
-                brain.setMemoryValue("dig_pos", ((VisionSensor)brain.getSensorByName("vision_sensor")).getLocation().toString());
-                brain.setMemoryValue("should_dig", "true");
-            }
-
 
             return true;
         }
