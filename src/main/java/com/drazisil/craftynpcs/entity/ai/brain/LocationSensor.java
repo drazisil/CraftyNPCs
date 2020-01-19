@@ -5,7 +5,7 @@ import com.drazisil.craftynpcs.entity.NPCEntity;
 
 public class LocationSensor extends Sensor {
 
-    private WorldLocation location;
+    private final WorldLocation location;
 
     public LocationSensor(NPCEntity npcEntity){
         super((npcEntity));

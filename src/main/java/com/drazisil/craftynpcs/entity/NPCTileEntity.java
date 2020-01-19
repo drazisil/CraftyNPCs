@@ -66,7 +66,7 @@ public class NPCTileEntity extends ChestTileEntity implements INamedContainerPro
         return this.chestContents;
     }
 
-    public boolean addInventorySlotContents(int index, ItemStack stack) {
+    boolean addInventorySlotContents(int index, ItemStack stack) {
         this.getItems().set(index, stack);
         if (stack.getCount() > this.getInventoryStackLimit()) {
             stack.setCount(this.getInventoryStackLimit());

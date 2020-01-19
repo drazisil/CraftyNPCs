@@ -4,14 +4,14 @@ import com.drazisil.craftynpcs.entity.NPCEntity;
 
 class Sensor {
 
-    protected NPCEntity npcEntity;
-    protected String name;
+    final NPCEntity npcEntity;
+    String name;
 
     public String getName() {
         return this.name;
     }
 
-    public Sensor(NPCEntity npcEntity) {
+    Sensor(NPCEntity npcEntity) {
         this.npcEntity = npcEntity;
     }
 

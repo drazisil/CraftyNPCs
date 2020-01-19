@@ -27,7 +27,7 @@ public class RandomPositionGenerator {
     }
 
     @Nullable
-    public static Vec3d func_221024_a(NPCEntity p_221024_0_, int p_221024_1_, int p_221024_2_, ToDoubleFunction<BlockPos> p_221024_3_) {
+    private static Vec3d func_221024_a(NPCEntity p_221024_0_, int p_221024_1_, int p_221024_2_, ToDoubleFunction<BlockPos> p_221024_3_) {
         return generateRandomPos(p_221024_0_, p_221024_1_, p_221024_2_, (Vec3d)null, false, 0.0D, p_221024_3_);
     }
 
@@ -68,17 +68,13 @@ public class RandomPositionGenerator {
         PathNavigator pathnavigator = creature.getNavigator();
         Random random = creature.getRNG();
         boolean flag;
-        if (creature.detachHome()) {
-            flag = creature.getHomePosition().withinDistance(creature.getPositionVec(), (double)(creature.getMaximumHomeDistance() + (float)p_191379_1_) + 1.0D);
-        } else {
-            flag = false;
-        }
+        flag = creature.detachHome() && creature.getHomePosition().withinDistance(creature.getPositionVec(), (double) (creature.getMaximumHomeDistance() + (float) p_191379_1_) + 1.0D);
 
         boolean flag1 = false;
         double d0 = -1.0D / 0.0;
         BlockPos blockpos = new BlockPos(creature);
 
-        for(int i = 0; i < 10; ++i) {
+        for (int i = 0; i < 10; ++i) {
             BlockPos blockpos1 = getBlockPos(random, p_191379_1_, p_191379_2_, p_191379_3_, p_191379_5_);
             if (blockpos1 != null) {
                 int j = blockpos1.getX();
@@ -87,20 +83,20 @@ public class RandomPositionGenerator {
                 BlockPos blockpos3;
                 if (creature.detachHome() && p_191379_1_ > 1) {
                     blockpos3 = creature.getHomePosition();
-                    if (creature.posX > (double)blockpos3.getX()) {
+                    if (creature.posX > (double) blockpos3.getX()) {
                         j -= random.nextInt(p_191379_1_ / 2);
                     } else {
                         j += random.nextInt(p_191379_1_ / 2);
                     }
 
-                    if (creature.posZ > (double)blockpos3.getZ()) {
+                    if (creature.posZ > (double) blockpos3.getZ()) {
                         l -= random.nextInt(p_191379_1_ / 2);
                     } else {
                         l += random.nextInt(p_191379_1_ / 2);
                     }
                 }
 
-                blockpos3 = new BlockPos((double)j + creature.posX, (double)k + creature.posY, (double)l + creature.posZ);
+                blockpos3 = new BlockPos((double) j + creature.posX, (double) k + creature.posY, (double) l + creature.posZ);
                 if ((!flag || creature.isWithinHomeDistanceFromPosition(blockpos3)) && pathnavigator.canEntityStandOnPos(blockpos3)) {
                     if (!p_191379_4_) {
                         blockpos3 = moveAboveSolid(blockpos3, creature);

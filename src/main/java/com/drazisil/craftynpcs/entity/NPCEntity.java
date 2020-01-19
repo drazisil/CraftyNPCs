@@ -38,7 +38,6 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 import javax.annotation.Nullable;
-import java.util.Iterator;
 import java.util.List;
 
 import static net.minecraft.block.ChestBlock.getDirectionToAttached;
@@ -49,17 +48,17 @@ public class NPCEntity extends MobEntity {
 
     private final NPCManager npcManager;
     private final String name;
-    public final Integer MAIN_HAND_SLOT = 0;
+    private final Integer MAIN_HAND_SLOT = 0;
 
     private BlockPos targetPos;
     public boolean isDigging = false;
 
     // This is the block the entity is looking at
-    private WorldLocation rayTraceBlock = new WorldLocation(0, 0, 0);
+    private final WorldLocation rayTraceBlock = new WorldLocation(0, 0, 0);
 
-    private Brain brain = new Brain(CraftyNPCs.LOGGER, this);
+    private final Brain brain = new Brain(CraftyNPCs.LOGGER, this);
 
-    public static final EnumProperty<ChestType> TYPE;
+    private static final EnumProperty<ChestType> TYPE;
     private final NPCTileEntity equipmentInventory = new NPCTileEntity();
     private int durabilityRemainingOnBlock;
     private int digTicks;
@@ -86,11 +85,6 @@ public class NPCEntity extends MobEntity {
 
     @OnlyIn(Dist.CLIENT)
     public boolean isWearing(PlayerModelPart part) {
-//        switch (part) {
-//            case LEFT_SLEEVE:
-//            case RIGHT_SLEEVE:
-//                return false;
-//        }
         return true;
     }
 
@@ -146,10 +140,8 @@ public class NPCEntity extends MobEntity {
 
         if (!this.getActivePotionMap().isEmpty()) {
             ListNBT listnbt = new ListNBT();
-            Iterator var8 = this.getActivePotionMap().values().iterator();
 
-            while(var8.hasNext()) {
-                EffectInstance effectinstance = (EffectInstance)var8.next();
+            for (EffectInstance effectinstance : this.getActivePotionMap().values()) {
                 listnbt.add(effectinstance.write(new CompoundNBT()));
             }
 
@@ -226,15 +218,15 @@ public class NPCEntity extends MobEntity {
 
         List<Entity> list = this.world.getEntitiesWithinAABBExcludingEntity(this, axisalignedbb);
 
-        for (int i = 0; i < list.size(); ++i) {
-            Entity entity = (Entity) list.get(i);
+        for (Entity aList : list) {
+            Entity entity = (Entity) aList;
             if (entity.isAlive() && entity instanceof ItemEntity) {
                 this.itemCollideWithNPC(this, (ItemEntity) entity);
             }
         }
     }
 
-    public void itemCollideWithNPC(NPCEntity npcEntity, ItemEntity itemIn) {
+    private void itemCollideWithNPC(NPCEntity npcEntity, ItemEntity itemIn) {
         if (!itemIn.world.isRemote) {
 
             ItemStack itemstack = itemIn.getItem();
@@ -300,7 +292,7 @@ public class NPCEntity extends MobEntity {
         return this.getBlockPathWeight(pos, this.world);
     }
 
-    public float getBlockPathWeight(BlockPos pos, IWorldReader worldIn) {
+    private float getBlockPathWeight(BlockPos pos, IWorldReader worldIn) {
         return 0.0F;
     }
 
@@ -330,7 +322,7 @@ public class NPCEntity extends MobEntity {
         return this.world.getBlockState(this.getPosition().down(1));
     }
 
-    public boolean canHarvestBlock(BlockState state) {
+    private boolean canHarvestBlock(BlockState state) {
         return state.getMaterial().isToolNotRequired() || this.equipmentInventory.getStackInSlot(MAIN_HAND_SLOT).canHarvestBlock(state);
     }
 
@@ -404,22 +396,18 @@ public class NPCEntity extends MobEntity {
 //        }
 //    }
 
-    public boolean tryHarvestBlock(BlockPos pos) {
+    public void tryHarvestBlock(BlockPos pos) {
         BlockState blockstate = this.world.getBlockState(pos);
-            Block block = blockstate.getBlock();
-                ItemStack itemstack = this.getHeldItemMainhand();
-                ItemStack copy = itemstack.copy();
-                boolean canHarvestBlock = canHarvestBlock(blockstate);
-                if (itemstack.isEmpty() && !copy.isEmpty()) {
-                }
+        Block block = blockstate.getBlock();
+        ItemStack itemstack = this.getHeldItemMainhand();
+        ItemStack copy = itemstack.copy();
+        boolean canHarvestBlock = canHarvestBlock(blockstate);
 
-                boolean wasBlockRemoved = this.removeBlock(pos, canHarvestBlock);
-                if (wasBlockRemoved && canHarvestBlock) {
-                    ItemStack itemstack1 = itemstack.isEmpty() ? ItemStack.EMPTY : itemstack.copy();
-                    Block.spawnDrops(blockstate, this.world, pos, null, this, itemstack1);
-                }
-
-                return true;
+        boolean wasBlockRemoved = this.removeBlock(pos, canHarvestBlock);
+        if (wasBlockRemoved && canHarvestBlock) {
+            ItemStack itemstack1 = itemstack.isEmpty() ? ItemStack.EMPTY : itemstack.copy();
+            Block.spawnDrops(blockstate, this.world, pos, null, this, itemstack1);
+        }
 
     }
 
@@ -457,11 +445,7 @@ public class NPCEntity extends MobEntity {
 
     static {
         TYPE = BlockStateProperties.CHEST_TYPE;
-        inventory = new NPCEntity.InventoryFactory<INamedContainerProvider>() {
-            public INamedContainerProvider forSingle(INamedContainerProvider p_212856_1_) {
-                return p_212856_1_;
-            }
-        };
+        inventory = p_212856_1_ -> p_212856_1_;
     }
 
 }

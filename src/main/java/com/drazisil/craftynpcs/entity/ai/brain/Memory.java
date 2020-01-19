@@ -2,11 +2,11 @@ package com.drazisil.craftynpcs.entity.ai.brain;
 
 import com.drazisil.craftynpcs.entity.NPCEntity;
 
-public class Memory {
+class Memory {
 
-    protected NPCEntity npcEntity;
-    protected String name;
-    protected String value;
+    private final NPCEntity npcEntity;
+    private final String name;
+    private String value;
 
     public String getName() {
         return this.name;
@@ -27,4 +27,5 @@ public class Memory {
     public void setValue(String value) {
         this.value = value;
     }
+
 }

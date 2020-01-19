@@ -63,7 +63,7 @@ public class WalkRandomTask extends Task {
     }
 
     @Nullable
-    protected Vec3d getPosition() {
+    private Vec3d getPosition() {
         return RandomPositionGenerator.findRandomTarget(npcEntity, 10, 7);
     }
 

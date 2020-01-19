@@ -23,7 +23,7 @@ public class DigTask extends Task {
     private int digTicks;
     private int initialBlockDamage;
     private int initialDamage;
-    private ArrayList<Block> minableBlocks = new ArrayList<>();
+    private final ArrayList<Block> minableBlocks = new ArrayList<>();
 
     public DigTask(String name, Brain brain) {
         this.name = name;

@@ -46,7 +46,7 @@ public class CraftyNPCs {
     public static final DeferredRegister<EntityType<?>> ENTITIES = new DeferredRegister<>(ForgeRegistries.ENTITIES, MODID);
 
     private static EntityType<NPCEntity> NPC_ENTITY_TYPE;
-    private static HashSet<Block> mineableBlocks = new HashSet<>();
+    private static final HashSet<Block> mineableBlocks = new HashSet<>();
     private static ConstructionBarrelBlock constructionBarrelBlock;
 
     private static BoingBlock boingBlock;

@@ -4,7 +4,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.world.World;
 
-public class BlockSave {
+class BlockSave {
 
     private final World world;
     private final Block block;

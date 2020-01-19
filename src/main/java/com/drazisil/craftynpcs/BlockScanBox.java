@@ -113,25 +113,25 @@ public class BlockScanBox {
         }
     }
 
-    public double getLeftSideX() {
+    private double getLeftSideX() {
         return Math.floor(this.leftSideX);
     }
 
-    public double getRightSideX() {
+    private double getRightSideX() {
         return Math.floor(rightSideX);
     }
 
-    public double getFrontSideZ() {
+    private double getFrontSideZ() {
         return Math.floor(frontSideZ);
     }
 
-    public double getBackSideZ() {
+    private double getBackSideZ() {
         return Math.floor(backSideZ);
     }
 
-    public double getTopSideY() {  return Math.floor(topSideY);  }
+    private double getTopSideY() {  return Math.floor(topSideY);  }
 
-    public double getBottomSideY() { return Math.floor(bottomSideY); }
+    private double getBottomSideY() { return Math.floor(bottomSideY); }
 
 
     private void setHeight(int height) {

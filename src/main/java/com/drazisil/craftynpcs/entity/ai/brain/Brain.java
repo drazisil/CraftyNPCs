@@ -16,10 +16,10 @@ public class Brain {
 
 
     public final NPCEntity npcEntity;
-    private Logger LOGGER;
-    private ArrayList<Sensor> sensors = new ArrayList<>();
-    private ArrayList<Memory> memories = new ArrayList<>();
-    private ArrayList<Task> tasks = new ArrayList<>();
+    private final Logger LOGGER;
+    private final ArrayList<Sensor> sensors = new ArrayList<>();
+    private final ArrayList<Memory> memories = new ArrayList<>();
+    private final ArrayList<Task> tasks = new ArrayList<>();
 
     private int brainSpeedCounter = 0;
 

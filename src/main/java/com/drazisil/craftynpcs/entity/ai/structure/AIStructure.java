@@ -6,7 +6,7 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class AIStructure {
+class AIStructure {
 
     private boolean completed = false;
     private NPCEntity npcEntity;
@@ -57,7 +57,7 @@ public class AIStructure {
         world.destroyBlock(stepPos, false);
     }
 
-    private BlockPos updateStep(BlockPos stepPos) {
+    private void updateStep(BlockPos stepPos) {
         BlockPos newStepLeft = stepPos.north().down();
         digStep(newStepLeft);
 
@@ -72,7 +72,6 @@ public class AIStructure {
             digStep(newStepRight);
         }
         this.currentPos = newStepLeft;
-        return newStepLeft;
 
     }
 }
