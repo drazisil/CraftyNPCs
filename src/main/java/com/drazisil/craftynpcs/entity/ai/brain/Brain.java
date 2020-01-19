@@ -35,6 +35,7 @@ public class Brain {
         this.memories.add(new Memory(this.npcEntity,"should_look", "true"));
         this.memories.add(new Memory(this.npcEntity,"should_dig", "false"));
         this.memories.add(new Memory(this.npcEntity,"dig_pos", ""));
+        this.memories.add(new Memory(this.npcEntity, "blocks_to_mine", "minecraft:grass_block,minecraft:dirt"));
 
         this.tasks.add(new DigTask("dig_task", this));
         this.tasks.add(new LookRandomTask("look_random_task", this));

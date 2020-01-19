@@ -11,6 +11,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class DigTask extends Task {
 
@@ -29,17 +30,20 @@ public class DigTask extends Task {
         this.brain = brain;
         this.digger = this.brain.npcEntity;
         this.world = this.digger.getEntityWorld();
-        ArrayList<String> minableBlockNames = new ArrayList<>();
-        minableBlockNames.add("minecraft:grass_block");
-        minableBlockNames.add("minecraft:dirt");
+        fetchMinableBlocksFromMemory();
+        System.out.println(minableBlocks.toString());
+
+    }
+
+    private void fetchMinableBlocksFromMemory() {
+        String mineableBlockNamesArray = brain.getMemoryValue("blocks_to_mine");
+        ArrayList<String> mineableBlockNames = new ArrayList<>(Arrays.asList(mineableBlockNamesArray.split(",")));
         for (Block block: CraftyNPCs.getBlockRegistry().getValues()) {
 //            System.out.println(block.getRegistryName().toString());
-            if (minableBlockNames.contains(block.getRegistryName().toString())) {
+            if (mineableBlockNames.contains(block.getRegistryName().toString())) {
                 minableBlocks.add(block);
             }
         }
-
-        System.out.println(minableBlocks.toString());
 
     }
 
