@@ -7,7 +7,6 @@ import com.drazisil.craftynpcs.entity.ai.brain.Brain;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.Minecraft;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -38,9 +37,9 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 import javax.annotation.Nullable;
-import java.util.List;
 
 import static net.minecraft.block.ChestBlock.getDirectionToAttached;
+import static net.minecraft.inventory.container.ContainerType.GENERIC_9X3;
 import static net.minecraft.state.properties.ChestType.SINGLE;
 
 @SuppressWarnings("EntityConstructor")
@@ -49,6 +48,7 @@ public class NPCEntity extends MobEntity {
     private final NPCManager npcManager;
     private final String name;
     private final Integer MAIN_HAND_SLOT = 0;
+    public final NPCInventoryContainer container;
 
     private BlockPos targetPos;
     public boolean isDigging = false;
@@ -77,6 +77,8 @@ public class NPCEntity extends MobEntity {
         this.name = "miner";
 
         ItemStack pickaxeStack = new ItemStack(Items.DIAMOND_PICKAXE);
+        this.container = new NPCInventoryContainer(GENERIC_9X3, 12);
+
 
         this.equipmentInventory.setInventorySlotContents(MAIN_HAND_SLOT, pickaxeStack);
         this.npcManager = CraftyNPCs.getInstance().getNpcManager();
@@ -207,28 +209,28 @@ public class NPCEntity extends MobEntity {
         this.rayTraceBlock.update(lookingBlockPos);
         this.brain.tick();
 
-        collideEntities();
+//        collideEntities();
     }
 
 
-    private void collideEntities() {
-
-
-        AxisAlignedBB axisalignedbb;
-        axisalignedbb = this.getBoundingBox().grow(1.0D, 0.5D, 1.0D);
-
-        List<Entity> list = this.world.getEntitiesWithinAABBExcludingEntity(this, axisalignedbb);
-
-        for (Entity aList : list) {
-            Entity entity = (Entity) aList;
-            if (entity.isAlive() && entity instanceof ItemEntity) {
-                this.itemCollideWithNPC(this, (ItemEntity) entity);
-            }
-        }
-    }
+//    private void collideEntities() {
+//
+//
+//        AxisAlignedBB axisalignedbb;
+//        axisalignedbb = this.getBoundingBox().grow(1.0D, 0.5D, 1.0D);
+//
+//        List<Entity> list = this.world.getEntitiesWithinAABBExcludingEntity(this, axisalignedbb);
+//
+//        for (Entity aList : list) {
+//            Entity entity = (Entity) aList;
+//            if (entity.isAlive() && entity instanceof ItemEntity) {
+//                this.itemCollideWithNPC(this, (ItemEntity) entity);
+//            }
+//        }
+//    }
 
     private void itemCollideWithNPC(NPCEntity npcEntity, ItemEntity itemIn) {
-        if (!itemIn.world.isRemote) {
+//        if (!itemIn.world.isRemote) {
 
             ItemStack itemstack = itemIn.getItem();
             Item item = itemstack.getItem();
@@ -238,11 +240,11 @@ public class NPCEntity extends MobEntity {
 
             NPCInventory inventory = npcEntity.getEquipmentInventory();
             int nextEmptySlot = inventory.getFirstEmptyStack();
-            if (nextEmptySlot == -1) {
-                this.sendMessage("I'm out of space!");
-                this.brain.stop();
-                return;
-            }
+//            if (nextEmptySlot == -1) {
+//                this.sendMessage("I'm out of space!");
+//                this.brain.stop();
+//                return;
+//            }
 //            System.out.println("Next Slot: " + nextEmptySlot);
             inventory.addItemStackToInventory(itemstack);
 //            inventory.addInventorySlotContents(nextEmptySlot, itemstack);
@@ -256,7 +258,7 @@ public class NPCEntity extends MobEntity {
 
         }
 
-    }
+//    }
 
     /*
         Default call is         this.rayTraceBlock = entity.func_213324_a(20.0D, 0.0F, false);

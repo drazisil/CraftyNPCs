@@ -3,6 +3,7 @@ package com.drazisil.craftynpcs.entity.ai.brain.task;
 import com.drazisil.craftynpcs.CraftyNPCs;
 import com.drazisil.craftynpcs.WorldLocation;
 import com.drazisil.craftynpcs.entity.NPCEntity;
+import com.drazisil.craftynpcs.entity.NPCInventory;
 import com.drazisil.craftynpcs.entity.ai.brain.Brain;
 import com.drazisil.craftynpcs.entity.ai.brain.VisionSensor;
 import net.minecraft.block.Block;
@@ -45,7 +46,7 @@ public class DigTask extends Task {
                     minableBlocks.add(block);
                 }
             } catch (NullPointerException e) {
-                CraftyNPCs.LOGGER.error("Error fetching name for block: " + e);
+                System.out.println("Error fetching name for block: " + e);
             }
         }
 
@@ -94,6 +95,14 @@ public class DigTask extends Task {
             } else {
                 this.func_225417_a(blockState, digPos);
             }
+        }
+
+        NPCInventory inventory = digger.getEquipmentInventory();
+        int nextEmptySlot = inventory.getFirstEmptyStack();
+        System.out.println("Next Slot: " + nextEmptySlot);
+        if (nextEmptySlot == -1) {
+            digger.sendMessage("I'm out of space!");
+            this.brain.stop();
         }
 
     }

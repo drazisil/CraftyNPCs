@@ -74,15 +74,15 @@ public class NPCInventory extends ChestTileEntity implements INamedContainerProv
         return -1;
     }
 
-    boolean addInventorySlotContents(int index, ItemStack stack) {
-        this.getItems().set(index, stack);
-        if (stack.getCount() > this.getInventoryStackLimit()) {
-            stack.setCount(this.getInventoryStackLimit());
-        }
-
-        this.markDirty();
-        return true;
-    }
+//    boolean addInventorySlotContents(int index, ItemStack stack) {
+//        this.getItems().set(index, stack);
+//        if (stack.getCount() > this.getInventoryStackLimit()) {
+//            stack.setCount(this.getInventoryStackLimit());
+//        }
+//
+//        this.markDirty();
+//        return true;
+//    }
 
     public boolean addItemStackToInventory(ItemStack itemStackIn) {
         return this.add(-1, itemStackIn);
@@ -116,6 +116,7 @@ public class NPCInventory extends ChestTileEntity implements INamedContainerProv
                             p_191971_2_.setCount(this.addResource(p_191971_1_, p_191971_2_));
                         }
                     } while(!p_191971_2_.isEmpty() && p_191971_2_.getCount() < i);
+
 
                     return p_191971_2_.getCount() < i;
                 }

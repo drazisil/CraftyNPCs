@@ -29,7 +29,9 @@ public class Brain {
         this.sensors.add(new LocationSensor(this.npcEntity));
         this.sensors.add(new VisionSensor(this.npcEntity));
 
+        System.out.println("Creating should_brain");
         this.memories.add(new Memory(this.npcEntity,"should_brain", "true"));
+        System.out.println("should_brain created");
         this.memories.add(new Memory(this.npcEntity,"should_random_walk", "true"));
         this.memories.add(new Memory(this.npcEntity,"should_look", "true"));
         this.memories.add(new Memory(this.npcEntity,"should_dig", "false"));
@@ -47,41 +49,49 @@ public class Brain {
     }
 
     private boolean shouldBrain() {
-        return this.getMemoryValue("should_brain").equals("true");
+        String shouldBrain = this.getMemoryValue("should_brain");
+        System.out.println("Current value of should_brain: " + shouldBrain + " = " + (shouldBrain.equals("true")));
+        return shouldBrain.equals("true");
     }
 
     public void tick(){
 
-        if (!shouldBrain()) return;
+        System.out.println("Brain Tick Start");
+
+        if (!shouldBrain()) {
+            System.out.println("NoBrain");
+            return;
+        }
 
         int brainSpeed = 1;
         if (brainSpeedCounter < brainSpeed) {
             brainSpeedCounter++;
             return;
         }
-//        LOGGER.debug("Brain Tick");
+        System.out.println("Starting Brain Tick");
         for (Sensor sensor: this.sensors) {
             sensor.update();
-            LOGGER.debug(sensor.getName() + ": " + sensor.getValue());
+            System.out.println(sensor.getName() + ": " + sensor.getValue());
         }
         for (Task task: this.tasks) {
             task.tick();
         }
         for (Memory memory: this.memories) {
-            LOGGER.info(memory.getName() + ": " + memory.getValue());
+            System.out.println(memory.getName() + ": " + memory.getValue());
         }
 
-        LOGGER.info("Looking at: " + getLookingAtBlock());
+        System.out.println("Looking at: " + getLookingAtBlock());
         brainSpeedCounter = 0;
     }
 
-    public void start(){
-        this.setMemoryValue("should_brain", "true");
-    }
+//    public void start(){
+//        this.setMemoryValue("should_brain", "true");
+//    }
 
 
     public void stop(){
         this.setMemoryValue("should_brain", "false");
+        System.out.println("Value of should_brain after stopping: " + this.getMemoryValue("should_brain"));
     }
 
     public Sensor getSensorByName(String name) {

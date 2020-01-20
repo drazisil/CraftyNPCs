@@ -41,6 +41,9 @@ public class LookRandomTask extends Task {
                 this.lookX = Math.cos(d0);
                 int plusOrMinus = Math.random() < 0.5 ? -1 : 1;
 //                this.lookY = (Math.floor(Math.random() * 8 - 4) + 1) * plusOrMinus;
+
+//                plusOrMinus = 1;
+
                 if (plusOrMinus == -1) {
                     this.lookY = Math.cos(d0);
                 } else {
@@ -50,7 +53,7 @@ public class LookRandomTask extends Task {
                 this.lookZ = Math.sin(d0);
                 this.idleTime = 20 + npcEntity.getRNG().nextInt(20);
             }
-            System.out.println("y: "+this.lookY);
+//            System.out.println("y: "+this.lookY);
 
             return true;
         }

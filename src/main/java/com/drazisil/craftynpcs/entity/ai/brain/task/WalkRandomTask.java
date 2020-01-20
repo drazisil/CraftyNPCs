@@ -26,7 +26,7 @@ public class WalkRandomTask extends Task {
     }
 
     private boolean shouldTick() {
-        if (brain.getMemoryValue("should_random_walk").equals("true")) {
+        if (this.brain.getMemoryValue("should_random_walk").equals("true")) {
             if (!this.mustUpdate) {
                 if (npcEntity.getIdleTime() >= 100) {
                     return false;
