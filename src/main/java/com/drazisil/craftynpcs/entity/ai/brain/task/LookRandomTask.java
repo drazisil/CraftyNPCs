@@ -39,9 +39,14 @@ public class LookRandomTask extends Task {
             if (this.idleTime == 0) {
                 double d0 = 6.283185307179586D * npcEntity.getRNG().nextDouble();
                 this.lookX = Math.cos(d0);
-                double random = (Math.floor(((Math.random() * 10 - 5) + 1)));
                 int plusOrMinus = Math.random() < 0.5 ? -1 : 1;
-                this.lookY = (Math.floor(Math.random() * 10 - 5) + 1) * plusOrMinus;
+//                this.lookY = (Math.floor(Math.random() * 8 - 4) + 1) * plusOrMinus;
+                if (plusOrMinus == -1) {
+                    this.lookY = Math.cos(d0);
+                } else {
+                    this.lookY = Math.sin(d0);
+                }
+//                this.lookY = (Math.floor(Math.random() * 8 - 4) + 1) * plusOrMinus;
                 this.lookZ = Math.sin(d0);
                 this.idleTime = 20 + npcEntity.getRNG().nextInt(20);
             }

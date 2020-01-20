@@ -34,7 +34,12 @@ public class Brain {
         this.memories.add(new Memory(this.npcEntity,"should_look", "true"));
         this.memories.add(new Memory(this.npcEntity,"should_dig", "false"));
         this.memories.add(new Memory(this.npcEntity,"dig_pos", ""));
-        this.memories.add(new Memory(this.npcEntity, "blocks_to_mine", "minecraft:grass_block,minecraft:dirt"));
+        String blocksToMine = "minecraft:grass_block,minecraft:dirt,minecraft:andesite"
+                + ",minecraft:coal_ore,minecraft:diamond_ore,minecraft:diorite"
+                + ",minecraft:emerald_ore,minecraft:gold_ore,minecraft:gravel"
+                + ",minecraft:iron_ore,minecraft:lapis_ore,minecraft:obsidian"
+                + ",minecraft:stone,minecraft:redstone_ore,minecraft:granite";
+        this.memories.add(new Memory(this.npcEntity, "blocks_to_mine", blocksToMine));
 
         this.tasks.add(new DigTask("dig_task", this));
         this.tasks.add(new LookRandomTask("look_random_task", this));
@@ -68,6 +73,15 @@ public class Brain {
 
         LOGGER.info("Looking at: " + getLookingAtBlock());
         brainSpeedCounter = 0;
+    }
+
+    public void start(){
+        this.setMemoryValue("should_brain", "true");
+    }
+
+
+    public void stop(){
+        this.setMemoryValue("should_brain", "false");
     }
 
     public Sensor getSensorByName(String name) {

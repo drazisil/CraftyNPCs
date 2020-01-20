@@ -110,7 +110,7 @@ public class DigTask extends Task {
     }
 
     private void checkBlockMinable() {
-        if (brain.getLookingAtBlock().equals(minableBlocks.get(0))) {
+        if (minableBlocks.contains(brain.getLookingAtBlock())) {
             brain.setMemoryValue("should_random_walk", "false");
             brain.setMemoryValue("should_look", "false");
             if (world.isRemote()) {

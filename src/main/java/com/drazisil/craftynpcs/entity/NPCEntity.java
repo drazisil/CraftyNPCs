@@ -33,6 +33,7 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
+import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
@@ -58,7 +59,7 @@ public class NPCEntity extends MobEntity {
     private final Brain brain = new Brain(CraftyNPCs.LOGGER, this);
 
     private static final EnumProperty<ChestType> TYPE;
-    private final NPCTileEntity equipmentInventory = new NPCTileEntity();
+    private final NPCInventory equipmentInventory = new NPCInventory();
     private int durabilityRemainingOnBlock;
     private int digTicks;
     private int initialBlockDamage;
@@ -234,17 +235,25 @@ public class NPCEntity extends MobEntity {
             int i = itemstack.getCount();
 
             ItemStack copy = itemstack.copy();
-            if ((itemIn.lifespan - itemIn.getAge() <= 200
-                    || (i <= 0
-                    || npcEntity.equipmentInventory.addInventorySlotContents((npcEntity.equipmentInventory.getSizeInventory() - 1), itemstack)))) {
-                copy.setCount(copy.getCount() - itemIn.getItem().getCount());
-                if (itemstack.isEmpty()) {
-                    npcEntity.onItemPickup(this, i);
-                    this.remove();
-                    itemstack.setCount(i);
-                }
 
+            NPCInventory inventory = npcEntity.getEquipmentInventory();
+            int nextEmptySlot = inventory.getFirstEmptyStack();
+            if (nextEmptySlot == -1) {
+                this.sendMessage("I'm out of space!");
+                this.brain.stop();
+                return;
             }
+//            System.out.println("Next Slot: " + nextEmptySlot);
+            inventory.addItemStackToInventory(itemstack);
+//            inventory.addInventorySlotContents(nextEmptySlot, itemstack);
+            copy.setCount(copy.getCount() - itemIn.getItem().getCount());
+            if (itemstack.isEmpty()) {
+                npcEntity.onItemPickup(itemIn, i);
+                itemIn.remove();
+                itemstack.setCount(i);
+            }
+
+
         }
 
     }
@@ -403,7 +412,16 @@ public class NPCEntity extends MobEntity {
         boolean wasBlockRemoved = this.removeBlock(pos, canHarvestBlock);
         if (wasBlockRemoved && canHarvestBlock) {
             ItemStack itemstack1 = itemstack.isEmpty() ? ItemStack.EMPTY : itemstack.copy();
-            Block.spawnDrops(blockstate, this.world, pos, null, this, itemstack1);
+
+            if (!world.isRemote) {
+                Block.getDrops(blockstate, (ServerWorld)this.world, pos, null).forEach((p_220057_2_) -> {
+                    itemCollideWithNPC(this, new ItemEntity(world, pos.getX(), pos.getY(), pos.getZ(), p_220057_2_));
+//                spawnAsEntity(worldIn, pos, p_220057_2_);
+                });
+
+            }
+
+//            Block.spawnDrops(blockstate, this.world, pos, null, this, itemstack1);
         }
 
     }
@@ -432,7 +450,7 @@ public class NPCEntity extends MobEntity {
         this.targetPos = targetPos;
     }
 
-    public NPCTileEntity getEquipmentInventory() {
+    public NPCInventory getEquipmentInventory() {
         return equipmentInventory;
     }
 
