@@ -29,9 +29,7 @@ public class Brain {
         this.sensors.add(new LocationSensor(this.npcEntity));
         this.sensors.add(new VisionSensor(this.npcEntity));
 
-        System.out.println("Creating should_brain");
-        this.memories.add(new Memory(this.npcEntity,"should_brain", "true"));
-        System.out.println("should_brain created");
+        this.memories.add(new Memory(this.npcEntity,"should_brain", "false"));
         this.memories.add(new Memory(this.npcEntity,"should_random_walk", "true"));
         this.memories.add(new Memory(this.npcEntity,"should_look", "true"));
         this.memories.add(new Memory(this.npcEntity,"should_dig", "false"));
@@ -50,16 +48,12 @@ public class Brain {
 
     private boolean shouldBrain() {
         String shouldBrain = this.getMemoryValue("should_brain");
-        System.out.println("Current value of should_brain: " + shouldBrain + " = " + (shouldBrain.equals("true")));
         return shouldBrain.equals("true");
     }
 
     public void tick(){
 
-        System.out.println("Brain Tick Start");
-
         if (!shouldBrain()) {
-            System.out.println("NoBrain");
             return;
         }
 
@@ -68,7 +62,6 @@ public class Brain {
             brainSpeedCounter++;
             return;
         }
-        System.out.println("Starting Brain Tick");
         for (Sensor sensor: this.sensors) {
             sensor.update();
             System.out.println(sensor.getName() + ": " + sensor.getValue());

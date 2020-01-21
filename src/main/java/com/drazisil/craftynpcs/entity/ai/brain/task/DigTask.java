@@ -32,7 +32,6 @@ public class DigTask extends Task {
         this.digger = this.brain.npcEntity;
         this.world = this.digger.getEntityWorld();
         fetchMinableBlocksFromMemory();
-        System.out.println(minableBlocks.toString());
 
     }
 
@@ -42,7 +41,8 @@ public class DigTask extends Task {
         for (Block block: CraftyNPCs.getBlockRegistry().getValues()) {
 //            System.out.println(block.getRegistryName().toString());
             try {
-                if (mineableBlockNames.contains(block.getRegistryName().toString())) {
+                String blockName = block.getRegistryName().toString();
+                if (mineableBlockNames.contains(blockName)) {
                     minableBlocks.add(block);
                 }
             } catch (NullPointerException e) {

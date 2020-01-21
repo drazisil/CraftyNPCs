@@ -2,9 +2,9 @@ package com.drazisil.craftynpcs.client;
 
 import com.drazisil.craftynpcs.CraftyNPCs;
 import com.drazisil.craftynpcs.entity.NPCEntity;
-import net.minecraft.client.renderer.entity.BipedRenderer;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererManager;
+import net.minecraft.client.renderer.entity.LivingRenderer;
 import net.minecraft.client.renderer.entity.layers.*;
 import net.minecraft.client.renderer.entity.model.BipedModel;
 import net.minecraft.item.CrossbowItem;
@@ -22,7 +22,7 @@ import javax.annotation.Nullable;
 
 @SuppressWarnings("ALL")
 @OnlyIn(Dist.CLIENT)
-public class NPCEntityRender extends BipedRenderer<NPCEntity, NPCModel<NPCEntity>> {
+public class NPCEntityRender extends LivingRenderer<NPCEntity, NPCModel<NPCEntity>> {
     public NPCEntityRender(EntityRendererManager renderManagerIn, NPCModel<NPCEntity> modelBipedIn, float shadowSize) {
         super(renderManagerIn, modelBipedIn, shadowSize);
     }

@@ -8,8 +8,9 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.EntityType;
-import net.minecraft.entity.MobEntity;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.SharedMonsterAttributes;
+import com.drazisil.craftynpcs.entity.ai.LookController;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerModelPart;
 import net.minecraft.inventory.EquipmentSlotType;
@@ -19,6 +20,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.ListNBT;
+import net.minecraft.pathfinding.PathNavigator;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.scoreboard.ScorePlayerTeam;
 import net.minecraft.state.EnumProperty;
@@ -43,12 +45,16 @@ import static net.minecraft.inventory.container.ContainerType.GENERIC_9X3;
 import static net.minecraft.state.properties.ChestType.SINGLE;
 
 @SuppressWarnings("EntityConstructor")
-public class NPCEntity extends MobEntity {
+public class NPCEntity extends LivingEntity {
 
     private final NPCManager npcManager;
     private final String name;
     private final Integer MAIN_HAND_SLOT = 0;
     public final NPCInventoryContainer container;
+
+    protected PathNavigator navigator;
+
+
 
     private BlockPos targetPos;
     public boolean isDigging = false;
@@ -64,6 +70,10 @@ public class NPCEntity extends MobEntity {
     private int digTicks;
     private int initialBlockDamage;
     private int initialDamage;
+    private float maximumHomeDistance;
+    private BlockPos homePosition;
+    protected LookController lookController;
+
 
     public static InventoryFactory<INamedContainerProvider> getInventory() {
         return inventory;
@@ -78,6 +88,12 @@ public class NPCEntity extends MobEntity {
 
         ItemStack pickaxeStack = new ItemStack(Items.DIAMOND_PICKAXE);
         this.container = new NPCInventoryContainer(GENERIC_9X3, 12);
+
+        this.maximumHomeDistance = -1.0F;
+        this.homePosition = BlockPos.ZERO;
+        this.lookController = new LookController(this);
+
+
 
 
         this.equipmentInventory.setInventorySlotContents(MAIN_HAND_SLOT, pickaxeStack);
@@ -94,6 +110,41 @@ public class NPCEntity extends MobEntity {
         return rayTraceBlock;
     }
 
+    public PathNavigator getNavigator() {
+        return navigator;
+    }
+
+    public int func_213396_dB() {
+        return 10;
+    }
+
+    public int getVerticalFaceSpeed() {
+        return 40;
+    }
+
+    public int getHorizontalFaceSpeed() {
+        return 75;
+    }
+
+    public float getMaximumHomeDistance() {
+        return this.maximumHomeDistance;
+    }
+
+    public boolean isWithinHomeDistanceFromPosition(BlockPos pos) {
+        if (this.maximumHomeDistance == -1.0F) {
+            return true;
+        } else {
+            return this.homePosition.distanceSq(pos) < (double)(this.maximumHomeDistance * this.maximumHomeDistance);
+        }
+    }
+
+    public boolean detachHome() {
+        return this.maximumHomeDistance != -1.0F;
+    }
+
+    public BlockPos getHomePosition() {
+        return this.homePosition;
+    }
 
     @Override
     public ItemStack getItemStackFromSlot(EquipmentSlotType slotIn) {
@@ -200,6 +251,15 @@ public class NPCEntity extends MobEntity {
 //            this.brain = this.createBrain(new Dynamic(NBTDynamicOps.INSTANCE, compound.get("Brain")));
         }
 
+    }
+
+    @Override
+    public Iterable<ItemStack> getArmorInventoryList() {
+        return null;
+    }
+
+    public LookController getLookController() {
+        return lookController;
     }
 
     @Override
