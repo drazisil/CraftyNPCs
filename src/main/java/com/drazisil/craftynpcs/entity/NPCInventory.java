@@ -13,13 +13,15 @@ import net.minecraft.util.NonNullList;
 public class NPCInventory extends ChestTileEntity implements INamedContainerProvider {
 
     private NonNullList<ItemStack> chestContents;
+    private NPCEntity owner;
 
 //    public NPCInventory(TileEntityType<?> typeIn) {
 //        super(typeIn);
 //    }
 
-    NPCInventory() {
+    NPCInventory(NPCEntity owner) {
         this.chestContents = NonNullList.withSize(27, ItemStack.EMPTY);
+        this.owner = owner;
     }
 
     public ItemStack getItemStackInSlot(int slotId) {
@@ -48,7 +50,9 @@ public class NPCInventory extends ChestTileEntity implements INamedContainerProv
     }
 
     @Override
-    protected void onOpenOrClose() {}
+    protected void onOpenOrClose() {
+        owner.syncInventory(this.serializeNBT());
+    }
 
     public int getNumPlayersUsing(){
         return this.numPlayersUsing;
@@ -189,6 +193,7 @@ public class NPCInventory extends ChestTileEntity implements INamedContainerProv
             itemstack.setAnimationsToGo(5);
             return i;
         }
+
     }
 
     public int storeItemStack(ItemStack itemStackIn) {
@@ -209,5 +214,7 @@ public class NPCInventory extends ChestTileEntity implements INamedContainerProv
         return stack1.getItem() == stack2.getItem() && ItemStack.areItemStackTagsEqual(stack1, stack2);
     }
 
-
+    public NonNullList<ItemStack> getChestContents() {
+        return chestContents;
+    }
 }

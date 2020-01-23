@@ -2,6 +2,7 @@ package com.drazisil.craftynpcs.entity;
 
 import com.drazisil.craftynpcs.CraftyNPCs;
 import com.drazisil.craftynpcs.WorldLocation;
+import com.drazisil.craftynpcs.entity.ai.LookController;
 import com.drazisil.craftynpcs.entity.ai.NPCManager;
 import com.drazisil.craftynpcs.entity.ai.brain.Brain;
 import net.minecraft.block.Block;
@@ -10,7 +11,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.SharedMonsterAttributes;
-import com.drazisil.craftynpcs.entity.ai.LookController;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerModelPart;
 import net.minecraft.inventory.EquipmentSlotType;
@@ -20,6 +20,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.ListNBT;
+import net.minecraft.network.datasync.DataParameter;
+import net.minecraft.network.datasync.DataSerializers;
+import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.pathfinding.PathNavigator;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.scoreboard.ScorePlayerTeam;
@@ -29,6 +32,7 @@ import net.minecraft.state.properties.ChestType;
 import net.minecraft.tileentity.ChestTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.HandSide;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.*;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
@@ -54,7 +58,7 @@ public class NPCEntity extends LivingEntity {
 
     protected PathNavigator navigator;
 
-
+    final static DataParameter<CompoundNBT> inventoryData = EntityDataManager.createKey(NPCEntity.class, DataSerializers.COMPOUND_NBT);
 
     private BlockPos targetPos;
     public boolean isDigging = false;
@@ -65,7 +69,7 @@ public class NPCEntity extends LivingEntity {
     private final Brain brain = new Brain(CraftyNPCs.LOGGER, this);
 
     private static final EnumProperty<ChestType> TYPE;
-    private final NPCInventory equipmentInventory = new NPCInventory();
+    private final NPCInventory equipmentInventory = new NPCInventory(this);
     private int durabilityRemainingOnBlock;
     private int digTicks;
     private int initialBlockDamage;
@@ -97,6 +101,7 @@ public class NPCEntity extends LivingEntity {
 
 
         this.equipmentInventory.setInventorySlotContents(MAIN_HAND_SLOT, pickaxeStack);
+        System.out.println(this.equipmentInventory.getChestContents().toString());
         this.npcManager = CraftyNPCs.getInstance().getNpcManager();
         npcManager.register(this);
     }
@@ -146,6 +151,11 @@ public class NPCEntity extends LivingEntity {
         return this.homePosition;
     }
 
+    public void syncInventory(CompoundNBT data) {
+        System.out.println(data.toString());
+        this.dataManager.set(inventoryData, data);
+    }
+
     @Override
     public ItemStack getItemStackFromSlot(EquipmentSlotType slotIn) {
         if (slotIn == EquipmentSlotType.MAINHAND) {
@@ -163,7 +173,18 @@ public class NPCEntity extends LivingEntity {
         compound.putShort("DeathTime", (short)this.deathTime);
         compound.putFloat("AbsorptionAmount", this.getAbsorptionAmount());
 
-        compound.put("OreInventory", this.equipmentInventory.serializeNBT());
+        ListNBT inventoryListNBT = new ListNBT();
+
+        NonNullList<ItemStack> inventoryList = this.equipmentInventory.getChestContents();
+
+        for (ItemStack itemStack: inventoryList) {
+            inventoryListNBT.add(itemStack.write(new CompoundNBT()));
+        }
+
+
+        compound.put("OreInventory", inventoryListNBT);
+        this.dataManager.set(inventoryData, this.equipmentInventory.serializeNBT());
+        System.out.println("write: " + inventoryListNBT.toString());
 
 
         EquipmentSlotType[] var2 = EquipmentSlotType.values();
@@ -209,7 +230,26 @@ public class NPCEntity extends LivingEntity {
 
     public void readAdditional(CompoundNBT compound) {
 
-        this.equipmentInventory.deserializeNBT((CompoundNBT) compound.get("OreInventory"));
+        System.out.println("read: " + compound.get("OreInventory"));
+
+        NonNullList<ItemStack> inventoryList;
+
+        if (compound.contains("OreInventory", 9)) {
+            ListNBT listnbt = compound.getList("OreInventory", 10);
+
+            this.equipmentInventory.clear();
+            for(int i = 0; i < listnbt.size(); ++i) {
+                CompoundNBT compoundnbt = listnbt.getCompound(i);
+                this.equipmentInventory.add(i, ItemStack.read(compoundnbt));
+            }
+        }
+
+//        this.equipmentInventory.deserializeNBT((CompoundNBT) compound.get("OreInventory"));
+        this.dataManager.set(inventoryData, this.equipmentInventory.serializeNBT());
+        System.out.println("write: " + this.dataManager.get(inventoryData).toString());
+
+
+//        this.dataManager.set(inventoryData, (CompoundNBT) compound.get("OreInventory"));
 
         this.setAbsorptionAmount(compound.getFloat("AbsorptionAmount"));
         if (compound.contains("Attributes", 9) && this.world != null && !this.world.isRemote) {
@@ -330,6 +370,12 @@ public class NPCEntity extends LivingEntity {
         Vec3d vec3d1 = this.getLook(p_213324_3_);
         Vec3d vec3d2 = vec3d.add(vec3d1.x * p_213324_1_, vec3d1.y * p_213324_1_, vec3d1.z * p_213324_1_);
         return this.world.rayTraceBlocks(new RayTraceContext(vec3d, vec3d2, RayTraceContext.BlockMode.OUTLINE, isFluid ? RayTraceContext.FluidMode.ANY : RayTraceContext.FluidMode.NONE, this));
+    }
+
+    @Override
+    protected void registerData() {
+        super.registerData();
+        this.dataManager.register(inventoryData, new CompoundNBT());
     }
 
     protected void registerGoals() {
